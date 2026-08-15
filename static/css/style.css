@@ -1,0 +1,794 @@
+/* ==========================================================================
+   CHAI GRILL - ULTRA LUXURY CINEMATIC STYLESHEET
+   ========================================================================== */
+
+/* Custom Fonts & Smooth Rendering */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #060608;
+  color: #f1f5f9;
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* 1. Custom Luxury Glow Cursor */
+.custom-cursor-dot,
+.custom-cursor-outline {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+}
+
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #d4af37;
+  box-shadow: 0 0 12px #d4af37;
+}
+
+.custom-cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+  transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+}
+
+body:hover .custom-cursor-outline {
+  opacity: 1;
+}
+
+/* 2. Golden Aurora Background Glows */
+.aurora-bg {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, rgba(249,115,22,0.06) 40%, transparent 70%);
+  filter: blur(80px);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: floatSlow 12s ease-in-out infinite alternate;
+}
+
+@keyframes floatSlow {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, -40px) scale(1.1); }
+  100% { transform: translate(-40px, 30px) scale(0.95); }
+}
+
+/* 3. Infinite Gold Marquee Ribbon */
+.marquee-wrapper {
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.marquee-content {
+  display: flex;
+  width: max-content;
+  animation: marqueeContinuous 24s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeContinuous {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 4. Luxury 3D Glassmorphic Cards */
+.luxury-glass-card {
+  background: linear-gradient(135deg, rgba(26, 26, 36, 0.75) 0%, rgba(14, 14, 20, 0.85) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.0) 40%,
+    rgba(212, 175, 55, 0.15) 50%,
+    rgba(212, 175, 55, 0.0) 60%,
+    transparent 100%
+  );
+  transition: transform 0.8s ease;
+  pointer-events: none;
+}
+
+.luxury-glass-card:hover::before {
+  transform: translateX(100%);
+}
+
+.luxury-glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 25px 50px -12px rgba(212, 175, 55, 0.2), 0 0 25px rgba(212, 175, 55, 0.1);
+  transform: translateY(-6px);
+}
+
+/* 5. Animated Interactive Category Filter Tabs */
+.category-pill {
+  position: relative;
+  background: rgba(18, 18, 26, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.category-pill:hover {
+  color: #f8fafc;
+  border-color: rgba(212, 175, 55, 0.4);
+  transform: translateY(-2px);
+}
+
+.category-pill.active {
+  background: linear-gradient(135deg, #d4af37 0%, #ca8a04 50%, #9a6700 100%);
+  color: #060608;
+  font-weight: 700;
+  border-color: #fde047;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.45), 0 4px 12px rgba(0, 0, 0, 0.5);
+  transform: scale(1.04);
+}
+
+/* 6. Glowing Badges & Flame Meter */
+.flame-glow {
+  filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.8));
+  animation: flameFlicker 1.8s infinite alternate ease-in-out;
+}
+
+@keyframes flameFlicker {
+  0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+  100% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+}
+
+.pulse-badge {
+  position: relative;
+}
+
+.pulse-badge::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: inherit;
+  filter: blur(6px);
+  opacity: 0.6;
+  z-index: -1;
+  animation: badgePulse 2.5s infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+/* 7. Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #060608;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e28;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+  box-shadow: 0 0 10px #d4af37;
+}
+
+/* =========================================================
+   CHAI'S GRILL - RESPONSIVE / MOBILE EXPERIENCE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   GLOBAL
+--------------------------------------------------------- */
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+body {
+    min-width: 320px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+#main-header {
+    transition:
+        background-color 0.35s ease,
+        padding 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+#main-header.header-scrolled {
+    background-color: rgba(10, 10, 12, 0.97);
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+
+/* ---------------------------------------------------------
+   EXPERIENCE CARDS
+   IMPORTANT:
+   Cards are visible even if JS / GSAP fails.
+--------------------------------------------------------- */
+
+.exp-card,
+.outlet-card-anim {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ---------------------------------------------------------
+   MENU LOADING
+--------------------------------------------------------- */
+
+.menu-loading {
+    opacity: 0.55;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE - TABLET
+--------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+
+    .custom-cursor-dot,
+    .custom-cursor-outline {
+        display: none !important;
+    }
+
+    .luxury-glass-card {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+
+    /* Header */
+
+    #main-header {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+
+    #main-header > div:first-child {
+        min-height: 58px;
+    }
+
+
+    /* Logo */
+
+    #main-header a.flex.items-center.gap-3 {
+        gap: 8px;
+        min-width: 0;
+    }
+
+
+    #main-header a.flex.items-center.gap-3 > div:first-child {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 14px;
+    }
+
+
+    #main-header a.flex.items-center.gap-3 i {
+        font-size: 17px;
+    }
+
+
+    #main-header a.flex.items-center.gap-3
+    .font-cinzel {
+        font-size: 15px;
+        letter-spacing: 0.12em;
+        white-space: nowrap;
+    }
+
+
+    #main-header a.flex.items-center.gap-3
+    span:last-child {
+        font-size: 7px;
+        letter-spacing: 0.12em;
+    }
+
+
+    /* Mobile menu */
+
+    #mobile-drawer {
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding-bottom: 18px;
+    }
+
+
+    #mobile-drawer a {
+        display: block;
+        padding: 12px 8px;
+        border-bottom:
+            1px solid rgba(255,255,255,0.06);
+    }
+
+
+    /* Main */
+
+    main {
+        padding-top: 70px !important;
+    }
+
+
+    /* Hero */
+
+    #hero {
+        min-height: auto;
+        padding-top: 55px;
+        padding-bottom: 70px;
+    }
+
+
+    #hero > div {
+        gap: 45px;
+    }
+
+
+    .hero-title-reveal {
+        max-width: 100%;
+    }
+
+
+    #hero h1 {
+        font-size: clamp(
+            2.15rem,
+            10vw,
+            3.5rem
+        );
+        line-height: 1.08;
+    }
+
+
+    #hero p {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+
+    #hero .hero-title-reveal.flex {
+        width: 100%;
+    }
+
+
+    #hero .hero-title-reveal.flex a {
+        width: 100%;
+        min-height: 52px;
+    }
+
+
+    /* Hero image */
+
+    #hero img {
+        height: 330px;
+        object-fit: cover;
+    }
+
+
+    /* Floating hero badges */
+
+    #hero .absolute.-top-4 {
+        top: -12px;
+        left: 4px;
+        transform: scale(0.88);
+        transform-origin: left top;
+    }
+
+
+    #hero .absolute.-bottom-4 {
+        bottom: -12px;
+        right: 4px;
+        transform: scale(0.88);
+        transform-origin: right bottom;
+    }
+
+
+    /* Counters */
+
+    #hero .grid-cols-3 {
+        gap: 10px;
+    }
+
+
+    #hero .grid-cols-3
+    .font-cinzel {
+        font-size: 25px;
+    }
+
+
+    #hero .grid-cols-3
+    .text-xs {
+        font-size: 8px;
+        letter-spacing: 0.08em;
+    }
+
+
+    /* Aurora */
+
+    .aurora-bg {
+        width: 300px;
+        height: 300px;
+        filter: blur(60px);
+    }
+
+
+    /* Marquee */
+
+    .marquee-content {
+        animation-duration: 28s;
+    }
+
+
+    .marquee-wrapper {
+        overflow: hidden;
+    }
+
+
+    .marquee-content span {
+        white-space: nowrap;
+        font-size: 9px;
+    }
+
+
+    /* Section spacing */
+
+    section {
+        scroll-margin-top: 80px;
+    }
+
+
+    #experience,
+    #menu,
+    #outlets,
+    #reviews {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+
+
+    /* Section headings */
+
+    section h2 {
+        font-size: clamp(
+            1.9rem,
+            9vw,
+            3rem
+        );
+        line-height: 1.15;
+    }
+
+
+    section .text-center {
+        max-width: 100%;
+    }
+
+
+    /* Experience cards */
+
+    #experience .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+
+    .exp-card {
+        padding: 22px !important;
+        border-radius: 22px;
+    }
+
+
+    .exp-card h3 {
+        font-size: 18px;
+    }
+
+
+    .exp-card p {
+        font-size: 13px;
+    }
+
+
+    /* Menu */
+
+    #menuSearch {
+        font-size: 14px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+    }
+
+
+    #categoryTabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding: 5px 2px 12px;
+        margin-left: -4px;
+        margin-right: -4px;
+        scrollbar-width: none;
+    }
+
+
+    #categoryTabs::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    #categoryTabs .category-pill {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 10px 17px;
+        font-size: 9px;
+    }
+
+
+    /* Menu grid */
+
+    #menuGrid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+
+    .menu-item-card {
+        padding: 14px !important;
+        border-radius: 22px;
+    }
+
+
+    .menu-item-card .relative {
+        height: 230px;
+    }
+
+
+    .menu-item-card h3 {
+        font-size: 18px;
+    }
+
+
+    .menu-item-card .mt-6 {
+        margin-top: 18px;
+    }
+
+
+    /* Outlets */
+
+    #outlets .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+
+    .outlet-card-anim {
+        padding: 20px !important;
+    }
+
+
+    /* Reviews */
+
+    #reviews .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+
+    #reviews .luxury-glass-card {
+        padding: 22px !important;
+    }
+
+
+    /* Modal */
+
+    #bookingModal {
+        padding: 12px;
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+
+
+    #bookingModal > div {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        max-height: calc(100vh - 20px);
+        overflow-y: auto;
+        border-radius: 22px;
+        padding: 22px 18px !important;
+    }
+
+
+    #bookingModal form {
+        font-size: 12px;
+    }
+
+
+    #bookingModal .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+
+
+    #bookingModal input,
+    #bookingModal select,
+    #bookingModal textarea {
+        font-size: 14px;
+        min-height: 48px;
+    }
+
+
+    #bookingModal textarea {
+        min-height: 80px;
+    }
+
+
+    /* Footer */
+
+    footer {
+        margin-top: 0;
+    }
+
+
+    footer .grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* Disable expensive hover effects */
+
+    .luxury-glass-card:hover {
+        transform: none;
+        box-shadow:
+            0 20px 40px -15px
+            rgba(0, 0, 0, 0.8),
+            inset 0 1px 0
+            rgba(255,255,255,0.1);
+    }
+
+
+    .luxury-glass-card:hover::before {
+        transform: none;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   SMALL PHONES
+--------------------------------------------------------- */
+
+@media (max-width: 390px) {
+
+    #main-header a.flex.items-center.gap-3
+    .font-cinzel {
+        font-size: 13px;
+    }
+
+
+    #main-header a.flex.items-center.gap-3
+    span:last-child {
+        font-size: 6px;
+    }
+
+
+    #hero h1 {
+        font-size: 2rem;
+    }
+
+
+    #hero img {
+        height: 290px;
+    }
+
+
+    #hero .absolute.-top-4,
+    #hero .absolute.-bottom-4 {
+        transform: scale(0.76);
+    }
+
+
+    #hero .grid-cols-3
+    .font-cinzel {
+        font-size: 21px;
+    }
+
+
+    .category-pill {
+        padding-left: 14px !important;
+        padding-right: 14px !important;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   ACCESSIBILITY
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+}
+
+/* 9. Signature Speciality Cards */
+.specialty-card {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+}
+.specialty-card:hover {
+  transform: translateY(-8px);
+}
+.specialty-count {
+  text-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+}

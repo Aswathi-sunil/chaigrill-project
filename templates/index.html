@@ -1,0 +1,386 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Ambient Aurora Lighting -->
+<div class="aurora-bg top-10 left-10"></div>
+<div class="aurora-bg top-1/2 right-10" style="animation-delay: -6s;"></div>
+
+<!-- 1. Hero Section -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden">
+  <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+
+    <!-- Left Hero Typography -->
+    <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+
+      <div class="hero-badge-reveal inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-gold/40 bg-charcoal-900/90 backdrop-blur-md shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-xs font-bold uppercase tracking-[0.25em] text-yellow-300">4 Iconic Kochi Lounges</span>
+      </div>
+
+        <p class="hero-badge-reveal font-cinzel italic text-gold/85 text-sm sm:text-base tracking-wide">
+  "Where Every Bite Tells a Malabar Story"
+</p>
+
+      <h1 class="hero-title-reveal font-cinzel text-4xl sm:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight text-white">
+        Where <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500">Spiced Chai</span><br />
+        Meets The <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-500 to-orange-400 drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">Charcoal Flame</span>
+      </h1>
+
+      <p class="hero-title-reveal text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+        Step into Kochi’s premier culinary lounge. Uniting artisanal hand-pulled saffron brews, fiery whole-spice charcoal grills, authentic rumali shawarmas, and late-night ambiance.
+      </p>
+
+      <div class="hero-title-reveal flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+        <a href="#menu" class="w-full sm:w-auto px-9 py-4 rounded-full bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 font-bold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.45)] hover:shadow-[0_0_45px_rgba(212,175,55,0.8)] transform hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-3">
+          <span>Explore Live Menu</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+        <a href="#outlets" class="w-full sm:w-auto px-9 py-4 rounded-full border border-slate-700 bg-charcoal-900/90 hover:bg-charcoal-800 hover:border-gold/50 text-slate-200 font-semibold text-xs tracking-widest uppercase backdrop-blur-md transition-all text-center flex items-center justify-center gap-2">
+          <i class="fa-solid fa-location-dot text-gold"></i>
+          <span>Find Nearest Hub</span>
+        </a>
+      </div>
+
+      <!-- Live Counters -->
+      <div class="pt-8 grid grid-cols-3 gap-6 border-t border-slate-800/80 text-center lg:text-left">
+        <div>
+          <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">4</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Kochi Hubs</div>
+        </div>
+        <div>
+          <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">50+</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Craft Recipes</div>
+        </div>
+        <div>
+          <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">4.9 ★</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Foodie Rating</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right 3D Visual Stack -->
+    <div class="lg:col-span-5 relative flex items-center justify-center">
+      <div class="relative w-full max-w-md" data-tilt data-tilt-max="14" data-tilt-speed="400">
+        <div class="rounded-3xl p-1 bg-gradient-to-br from-gold via-slate-800 to-amber-600/60 shadow-[0_0_50px_rgba(212,175,55,0.25)]">
+          <div class="rounded-[22px] overflow-hidden bg-charcoal-900 relative">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=80" alt="Chai Grill Feast" class="w-full h-96 object-cover transform hover:scale-108 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/40 to-transparent flex flex-col justify-end p-6">
+              <div class="flex items-center justify-between mb-2">
+                <span class="pulse-badge px-3 py-1 bg-gold text-charcoal-950 font-bold text-xs rounded-full uppercase tracking-wider">Master Chef's Smoked Cut</span>
+                <span class="text-gold font-bold text-xl font-cinzel">₹240</span>
+              </div>
+              <h3 class="font-cinzel text-2xl font-bold text-white mb-1">Malabar Charcoal Alfaham</h3>
+              <p class="text-xs text-slate-300">Marinated in 18 authentic spices and charred over real coconut embers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Micro Badges -->
+        <div class="absolute -top-4 -left-4 bg-charcoal-900/95 border border-gold/50 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center text-gold">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <div>
+            <div class="text-[9px] uppercase tracking-wider text-slate-400">Pure Saffron</div>
+            <div class="text-xs font-bold text-gold">Dum Chai</div>
+          </div>
+        </div>
+
+        <div class="absolute -bottom-4 -right-4 bg-charcoal-900/95 border border-red-500/50 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 flame-glow">
+            <i class="fa-solid fa-fire"></i>
+          </div>
+          <div>
+            <div class="text-[9px] uppercase tracking-wider text-slate-400">Live Embers</div>
+            <div class="text-xs font-bold text-white">Charcoal Grill</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 2. Infinite Continuous Gold Marquee Ribbon -->
+<div class="py-4 bg-gradient-to-r from-charcoal-950 via-charcoal-900 to-charcoal-950 border-y border-gold/20 marquee-wrapper">
+  <div class="marquee-content gap-8 text-xs font-bold tracking-[0.3em] uppercase text-gold/90">
+    <span>✦ PADAMUGHAL KAKKANAD</span>
+    <span>✦ CHANGAMPUZHA PARK EDAPPALLY</span>
+    <span>✦ THOPPUMPADY KOCHI</span>
+    <span>✦ WILLINGDON ISLAND MATTANCHERI HALT</span>
+    <span>✦ AUTHENTIC SAFFRON MATKA CHAI</span>
+    <span>✦ LIVE CHARCOAL GRILL</span>
+    <span>✦ PADAMUGHAL KAKKANAD</span>
+    <span>✦ CHANGAMPUZHA PARK EDAPPALLY</span>
+    <span>✦ THOPPUMPADY KOCHI</span>
+    <span>✦ WILLINGDON ISLAND MATTANCHERI HALT</span>
+  </div>
+</div>
+
+<!-- 2b. Signature Specialities -->
+<section id="specialities" class="py-24 relative overflow-hidden">
+  <div class="aurora-bg -top-20 -left-20" style="animation-delay:-3s;"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-6">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">Our Malabar Legacy</span>
+      <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-white">Three Specialities, One Soul</h2>
+      <p class="font-cinzel italic text-gold/90 text-sm sm:text-base tracking-wide">"Where Every Bite Tells a Malabar Story"</p>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 mt-14">
+
+      <!-- Tea -->
+      <div class="specialty-card luxury-glass-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8">
+        <div class="relative h-56 overflow-hidden">
+              <img src="{% static 'images/specialities/tea.jpg' %}" alt="Malabar Dum Chai Varieties" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
+          <div class="absolute top-4 left-4 w-12 h-12 rounded-2xl bg-gold/20 border border-gold/40 backdrop-blur-md flex items-center justify-center text-gold text-xl">
+            <i class="fa-solid fa-mug-hot"></i>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="specialty-count font-cinzel text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500 mb-1">21+</div>
+          <h3 class="font-cinzel text-xl font-bold text-white mb-2">Varieties of Tea</h3>
+          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">From smoky Suleimani and royal Kashmiri Kahwa to our house Saffron Dum Chai — every cup is slow-brewed the traditional Malabar way.</p>
+          <a href="{% url 'menu' %}#categoryTabs" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold hover:gap-3 transition-all">Explore Tea Menu <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Avil Milk -->
+      <div class="specialty-card luxury-glass-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8">
+        <div class="relative h-56 overflow-hidden">
+            <img src="{% static 'images/specialities/avil-milk.jpg' %}" alt="Signature Avil Milk Shakes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
+          <div class="absolute top-4 left-4 w-12 h-12 rounded-2xl bg-red-500/20 border border-red-500/40 backdrop-blur-md flex items-center justify-center text-red-400 text-xl">
+            <i class="fa-solid fa-blender"></i>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="specialty-count font-cinzel text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-amber-400 to-gold mb-1">60+</div>
+          <h3 class="font-cinzel text-xl font-bold text-white mb-2">Signature Avil Milk</h3>
+          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">Our beloved beaten-rice milk speciality, hand-tossed in 60 indulgent flavours — from Kesar Pista to Nutella Fusion and classic Nannari.</p>
+          <a href="{% url 'menu' %}#categoryTabs" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold hover:gap-3 transition-all">Explore Avil Milk <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Snacks -->
+      <div class="specialty-card luxury-glass-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8">
+        <div class="relative h-56 overflow-hidden">
+            <img src="{% static 'images/specialities/snacks.jpg' %}" alt="Authentic Malabar Snacks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
+          <div class="absolute top-4 left-4 w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 backdrop-blur-md flex items-center justify-center text-amber-300 text-xl">
+            <i class="fa-solid fa-bowl-food"></i>
+          </div>
+        </div>
+        <div class="p-7">
+          <div class="specialty-count font-cinzel text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-gold to-yellow-200 mb-1">200+</div>
+          <h3 class="font-cinzel text-xl font-bold text-white mb-2">Authentic Malabar Snacks</h3>
+          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">Unniyappam, Pazham Pori, Chicken Cutlets & more — over 200 recipes rooted in generations-old Malabar kitchens.</p>
+          <a href="{% url 'menu' %}#categoryTabs" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold hover:gap-3 transition-all">Explore Snacks <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 3. The Craftsmanship Experience -->
+<section id="experience" class="py-24 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">The Alchemy of Spices</span>
+      <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-white">Why Kochi Loves Chai Grill</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="exp-card luxury-glass-card p-8 rounded-3xl" data-tilt>
+        <div class="w-14 h-14 rounded-2xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold text-2xl mb-6">
+          <i class="fa-solid fa-mug-saucer"></i>
+        </div>
+        <h3 class="font-cinzel text-xl font-bold text-white mb-3">Slow-Steeped Dum Tea</h3>
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+          Assam tea leaves boiled to perfection with crushed cardamom, fresh ginger, and pure Kashmiri saffron.
+        </p>
+      </div>
+
+      <div class="exp-card luxury-glass-card p-8 rounded-3xl" data-tilt>
+        <div class="w-14 h-14 rounded-2xl bg-red-500/15 border border-red-500/40 flex items-center justify-center text-red-400 text-2xl mb-6 flame-glow">
+          <i class="fa-solid fa-fire-flame-curved"></i>
+        </div>
+        <h3 class="font-cinzel text-xl font-bold text-white mb-3">Real Charcoal Grilling</h3>
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+          Tender prime cuts marinated in secret herb pastes and flame-kissed on glowing coconut shell charcoal.
+        </p>
+      </div>
+
+      <div class="exp-card luxury-glass-card p-8 rounded-3xl" data-tilt>
+        <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-300 text-2xl mb-6">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <h3 class="font-cinzel text-xl font-bold text-white mb-3">Late-Night Hub (2 AM)</h3>
+        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+          Vibrant aesthetic lounge spaces across Kochi open late for night owls, food lovers, and casual hangs.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Interactive Master Gourmet Menu -->
+<section id="menu" class="py-24 bg-charcoal-900/50 border-y border-slate-800 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">The Epicurean Collection</span>
+      <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-white">Chai Grill Curated Menu</h2>
+
+      <!-- Live Search Bar -->
+      <div class="relative max-w-md mx-auto mt-6">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gold"></i>
+        <input type="text" id="menuSearch" placeholder="Search Chai, Alfaham, Shawarma, Burgers..." class="w-full pl-11 pr-4 py-3.5 rounded-full bg-charcoal-800/90 border border-slate-700 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold transition-all shadow-inner" />
+      </div>
+    </div>
+
+    <!-- Category Pill Filter Tabs -->
+    <div class="flex items-center justify-center gap-2.5 sm:gap-3.5 flex-wrap mb-12" id="categoryTabs">
+      <button class="category-pill active px-6 py-2.5 rounded-full text-xs uppercase tracking-wider" data-category="all">All Specialties</button>
+      {% for cat in categories %}
+        <button class="category-pill px-6 py-2.5 rounded-full text-xs uppercase tracking-wider" data-category="{{ cat.slug }}">{{ cat.name }}</button>
+      {% endfor %}
+    </div>
+
+    <!-- Menu Items Grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="menuGrid">
+      {% for item in menu_items %}
+      <div class="luxury-glass-card rounded-3xl p-5 flex flex-col justify-between group" data-tilt data-tilt-max="10" data-tilt-speed="350">
+        <div>
+          <div class="relative h-52 rounded-2xl overflow-hidden mb-4 bg-charcoal-800">
+            <img src="{{ item.display_image }}" alt="{{ item.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" />            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900/90 via-transparent to-transparent"></div>
+            <div class="absolute top-3 right-3 bg-charcoal-900/90 backdrop-blur-md px-3.5 py-1 rounded-full border border-gold/40 font-cinzel text-gold font-bold text-sm shadow-lg">
+              ₹{{ item.price }}
+            </div>
+            <div class="absolute bottom-3 left-3 flex gap-2 flex-wrap">
+              {% if item.is_veg %}
+                <span class="px-2.5 py-1 text-[10px] font-bold rounded-lg border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">VEG</span>
+              {% else %}
+                <span class="px-2.5 py-1 text-[10px] font-bold rounded-lg border bg-red-500/20 text-red-300 border-red-500/40">NON-VEG</span>
+              {% endif %}
+              {% if item.is_bestseller %}
+                <span class="pulse-badge px-2.5 py-1 text-[10px] font-bold rounded-lg border bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 border-gold shadow-md">BESTSELLER</span>
+              {% endif %}
+            </div>
+          </div>
+          <h3 class="font-cinzel text-xl font-bold text-white group-hover:text-gold transition-colors duration-300">{{ item.name }}</h3>
+          <p class="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">{{ item.description }}</p>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
+          <div class="flex items-center gap-1">
+            <i class="fa-solid fa-fire text-amber-500 flame-glow text-[11px]"></i>
+            <span class="text-[10px] text-amber-400 font-semibold uppercase tracking-wider">Live Charcoal</span>
+          </div>
+          <button onclick="quickOrderWhatsApp('{{ item.name }}')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-gold/15 to-amber-500/10 hover:from-gold hover:to-amber-500 hover:text-charcoal-950 text-gold text-xs font-bold border border-gold/30 transition-all duration-300 transform group-hover:scale-105 shadow-md flex items-center gap-1.5">
+            <span>Order</span>
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- 5. 4 Kochi Outlets Showcase -->
+<section id="outlets" class="py-24 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">Our Kochi Destinations</span>
+      <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-white">4 Strategic Outlets</h2>
+      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for outlet in outlets %}
+      <div class="outlet-card-anim luxury-glass-card p-6 rounded-3xl flex flex-col justify-between group" data-tilt>
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="w-9 h-9 rounded-xl bg-gold/15 text-gold border border-gold/30 flex items-center justify-center font-cinzel font-bold text-sm">0{{ forloop.counter }}</span>
+            <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> OPEN NOW
+            </span>
+          </div>
+          <h3 class="font-cinzel text-xl font-bold text-white group-hover:text-gold transition-colors">{{ outlet.name }}</h3>
+          <p class="text-xs text-slate-400 mt-1">{{ outlet.area }}</p>
+
+          <div class="mt-5 pt-4 border-t border-slate-700/60 text-xs text-slate-300 space-y-2.5">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-clock text-gold"></i>
+              <span>{{ outlet.opening_time }}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-phone text-gold"></i>
+              <a href="tel:{{ outlet.phone }}" class="hover:underline font-bold text-white">{{ outlet.phone }}</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center gap-2">
+          <a href="tel:{{ outlet.phone }}" class="flex-1 py-3 text-center text-xs font-bold rounded-xl bg-gold text-charcoal-950 hover:bg-gold-400 transition-all shadow-md">
+            <i class="fa-solid fa-phone mr-1"></i> Call Branch
+          </a>
+          <a href="https://wa.me/{{ outlet.whatsapp_number }}?text=Hi%20Chai%20Grill%20{{ outlet.name|urlencode }},%20I%20would%20like%20to%20order" target="_blank" class="w-11 h-11 flex items-center justify-center rounded-xl bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all border border-emerald-500/30 shadow-md">
+            <i class="fa-brands fa-whatsapp text-lg"></i>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<!-- 6. Verified Reviews -->
+<section id="reviews" class="py-20 bg-charcoal-900/40 border-t border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">Foodie Feedback</span>
+    <h2 class="font-cinzel text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-12">Loved By Thousands In Kochi</h2>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="luxury-glass-card p-8 rounded-3xl text-left space-y-4">
+        <div class="flex text-gold gap-1 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="text-slate-300 text-xs leading-relaxed italic">"The Malabar Alfaham with Saffron Dum Chai in Kakkanad is legendary. Open till late night, incredible vibe!"</p>
+        <div class="text-xs font-bold text-white pt-2">— Rohit Nair, Kakkanad Foodie</div>
+      </div>
+      <div class="luxury-glass-card p-8 rounded-3xl text-left space-y-4">
+        <div class="flex text-gold gap-1 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="text-slate-300 text-xs leading-relaxed italic">"Best jumbo shawarma in Edappally! Fluffy garlic sauce, soft rumali, and juicy spiced chicken."</p>
+        <div class="text-xs font-bold text-white pt-2">— Devika Menon, Regular Customer</div>
+      </div>
+      <div class="luxury-glass-card p-8 rounded-3xl text-left space-y-4">
+        <div class="flex text-gold gap-1 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="text-slate-300 text-xs leading-relaxed italic">"The Willingdon Island outlet is perfect for evening tea with a breeze. Highly recommended!"</p>
+        <div class="text-xs font-bold text-white pt-2">— Fazil Ahmed, Kochi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<footer class="bg-black border-t border-gold/20 py-12 text-center text-xs text-slate-500">-->
+<!--  <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">-->
+<!--    <p>© {% now "Y" %} Chai Grill Kochi. All Rights Reserved.</p>-->
+<!--    <div class="flex items-center gap-6">-->
+<!--      <a href="https://www.instagram.com/chai_grill_/" target="_blank" class="text-slate-400 hover:text-gold transition-colors flex items-center gap-1.5 font-semibold">-->
+<!--        <i class="fa-brands fa-instagram text-pink-500"></i> @chai_grill_-->
+<!--      </a>-->
+<!--      <a href="tel:9747478292" class="text-slate-400 hover:text-gold transition-colors">Padamughal: 9747478292</a>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</footer>-->
+{% endblock %}

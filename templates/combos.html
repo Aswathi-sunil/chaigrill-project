@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Loaded Combos & Buckets | Chai's Grill Kochi{% endblock %}
+
+{% block content %}
+<section class="py-16 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">For Hungry Legends</span>
+      <h1 class="font-cinzel text-4xl sm:text-6xl font-black text-white">Loaded Combos & Feast Buckets</h1>
+      <p class="text-slate-400 text-sm">Massive value packages combining Shawaya Mandhi, Crunchy Fried Chicken, Don Chilly, Fries, and Mojitos.</p>
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+  <span class="px-4 py-2 rounded-full bg-charcoal-900/80 border border-gold/25 text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-2"><i class="fa-solid fa-mug-hot"></i> 21+ Teas</span>
+  <span class="px-4 py-2 rounded-full bg-charcoal-900/80 border border-gold/25 text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-2"><i class="fa-solid fa-blender"></i> 60+ Avil Milk</span>
+  <span class="px-4 py-2 rounded-full bg-charcoal-900/80 border border-gold/25 text-[11px] font-bold uppercase tracking-wider text-gold flex items-center gap-2"><i class="fa-solid fa-bowl-food"></i> 200+ Snacks</span>
+</div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for combo in combos %}
+      <div class="luxury-glass-card rounded-3xl p-6 flex flex-col justify-between group" data-tilt>
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="pulse-badge px-3 py-1 rounded-full text-[10px] font-bold bg-gold text-charcoal-950 uppercase tracking-wider">{{ combo.badge }}</span>
+            <span class="font-cinzel text-2xl font-black text-gold">₹{{ combo.price }}</span>
+          </div>
+
+          <h3 class="font-cinzel text-2xl font-bold text-white mb-1 group-hover:text-gold transition-colors">{{ combo.name }}</h3>
+          <p class="text-xs text-amber-400 font-semibold mb-4">{{ combo.target_audience }}</p>
+
+          <div class="p-4 rounded-2xl bg-charcoal-900/90 border border-slate-800 space-y-2 mb-6">
+            <div class="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Includes:</div>
+            <ul class="text-xs text-slate-400 space-y-1.5">
+              {% for inc in combo.get_includes_list %}
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-gold mt-0.5 text-[10px]"></i>
+                  <span>{{ inc }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <button onclick="quickOrderWhatsApp('{{ combo.name }} (₹{{ combo.price }})')" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 font-bold text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform">
+          <i class="fa-brands fa-whatsapp text-base"></i> Order Combo on WhatsApp
+        </button>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}
