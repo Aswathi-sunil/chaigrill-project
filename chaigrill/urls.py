@@ -12,4 +12,6 @@ urlpatterns = [
     path('', include('core.urls')),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# In production, Cloudinary serves media files directly — no local serving needed.
