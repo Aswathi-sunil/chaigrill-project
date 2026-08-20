@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from .models import Outlet, MenuCategory, MenuItem, ComboMeal, ReservationInquiry
+from .models import Outlet, MenuCategory, MenuItem, ComboMeal, ReservationInquiry, PromoVideo
 from .forms import ReservationForm
 
 def global_outlets_context(request):
     return {
         'all_outlets': Outlet.objects.filter(is_active=True).order_by('order_priority'),
-        'current_path': request.path
+        'current_path': request.path,
+        'promo_video': PromoVideo.objects.filter(is_active=True).first(),
     }
 
 def home_view(request):

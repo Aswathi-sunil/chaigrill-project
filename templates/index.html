@@ -232,10 +232,10 @@
 </section>
 
 <!-- 4. Interactive Master Gourmet Menu -->
-<section id="menu" class="py-24 bg-charcoal-900/50 border-y border-slate-800 relative">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="menu" class="py-24 bg-charcoal-900/50 border-y border-slate-800 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-    <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+    <div class="text-center max-w-3xl mx-auto space-y-4 mb-10">
       <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">The Epicurean Collection</span>
       <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-white">Chai Grill Curated Menu</h2>
 
@@ -246,51 +246,84 @@
       </div>
     </div>
 
-    <!-- Category Pill Filter Tabs -->
-    <div class="flex items-center justify-center gap-2.5 sm:gap-3.5 flex-wrap mb-12" id="categoryTabs">
-      <button class="category-pill active px-6 py-2.5 rounded-full text-xs uppercase tracking-wider" data-category="all">All Specialties</button>
+    <!-- =====================================================
+         CATEGORY SELECTOR (now ABOVE the menu cards)
+    ====================================================== -->
+    <div class="chai-menu-categories flex items-center justify-center gap-2.5 sm:gap-3.5 flex-wrap mb-10" id="categoryTabs">
+      <button type="button" class="category-pill active px-6 py-2.5 rounded-full text-xs uppercase tracking-wider" data-category="all">All Specialties</button>
       {% for cat in categories %}
-        <button class="category-pill px-6 py-2.5 rounded-full text-xs uppercase tracking-wider" data-category="{{ cat.slug }}">{{ cat.name }}</button>
+        <button type="button" class="category-pill px-6 py-2.5 rounded-full text-xs uppercase tracking-wider" data-category="{{ cat.slug }}">{{ cat.name }}</button>
       {% endfor %}
     </div>
 
-    <!-- Menu Items Grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="menuGrid">
-      {% for item in menu_items %}
-      <div class="luxury-glass-card rounded-3xl p-5 flex flex-col justify-between group" data-tilt data-tilt-max="10" data-tilt-speed="350">
-        <div>
-          <div class="relative h-52 rounded-2xl overflow-hidden mb-4 bg-charcoal-800">
-            <img src="{{ item.display_image }}" alt="{{ item.name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" loading="lazy" />            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-900/90 via-transparent to-transparent"></div>
-            <div class="absolute top-3 right-3 bg-charcoal-900/90 backdrop-blur-md px-3.5 py-1 rounded-full border border-gold/40 font-cinzel text-gold font-bold text-sm shadow-lg">
-              ₹{{ item.price }}
-            </div>
-            <div class="absolute bottom-3 left-3 flex gap-2 flex-wrap">
-              {% if item.is_veg %}
-                <span class="px-2.5 py-1 text-[10px] font-bold rounded-lg border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">VEG</span>
-              {% else %}
-                <span class="px-2.5 py-1 text-[10px] font-bold rounded-lg border bg-red-500/20 text-red-300 border-red-500/40">NON-VEG</span>
-              {% endif %}
-              {% if item.is_bestseller %}
-                <span class="pulse-badge px-2.5 py-1 text-[10px] font-bold rounded-lg border bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 border-gold shadow-md">BESTSELLER</span>
-              {% endif %}
-            </div>
-          </div>
-          <h3 class="font-cinzel text-xl font-bold text-white group-hover:text-gold transition-colors duration-300">{{ item.name }}</h3>
-          <p class="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">{{ item.description }}</p>
-        </div>
+    <!-- =====================================================
+         CATEGORY STATUS
+    ====================================================== -->
+    <div class="text-center mb-3">
+      <div id="menuCategoryLabel" class="text-[10px] uppercase tracking-[0.3em] font-bold text-gold/80">
+        Featured Selection
+      </div>
+    </div>
 
-        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between">
-          <div class="flex items-center gap-1">
-            <i class="fa-solid fa-fire text-amber-500 flame-glow text-[11px]"></i>
-            <span class="text-[10px] text-amber-400 font-semibold uppercase tracking-wider">Live Charcoal</span>
+    <!-- =====================================================
+         COVERFLOW MENU STAGE
+    ====================================================== -->
+    <section class="cf-menu-stage" id="menuCoverflow" aria-label="Menu items">
+
+      <!-- Decorative glow -->
+      <div class="cf-menu-stage__glow" aria-hidden="true"></div>
+
+      <!-- Top information -->
+      <div class="cf-menu-stage__head">
+        <span class="cf-menu-eyebrow">CHAI GRILL / MENU</span>
+        <h2 id="menuCoverflowTitle" class="cf-menu-title">Featured Favourites</h2>
+      </div>
+
+      <!-- COVERFLOW TRACK -->
+      <div class="cf-menu-track-wrap">
+        <div class="cf-menu-track" id="menuGrid" role="list">
+          <!-- Menu cards are generated dynamically by app.js from /api/menu/. -->
+          <div class="cf-menu-loading" id="menuLoading">
+            <div class="cf-menu-loader"></div>
+            <span>Preparing the menu...</span>
           </div>
-          <button onclick="quickOrderWhatsApp('{{ item.name }}')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-gold/15 to-amber-500/10 hover:from-gold hover:to-amber-500 hover:text-charcoal-950 text-gold text-xs font-bold border border-gold/30 transition-all duration-300 transform group-hover:scale-105 shadow-md flex items-center gap-1.5">
-            <span>Order</span>
-            <i class="fa-brands fa-whatsapp text-sm"></i>
-          </button>
         </div>
       </div>
-      {% endfor %}
+
+      <!-- EMPTY STATE -->
+      <div class="cf-menu-empty hidden" id="menuEmpty">
+        <div class="cf-menu-empty__icon"><i class="fa-solid fa-utensils"></i></div>
+        <h3>No menu items found</h3>
+        <p>Try another category or search for something else.</p>
+      </div>
+
+      <!-- PREVIOUS BUTTON -->
+      <button type="button" class="cf-menu-nav cf-menu-nav--prev" id="menuPrev" aria-label="Previous menu item">
+        <span class="cf-menu-nav__icon">&#8249;</span>
+        <span class="cf-menu-nav__label">Previous</span>
+      </button>
+
+      <!-- NEXT BUTTON -->
+      <button type="button" class="cf-menu-nav cf-menu-nav--next" id="menuNext" aria-label="Next menu item">
+        <span class="cf-menu-nav__label">Next</span>
+        <span class="cf-menu-nav__icon">&#8250;</span>
+      </button>
+
+      <!-- DOT NAVIGATION -->
+      <div class="cf-menu-dots" id="menuDots" role="tablist" aria-label="Menu item navigation"></div>
+
+      <!-- INSTRUCTION -->
+      <div class="cf-menu-instruction">
+        <span><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-arrow-right"></i></span>
+        <span>Swipe, click or use arrow keys</span>
+      </div>
+
+    </section>
+
+    <div class="text-center mt-12">
+      <a href="{% url 'menu' %}" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gold/40 text-gold text-xs font-bold uppercase tracking-widest hover:bg-gold hover:text-charcoal-950 transition-all">
+        View Full Master Menu <i class="fa-solid fa-arrow-right"></i>
+      </a>
     </div>
 
   </div>

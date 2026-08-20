@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Outlet, MenuCategory, MenuItem, ComboMeal, ReservationInquiry
+from .models import Outlet, MenuCategory, MenuItem, ComboMeal, ReservationInquiry, PromoVideo
 
 @admin.register(Outlet)
 class OutletAdmin(admin.ModelAdmin):
@@ -42,6 +42,15 @@ class ComboMealAdmin(admin.ModelAdmin):
     list_editable = ('price', 'is_active', 'order_priority')
     prepopulated_fields = {'slug': ('name',)}
 
+@admin.register(PromoVideo)
+class PromoVideoAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'uploaded_at', 'preview')
+    list_editable = ('is_active',)
+
+    def preview(self, obj):
+        if obj.video:
+            return format_html('<video src="{}" style="width:60px;height:80px;object-fit:cover;border-radius:6px;" muted></video>', obj.video.url)
+        return "-"
 
 @admin.register(ReservationInquiry)
 class ReservationInquiryAdmin(admin.ModelAdmin):

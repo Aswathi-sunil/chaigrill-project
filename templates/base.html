@@ -38,6 +38,20 @@
 </head>
 <body class="bg-charcoal-950 text-slate-100 font-outfit overflow-x-hidden antialiased selection:bg-gold selection:text-charcoal-950">
 
+<!-- =====================================================
+       PAGE PRELOADER
+  ====================================================== -->
+  <div id="pagePreloader" class="page-preloader">
+    <div class="page-preloader__inner">
+      <img
+          src="{% static 'images/logo.png' %}"
+          alt="Chai's Grill"
+          class="page-preloader__logo"
+      >
+      <div class="page-preloader__ring"></div>
+    </div>
+  </div>
+
   <!-- Desktop Luxury Cursor -->
   <div class="custom-cursor-dot hidden lg:block"></div>
   <div class="custom-cursor-outline hidden lg:block"></div>
@@ -48,11 +62,11 @@
 
       <!-- Brand Logo -->
       <a href="{% url 'home' %}" class="flex items-center gap-3 group">
-        <div class="relative w-20 h-20 flex items-center justify-center group-hover:scale-105 transition-all">
+  <div class="relative w-28 h-28 flex items-center justify-center group-hover:scale-105 transition-all">
     <img
         src="{% static 'images/logo.png' %}"
         alt="Chai's Grill Logo"
-        class="w-20 h-20 object-contain drop-shadow-[0_0_18px_rgba(212,175,55,0.5)]"
+        class="w-28 h-28 object-contain drop-shadow-[0_0_18px_rgba(212,175,55,0.5)]"
     >
     <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
     <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-red-500"></span>
@@ -181,7 +195,7 @@
         <h4 class="font-cinzel text-sm font-bold text-white mb-3 uppercase tracking-wider">Our 4 Hubs</h4>
         <ul class="space-y-1.5 text-slate-400">
           <li>✦ Thoppumpady (8943777001)</li>
-          <li>✦ Padamughal, Kakkanad (9747478292)</li>
+          <li>✦ Padamughal, Kakkanad (9747478092)</li>
           <li>✦ Changampuzha Park, Edappally (9747478092)</li>
           <li>✦ Willingdon Island, Mattancheri (8943777001)</li>
         </ul>
@@ -198,6 +212,41 @@
       © {% now "Y" %} Chai's Grill Kochi. Traditional Quality. All Rights Reserved.
     </div>
   </footer>
+
+  <!-- =====================================================
+     FLOATING PROMO VIDEO WIDGET
+     (uploaded via Django Admin → Floating Promo Videos)
+====================================================== -->
+{% if promo_video %}
+<div class="promo-video-widget" id="promoVideoWidget">
+
+  <button type="button" class="promo-video-widget__close" id="promoVideoClose" aria-label="Close video">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <button type="button" class="promo-video-widget__mute" id="promoVideoMute" aria-label="Toggle sound">
+    <i class="fa-solid fa-volume-xmark" id="promoVideoMuteIcon"></i>
+  </button>
+
+  <video
+      id="promoVideoPlayer"
+      src="{{ promo_video.video.url }}"
+      {% if promo_video.thumbnail %}poster="{{ promo_video.thumbnail.url }}"{% endif %}
+      autoplay
+      loop
+      muted
+      playsinline
+      class="promo-video-widget__video">
+  </video>
+
+  {% if promo_video.link_url %}
+  <a href="{{ promo_video.link_url }}" target="_blank" class="promo-video-widget__expand" aria-label="Open link">
+    <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+  </a>
+  {% endif %}
+
+</div>
+{% endif %}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

@@ -132,6 +132,35 @@ class ComboMeal(models.Model):
         return f"{self.name} - ₹{self.price}"
 
 
+class PromoVideo(models.Model):
+    """A short floating promo video shown as a corner widget on the site.
+    Upload the video file from the Django admin — only the most recent
+    active one is displayed."""
+    title = models.CharField(max_length=150, help_text="Internal label, e.g. 'Cocktail Pour Reel'")
+    video = models.FileField(
+        upload_to="promo_videos/%Y/%m/",
+        help_text="Upload an MP4 file (keep it short, under ~15MB for fast loading)."
+    )
+    thumbnail = models.ImageField(
+        upload_to="promo_videos/thumbs/%Y/%m/",
+        blank=True, null=True,
+        help_text="Optional poster image shown before the video plays."
+    )
+    link_url = models.URLField(
+        blank=True,
+        help_text="Optional — where the widget takes users if they tap the expand icon."
+    )
+    is_active = models.BooleanField(default=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-uploaded_at']
+        verbose_name = "Floating Promo Video"
+        verbose_name_plural = "Floating Promo Videos"
+
+    def __str__(self):
+        return self.title
+
 class ReservationInquiry(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending Review'),

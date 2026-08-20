@@ -4,6 +4,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+    initPreloader();
     initCustomCursor();
     initSmokeEmberCanvas();
     setupMenuFilters();
@@ -13,7 +14,30 @@ document.addEventListener("DOMContentLoaded", () => {
     initBookingModal();
     initTilt();
     initSmoothScroll();
+    initPromoVideoWidget();
 });
+
+
+/* =========================================================
+   0b. PAGE PRELOADER
+   ========================================================= */
+
+function initPreloader() {
+    const preloader = document.getElementById("pagePreloader");
+    if (!preloader) return;
+
+    const hide = () => {
+        preloader.classList.add("is-hidden");
+        // fully remove from flow after the fade-out finishes
+        setTimeout(() => preloader.remove(), 650);
+    };
+
+    if (document.readyState === "complete") {
+        hide();
+    } else {
+        window.addEventListener("load", hide);
+    }
+}
 
 
 /* =========================================================
@@ -300,7 +324,7 @@ function initSmokeEmberCanvas() {
 
 
 /* =========================================================
-   3. MENU AJAX FILTER
+   3. MENU AJAX + 3D COVERFLOW
    ========================================================= */
 
 function setupMenuFilters() {
@@ -314,42 +338,847 @@ function setupMenuFilters() {
     const menuGrid =
         document.getElementById("menuGrid");
 
+    const menuDots =
+        document.getElementById("menuDots");
+
+    const prevBtn =
+        document.getElementById("menuPrev");
+
+    const nextBtn =
+        document.getElementById("menuNext");
+
+    const menuEmpty =
+        document.getElementById("menuEmpty");
+
+    const menuLoading =
+        document.getElementById("menuLoading");
+
+    const categoryLabel =
+        document.getElementById("menuCategoryLabel");
+
+    const coverflowTitle =
+        document.getElementById("menuCoverflowTitle");
+
+    const activeName =
+        document.getElementById("menuActiveName");
+
+    const activeCategory =
+        document.getElementById("menuActiveCategory");
+
+    const activeDescription =
+        document.getElementById("menuActiveDescription");
+
+    const activePrice =
+        document.getElementById("menuActivePrice");
+
+    const activeOrder =
+        document.getElementById("menuActiveOrder");
+
+    const searchClear =
+        document.getElementById("menuSearchClear");
+
+
     if (!menuGrid) return;
 
 
-    function buildSpiceLevelHTML(level) {
+    /* =====================================================
+       STATE
+    ====================================================== */
 
-        if (!level || level === 0) {
+    let menuItems = [];
+
+    let activeIndex = 0;
+
+    let currentCategory = "all";
+
+    let currentQuery = "";
+
+    let showingAll = false;
+
+    let touchStartX = null;
+
+    let touchStartY = null;
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ====================================================== */
+
+    function safeHTML(value) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent =
+            value == null ? "" : String(value);
+
+        return div.innerHTML;
+
+    }
+
+
+    /* =====================================================
+       BUILD SPICE INDICATOR
+    ====================================================== */
+
+    function buildSpiceHTML(level) {
+
+        const spice =
+            Number(level || 0);
+
+        if (!spice) {
 
             return `
-                <span class="text-[10px] text-slate-400 font-medium">
+                <span class="cf-menu-card__spice">
                     Mild & Aromatic
                 </span>
             `;
+
         }
 
-        let peppers = "";
 
-        for (let i = 0; i < level; i++) {
+        let flames = "";
 
-            peppers += `
-                <i class="fa-solid fa-fire
-                text-amber-500 flame-glow
-                text-[11px] mr-0.5"></i>
+        for (
+            let i = 0;
+            i < spice;
+            i++
+        ) {
+
+            flames += `
+                <i class="fa-solid fa-fire"></i>
             `;
+
         }
+
 
         return `
-            <div class="flex items-center gap-1">
-                ${peppers}
-                <span class="text-[10px] text-amber-400
-                font-semibold uppercase tracking-wider ml-1">
-                    Smoked Heat
-                </span>
-            </div>
+            <span class="cf-menu-card__spice cf-menu-card__spice--hot">
+                ${flames}
+            </span>
         `;
+
     }
 
+
+    /* =====================================================
+       BUILD DIET BADGE
+    ====================================================== */
+
+    function buildDietBadge(item) {
+
+        if (item.is_veg) {
+
+            return `
+                <span class="cf-menu-card__diet cf-menu-card__diet--veg">
+                    <i class="fa-solid fa-leaf"></i>
+                    VEG
+                </span>
+            `;
+
+        }
+
+
+        return `
+            <span class="cf-menu-card__diet cf-menu-card__diet--nonveg">
+                <i class="fa-solid fa-drumstick-bite"></i>
+                NON-VEG
+            </span>
+        `;
+
+    }
+/* =====================================================
+   HOMEPAGE MENU CARD
+   IMAGE + ITEM NAME ONLY
+====================================================== */
+
+function createCard(item, index) {
+
+    const card = document.createElement("button");
+
+    card.type = "button";
+
+    card.className = "cf-menu-card";
+
+    card.setAttribute("role", "listitem");
+
+    card.setAttribute(
+        "aria-label",
+        item.name || "Menu item"
+    );
+
+    card.dataset.menuIndex = String(index);
+
+
+    const image =
+        item.image || "";
+
+
+    card.innerHTML = `
+
+        <span class="cf-menu-card__image-wrap">
+
+            <img
+                class="cf-menu-card__image"
+                src="${safeHTML(image)}"
+                alt="${safeHTML(item.name || "Menu item")}"
+                loading="lazy"
+            >
+
+            <span
+                class="cf-menu-card__overlay"
+                aria-hidden="true">
+            </span>
+
+            <span
+                class="cf-menu-card__sheen"
+                aria-hidden="true">
+            </span>
+
+
+            <span class="cf-menu-card__caption">
+
+                <span class="cf-menu-card__name">
+                    ${safeHTML(item.name || "Menu item")}
+                </span>
+
+            </span>
+
+        </span>
+
+    `;
+
+
+    card.addEventListener(
+        "click",
+        function () {
+
+            const clickedIndex =
+                Number(
+                    this.dataset.menuIndex
+                );
+
+
+            if (
+                clickedIndex === activeIndex
+            ) {
+                return;
+            }
+
+
+            setActive(clickedIndex);
+
+        }
+    );
+
+
+    return card;
+}
+/* =====================================================
+   RENDER CARDS
+====================================================== */
+
+function renderCards() {
+
+    menuGrid.innerHTML = "";
+
+    /*
+     * Homepage may not have menuDots.
+     * Menu page does.
+     * So only access it when it exists.
+     */
+    if (menuDots) {
+        menuDots.innerHTML = "";
+    }
+
+
+    if (!menuItems.length) {
+
+        menuGrid.classList.add(
+            "cf-menu-track--empty"
+        );
+
+        if (menuEmpty) {
+
+            menuEmpty.classList.remove(
+                "hidden"
+            );
+
+        }
+
+        updateDetail(null);
+
+        return;
+    }
+
+
+    menuGrid.classList.remove(
+        "cf-menu-track--empty"
+    );
+
+
+    if (menuEmpty) {
+
+        menuEmpty.classList.add(
+            "hidden"
+        );
+
+    }
+
+
+    menuItems.forEach(
+        (item, index) => {
+
+            const card =
+                createCard(
+                    item,
+                    index
+                );
+
+            menuGrid.appendChild(card);
+
+        }
+    );
+
+
+    /*
+     * Only create dots when the
+     * dots container exists.
+     */
+    if (menuDots) {
+        createDots();
+    }
+
+
+    activeIndex =
+        Math.min(
+            activeIndex,
+            menuItems.length - 1
+        );
+
+
+    renderCoverflow();
+
+}
+
+
+    /* =====================================================
+       CREATE DOTS
+    ====================================================== */
+
+    function createDots() {
+
+        menuItems.forEach(
+            (item, index) => {
+
+                const dot =
+                    document.createElement(
+                        "button"
+                    );
+
+                dot.type = "button";
+
+                dot.className =
+                    "cf-menu-dot";
+
+                dot.setAttribute(
+                    "role",
+                    "tab"
+                );
+
+                dot.setAttribute(
+                    "aria-label",
+                    `Go to ${item.name}`
+                );
+
+
+                dot.addEventListener(
+                    "click",
+                    () => {
+
+                        setActive(index);
+
+                    }
+                );
+
+
+                menuDots.appendChild(dot);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       GET CARD SPACING
+    ====================================================== */
+
+    function getSpacing() {
+
+        const root =
+            getComputedStyle(
+                document.documentElement
+            );
+
+
+        const cssSpacing =
+            parseFloat(
+                root.getPropertyValue(
+                    "--cf-menu-spacing"
+                )
+            );
+
+
+        if (
+            Number.isFinite(cssSpacing) &&
+            cssSpacing > 0
+        ) {
+
+            return cssSpacing;
+
+        }
+
+
+        if (
+            window.innerWidth < 640
+        ) {
+
+            return 150;
+
+        }
+
+
+        if (
+            window.innerWidth < 1024
+        ) {
+
+            return 190;
+
+        }
+
+
+        return 250;
+
+    }
+
+
+    /* =====================================================
+       RENDER 3D POSITIONS
+    ====================================================== */
+
+    function renderCoverflow() {
+
+        const cards =
+            Array.from(
+                menuGrid.querySelectorAll(
+                    ".cf-menu-card"
+                )
+            );
+
+
+        const dots =
+        menuDots
+            ? Array.from(
+                menuDots.querySelectorAll(
+                    ".cf-menu-dot"
+                )
+            )
+        : [];
+
+
+        const spacing =
+            getSpacing();
+
+
+        cards.forEach(
+            (card, index) => {
+
+                const offset =
+                    index - activeIndex;
+
+                const abs =
+                    Math.abs(offset);
+
+
+                card.classList.toggle(
+                    "is-active",
+                    offset === 0
+                );
+
+
+                /*
+                 * Hide cards that are too far
+                 * away from the active card.
+                 */
+
+                if (abs > 4) {
+
+                    card.style.opacity = "0";
+
+                    card.style.pointerEvents =
+                        "none";
+
+                    card.style.zIndex = "0";
+
+                    card.style.transform =
+                        `
+                        translateX(${offset * spacing}px)
+                        translateZ(-500px)
+                        rotateY(${offset > 0 ? -18 : 18}deg)
+                        scale(.55)
+                        `;
+
+                    return;
+
+                }
+
+
+                /*
+                 * Active card
+                 */
+
+                const scale =
+                    offset === 0
+                        ? 1
+                        : Math.max(
+                            0.62,
+                            1 - abs * 0.13
+                        );
+
+
+                /*
+                 * Rotation
+                 */
+
+                const rotate =
+                    offset === 0
+                        ? 0
+                        : offset > 0
+                            ? -15
+                            : 15;
+
+
+                /*
+                 * Depth
+                 */
+
+                const translateZ =
+                    offset === 0
+                        ? 0
+                        : -(abs * 100);
+
+
+                /*
+                 * Opacity
+                 */
+
+                const opacity =
+                    offset === 0
+                        ? 1
+                        : Math.max(
+                            0.25,
+                            1 - abs * 0.24
+                        );
+
+
+                card.style.opacity =
+                    String(opacity);
+
+
+                card.style.pointerEvents =
+                    "auto";
+
+
+                card.style.zIndex =
+                    String(
+                        100 - abs
+                    );
+
+
+                card.style.transform =
+                    `
+                    translateX(${offset * spacing}px)
+                    translateZ(${translateZ}px)
+                    rotateY(${rotate}deg)
+                    scale(${scale})
+                    `;
+
+            }
+        );
+
+
+        dots.forEach(
+            (dot, index) => {
+
+                dot.classList.toggle(
+                    "is-active",
+                    index === activeIndex
+                );
+
+            }
+        );
+
+
+        updateDetail(
+            menuItems[activeIndex]
+        );
+
+    }
+
+
+    /* =====================================================
+       SET ACTIVE CARD
+    ====================================================== */
+
+    function setActive(index) {
+
+        if (!menuItems.length) {
+            return;
+        }
+
+
+        activeIndex =
+            Math.max(
+                0,
+                Math.min(
+                    menuItems.length - 1,
+                    index
+                )
+            );
+
+
+        renderCoverflow();
+
+    }
+
+
+    /* =====================================================
+       PREVIOUS
+    ====================================================== */
+
+    function previousItem() {
+
+        if (!menuItems.length) {
+            return;
+        }
+
+
+        /*
+         * Loop from first → last
+         */
+
+        if (activeIndex <= 0) {
+
+            setActive(
+                menuItems.length - 1
+            );
+
+            return;
+
+        }
+
+
+        setActive(
+            activeIndex - 1
+        );
+
+    }
+
+
+    /* =====================================================
+       NEXT
+    ====================================================== */
+
+    function nextItem() {
+
+        if (!menuItems.length) {
+            return;
+        }
+
+
+        /*
+         * Loop from last → first
+         */
+
+        if (
+            activeIndex >=
+            menuItems.length - 1
+        ) {
+
+            setActive(0);
+
+            return;
+
+        }
+
+
+        setActive(
+            activeIndex + 1
+        );
+
+    }
+
+
+    /* =====================================================
+       ACTIVE ITEM INFORMATION
+    ====================================================== */
+
+    function updateDetail(item) {
+
+        if (!item) {
+
+            if (activeName) {
+
+                activeName.textContent =
+                    "No menu items";
+
+            }
+
+            if (activeDescription) {
+
+                activeDescription.textContent =
+                    "Try another category or search.";
+
+            }
+
+            if (activePrice) {
+
+                activePrice.textContent =
+                    "₹0";
+
+            }
+
+            return;
+
+        }
+
+
+        if (activeName) {
+
+            activeName.textContent =
+                item.name || "";
+
+        }
+
+
+        if (activeCategory) {
+
+            activeCategory.textContent =
+                (
+                    item.category ||
+                    "CHAI GRILL"
+                ).toUpperCase();
+
+        }
+
+
+        if (activeDescription) {
+
+            activeDescription.textContent =
+                item.desc ||
+                "A signature Chai Grill favourite.";
+
+        }
+
+
+        if (activePrice) {
+
+            activePrice.textContent =
+                `₹${item.price}`;
+
+        }
+
+
+        if (activeOrder) {
+
+            activeOrder.onclick =
+                () => {
+
+                    quickOrderWhatsApp(
+                        item.name
+                    );
+
+                };
+
+        }
+
+    }
+
+
+    /* =====================================================
+       UPDATE CATEGORY TITLE
+    ====================================================== */
+
+    function updateCategoryHeading(
+        category,
+        itemCount
+    ) {
+
+        let title =
+            "Featured Favourites";
+
+        let label =
+            "Featured Selection";
+
+
+        if (
+            category &&
+            category !== "all"
+        ) {
+
+            const activeTab =
+                document.querySelector(
+                    `.category-pill[data-category="${CSS.escape(category)}"]`
+                );
+
+
+            if (activeTab) {
+
+                const categoryName =
+                    activeTab.textContent.trim();
+
+
+                title =
+                    categoryName;
+
+                label =
+                    categoryName;
+
+            } else {
+
+                title =
+                    "Our Menu";
+
+                label =
+                    "Menu Selection";
+
+            }
+
+        }
+
+
+        if (coverflowTitle) {
+
+            coverflowTitle.textContent =
+                title;
+
+        }
+
+
+        if (categoryLabel) {
+
+            categoryLabel.textContent =
+                `${label} · ${itemCount} ITEM${itemCount === 1 ? "" : "S"}`;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOAD MENU FROM DJANGO API
+    ====================================================== */
 
     function fetchMenuItems(
         category = "all",
@@ -357,369 +1186,577 @@ function setupMenuFilters() {
         showAll = false
     ) {
 
-        menuGrid.classList.add("menu-loading");
+        currentCategory =
+            category;
 
-        fetch(
-            `/api/menu/?category=${encodeURIComponent(category)}&q=${encodeURIComponent(query)}&show_all=${showAll ? "1" : "0"}`
-        )
-            .then((response) => {
+        currentQuery =
+            query;
 
-                if (!response.ok) {
-                    throw new Error(
-                        `HTTP ${response.status}`
-                    );
+
+        if (menuLoading) {
+
+            menuLoading.classList.remove(
+                "hidden"
+            );
+
+        }
+
+
+        menuGrid.classList.add(
+            "menu-loading"
+        );
+
+
+        const url =
+            `/api/menu/?category=${encodeURIComponent(category)}`
+            +
+            `&q=${encodeURIComponent(query)}`
+            +
+            `&show_all=${showAll ? "1" : "0"}`;
+
+
+        fetch(url)
+
+            .then(
+                (response) => {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            `HTTP ${response.status}`
+                        );
+
+                    }
+
+
+                    return response.json();
+
                 }
+            )
 
-                return response.json();
-            })
+            .then(
+                (data) => {
 
-            .then((data) => {
+                    if (
+                        !data ||
+                        !Array.isArray(
+                            data.items
+                        )
+                    ) {
 
-                if (!data.items) {
-                    throw new Error(
-                        "Invalid menu response"
+                        throw new Error(
+                            "Invalid menu response"
+                        );
+
+                    }
+
+
+                    menuItems =
+                        data.items;
+
+
+                    /*
+                     * Start each category at
+                     * the middle card where
+                     * possible.
+                     */
+
+                    if (
+                        menuItems.length > 1
+                    ) {
+
+                        activeIndex =
+                            Math.floor(
+                                menuItems.length / 2
+                            );
+
+                    } else {
+
+                        activeIndex = 0;
+
+                    }
+
+
+                    updateCategoryHeading(
+                        category,
+                        menuItems.length
                     );
+
+
+                    renderCards();
+
                 }
+            )
+
+            .catch(
+                (error) => {
+
+                    console.error(
+                        "Menu loading error:",
+                        error
+                    );
 
 
-                if (data.items.length === 0) {
+                    menuItems = [];
 
                     menuGrid.innerHTML = `
-                        <div class="col-span-full
-                        py-16 text-center">
 
-                            <div class="w-16 h-16
-                            rounded-full bg-gold/10
-                            border border-gold/30
-                            flex items-center
-                            justify-center
-                            text-gold mx-auto mb-4">
+                        <div class="cf-menu-error">
 
-                                <i class="fa-solid fa-mug-hot
-                                text-2xl"></i>
+                            <div class="cf-menu-error__icon">
+
+                                <i class="fa-solid fa-circle-exclamation"></i>
 
                             </div>
 
-                            <h3 class="font-cinzel
-                            text-xl font-bold
-                            text-white mb-1">
-
-                                No Culinary Matches Found
-
+                            <h3>
+                                Unable to load menu
                             </h3>
 
-                            <p class="text-xs text-slate-400">
-
-                                Try searching for
-                                "Alfaham", "Dum Chai",
-                                "Shawarma" or "Burger".
-
+                            <p>
+                                Please refresh the page
+                                and try again.
                             </p>
 
                         </div>
+
                     `;
 
-                    return;
+
+                    if (menuEmpty) {
+
+                        menuEmpty.classList.add(
+                            "hidden"
+                        );
+
+                    }
+
                 }
+            )
+
+            .finally(
+                () => {
+
+                    menuGrid.classList.remove(
+                        "menu-loading"
+                    );
 
 
-                menuGrid.innerHTML =
-                    data.items.map((item) => `
+                    if (menuLoading) {
 
-                    <div
-                        class="luxury-glass-card
-                        rounded-3xl p-5
-                        flex flex-col
-                        justify-between group
-                        menu-item-card"
-                        data-tilt
-                    >
+                        menuLoading.classList.add(
+                            "hidden"
+                        );
 
-                        <div>
+                    }
 
-                            <div class="relative
-                            h-52 sm:h-56
-                            rounded-2xl overflow-hidden
-                            mb-4 bg-charcoal-800">
+                }
+            );
 
-                                <img
-                                    src="${item.image || ''}"
-                                    alt="${escapeHTML(item.name)}"
-                                    class="w-full h-full
-                                    object-cover
-                                    group-hover:scale-110
-                                    transition-transform
-                                    duration-700"
-                                    loading="lazy"
-                                />
-
-                                <div class="absolute inset-0
-                                bg-gradient-to-t
-                                from-charcoal-900/90
-                                via-transparent
-                                to-transparent">
-                                </div>
-
-                                <div class="absolute
-                                top-3 right-3
-                                bg-charcoal-900/90
-                                backdrop-blur-md
-                                px-3.5 py-1
-                                rounded-full
-                                border border-gold/40
-                                font-cinzel
-                                text-gold font-bold
-                                text-sm">
-
-                                    ₹${item.price}
-
-                                </div>
-
-                                <div class="absolute
-                                bottom-3 left-3
-                                flex gap-2 flex-wrap">
-
-                                    ${
-                                        item.is_veg
-                                        ?
-                                        `
-                                        <span class="px-2.5 py-1
-                                        text-[10px] font-bold
-                                        rounded-lg border
-                                        bg-emerald-500/20
-                                        text-emerald-300
-                                        border-emerald-500/40">
-                                            VEG
-                                        </span>
-                                        `
-                                        :
-                                        `
-                                        <span class="px-2.5 py-1
-                                        text-[10px] font-bold
-                                        rounded-lg border
-                                        bg-red-500/20
-                                        text-red-300
-                                        border-red-500/40">
-                                            NON-VEG
-                                        </span>
-                                        `
-                                    }
-
-                                    ${
-                                        item.is_bestseller
-                                        ?
-                                        `
-                                        <span class="pulse-badge
-                                        px-2.5 py-1
-                                        text-[10px]
-                                        font-bold rounded-lg
-                                        border bg-gradient-to-r
-                                        from-gold via-amber-500
-                                        to-gold-600
-                                        text-charcoal-950
-                                        border-gold shadow-md">
-                                            BESTSELLER
-                                        </span>
-                                        `
-                                        :
-                                        ""
-                                    }
-
-                                </div>
-
-                            </div>
+    }
 
 
-                            <h3 class="font-cinzel
-                            text-lg sm:text-xl
-                            font-bold text-white
-                            group-hover:text-gold
-                            transition-colors">
+    /* =====================================================
+       CATEGORY BUTTONS
+    ====================================================== */
 
-                                ${escapeHTML(item.name)}
+    tabs.forEach(
+        (tab) => {
 
-                            </h3>
+            tab.addEventListener(
+                "click",
+                () => {
 
+                    tabs.forEach(
+                        (t) => {
 
-                            <p class="text-xs
-                            text-slate-400 mt-2
-                            line-clamp-2
-                            leading-relaxed">
+                            t.classList.remove(
+                                "active"
+                            );
 
-                                ${escapeHTML(item.desc || "")}
-
-                            </p>
-
-                        </div>
-
-
-                        <div class="mt-6 pt-4
-                        border-t border-slate-700/60
-                        flex items-center
-                        justify-between gap-3">
-
-                            ${buildSpiceLevelHTML(item.spice)}
-
-                            <button
-                                onclick="quickOrderWhatsApp('${escapeJS(item.name)}')"
-                                class="shrink-0 px-4 py-2
-                                rounded-xl
-                                bg-gradient-to-r
-                                from-gold/15
-                                to-amber-500/10
-                                hover:from-gold
-                                hover:to-amber-500
-                                hover:text-charcoal-950
-                                text-gold text-xs
-                                font-bold border
-                                border-gold/30
-                                transition-all
-                                flex items-center gap-1.5">
-
-                                <span>Order</span>
-
-                                <i class="fa-brands
-                                fa-whatsapp text-sm"></i>
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                `).join("");
-
-
-                initTilt();
-
-
-                // Animate newly loaded menu cards
-                if (
-                    typeof gsap !== "undefined"
-                ) {
-
-                    gsap.fromTo(
-                        ".menu-item-card",
-                        {
-                            opacity: 0,
-                            y: 20
-                        },
-                        {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.45,
-                            stagger: 0.06,
-                            ease: "power2.out"
                         }
                     );
+
+
+                    tab.classList.add(
+                        "active"
+                    );
+
+
+                    const category =
+                        tab.dataset.category ||
+                        "all";
+
+
+                    fetchMenuItems(
+                        category,
+                        searchInput
+                            ? searchInput.value.trim()
+                            : "",
+                        false
+                    );
+
                 }
-
-            })
-
-            .catch((error) => {
-
-                console.error(
-                    "Menu loading error:",
-                    error
-                );
-
-                menuGrid.innerHTML = `
-                    <div class="col-span-full
-                    text-center py-12">
-
-                        <i class="fa-solid fa-circle-exclamation
-                        text-red-400 text-3xl mb-3"></i>
-
-                        <p class="text-slate-400">
-                            Unable to load menu.
-                            Please refresh the page.
-                        </p>
-
-                    </div>
-                `;
-
-            })
-
-            .finally(() => {
-
-                menuGrid.classList.remove(
-                    "menu-loading"
-                );
-
-            });
-    }
-
-
-    tabs.forEach((tab) => {
-
-        tab.addEventListener("click", () => {
-
-            tabs.forEach((t) =>
-                t.classList.remove("active")
             );
 
-            tab.classList.add("active");
+        }
+    );
 
-            fetchMenuItems(
-                tab.dataset.category,
-                searchInput
-                    ? searchInput.value
-                    : ""
-            );
-        });
-    });
 
-    const showAllToggle = document.getElementById("showAllToggle");
-    let showingAll = false;
-
-    if (showAllToggle) {
-        showAllToggle.addEventListener("click", () => {
-            showingAll = !showingAll;
-
-            const activeTab = document.querySelector(".category-pill.active");
-            const category = activeTab ? activeTab.dataset.category : "all";
-
-            fetchMenuItems(category, searchInput ? searchInput.value : "", showingAll);
-
-            showAllToggle.innerHTML = showingAll
-                ? `Showing full menu — <span class="underline">tap to view bestsellers only</span>`
-                : `Showing our bestsellers — <span class="underline">tap to view the full menu</span>`;
-        });
-    }
+    /* =====================================================
+       SEARCH
+    ====================================================== */
 
     if (searchInput) {
 
         let debounceTimer;
 
+
         searchInput.addEventListener(
             "input",
             (event) => {
 
-                clearTimeout(debounceTimer);
+                clearTimeout(
+                    debounceTimer
+                );
 
-                debounceTimer = setTimeout(() => {
 
-                    const activeTab =
-                        document.querySelector(
-                            ".category-pill.active"
-                        );
+                const value =
+                    event.target.value.trim();
 
-                    const category =
-                        activeTab
-                            ? activeTab.dataset.category
-                            : "all";
 
-                    fetchMenuItems(
-                        category,
-                        event.target.value
+                if (searchClear) {
+
+                    searchClear.classList.toggle(
+                        "hidden",
+                        !value
                     );
 
-                }, 300);
+                }
+
+
+                debounceTimer =
+                    setTimeout(
+                        () => {
+
+                            const activeTab =
+                                document.querySelector(
+                                    ".category-pill.active"
+                                );
+
+
+                            const category =
+                                activeTab
+                                    ? activeTab.dataset.category
+                                    : "all";
+
+
+                            fetchMenuItems(
+                                category,
+                                value,
+                                false
+                            );
+
+                        },
+                        300
+                    );
+
             }
         );
-    }
-}
 
+    }
+
+
+    /* =====================================================
+       SEARCH CLEAR
+    ====================================================== */
+
+    if (searchClear) {
+
+        searchClear.addEventListener(
+            "click",
+            () => {
+
+                if (searchInput) {
+
+                    searchInput.value = "";
+
+                }
+
+
+                searchClear.classList.add(
+                    "hidden"
+                );
+
+
+                const activeTab =
+                    document.querySelector(
+                        ".category-pill.active"
+                    );
+
+
+                const category =
+                    activeTab
+                        ? activeTab.dataset.category
+                        : "all";
+
+
+                fetchMenuItems(
+                    category,
+                    "",
+                    false
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       PREVIOUS / NEXT BUTTONS
+    ====================================================== */
+
+    if (prevBtn) {
+
+        prevBtn.addEventListener(
+            "click",
+            previousItem
+        );
+
+    }
+
+
+    if (nextBtn) {
+
+        nextBtn.addEventListener(
+            "click",
+            nextItem
+        );
+
+    }
+
+
+    /* =====================================================
+       KEYBOARD NAVIGATION
+    ====================================================== */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (!menuItems.length) {
+                return;
+            }
+
+
+            const stage =
+                document.getElementById("menuCoverflow") ||
+                menuGrid.closest(".cf-menu-coverflow") ||
+                menuGrid.parentElement;
+
+            if (!stage) {
+                return;
+            }
+
+
+            const rect =
+                stage.getBoundingClientRect();
+
+
+            const inView =
+                rect.top <
+                window.innerHeight &&
+                rect.bottom > 0;
+
+
+            if (!inView) {
+                return;
+            }
+
+
+            /*
+             * Don't steal arrow keys from
+             * an input field.
+             */
+
+            const tag =
+                document.activeElement
+                    ? document.activeElement.tagName
+                    : "";
+
+
+            if (
+                tag === "INPUT" ||
+                tag === "TEXTAREA" ||
+                tag === "SELECT"
+            ) {
+
+                return;
+
+            }
+
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                event.preventDefault();
+
+                previousItem();
+
+            }
+
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                event.preventDefault();
+
+                nextItem();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       TOUCH / SWIPE
+    ====================================================== */
+
+    menuGrid.addEventListener(
+        "touchstart",
+        (event) => {
+
+            if (
+                !event.touches ||
+                !event.touches.length
+            ) {
+
+                return;
+
+            }
+
+
+            touchStartX =
+                event.touches[0].clientX;
+
+            touchStartY =
+                event.touches[0].clientY;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    menuGrid.addEventListener(
+        "touchend",
+        (event) => {
+
+            if (
+                touchStartX === null ||
+                touchStartY === null
+            ) {
+
+                return;
+
+            }
+
+
+            const endX =
+                event.changedTouches[0].clientX;
+
+            const endY =
+                event.changedTouches[0].clientY;
+
+
+            const dx =
+                endX - touchStartX;
+
+            const dy =
+                endY - touchStartY;
+
+
+            /*
+             * Only treat it as a swipe when
+             * horizontal movement is stronger
+             * than vertical movement.
+             */
+
+            if (
+                Math.abs(dx) > 45 &&
+                Math.abs(dx) > Math.abs(dy)
+            ) {
+
+                if (dx < 0) {
+
+                    nextItem();
+
+                } else {
+
+                    previousItem();
+
+                }
+
+            }
+
+
+            touchStartX = null;
+
+            touchStartY = null;
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================================
+       RESIZE
+    ====================================================== */
+
+    let resizeTimer;
+
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            clearTimeout(
+                resizeTimer
+            );
+
+
+            resizeTimer =
+                setTimeout(
+                    () => {
+
+                        renderCoverflow();
+
+                    },
+                    120
+                );
+
+        }
+    );
+
+
+    /* =====================================================
+       INITIAL LOAD
+    ====================================================== */
+
+    fetchMenuItems(
+        "all",
+        "",
+        false
+    );
+
+}
 
 /* =========================================================
    4. SAFE HTML HELPERS
@@ -1256,6 +2293,36 @@ function initSmoothScroll() {
     });
 }
 
+/* =========================================================
+   0. FLOATING PROMO VIDEO WIDGET
+   ========================================================= */
+
+function initPromoVideoWidget() {
+    const widget = document.getElementById("promoVideoWidget");
+    if (!widget) return;
+
+    const closeBtn = document.getElementById("promoVideoClose");
+    const muteBtn = document.getElementById("promoVideoMute");
+    const muteIcon = document.getElementById("promoVideoMuteIcon");
+    const player = document.getElementById("promoVideoPlayer");
+
+    closeBtn.addEventListener("click", () => {
+        widget.classList.add("hidden");
+        if (player) player.pause();
+    });
+
+    muteBtn.addEventListener("click", () => {
+        if (!player) return;
+        player.muted = !player.muted;
+        muteIcon.className = player.muted
+            ? "fa-solid fa-volume-xmark"
+            : "fa-solid fa-volume-high";
+    });
+
+    if (player) {
+        player.play().catch(() => {});
+    }
+}
 /* SPECIALITY CARDS */
 const specialtyCards = document.querySelectorAll(".specialty-card");
 
