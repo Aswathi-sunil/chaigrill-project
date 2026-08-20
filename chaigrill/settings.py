@@ -89,4 +89,17 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Modern Django 4.2+ storage config — declared explicitly alongside the legacy
+# settings above, since django-cloudinary-storage doesn't always get picked up
+# correctly through DEFAULT_FILE_STORAGE alone on newer Django versions.
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
