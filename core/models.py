@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
 
 def generate_unique_slug(model_instance, field_value, slug_field_name="slug"):
     """Generates a guaranteed unique slug even if duplicates exist."""
@@ -139,6 +139,7 @@ class PromoVideo(models.Model):
     title = models.CharField(max_length=150, help_text="Internal label, e.g. 'Cocktail Pour Reel'")
     video = models.FileField(
         upload_to="promo_videos/%Y/%m/",
+        storage=VideoMediaCloudinaryStorage(),
         help_text="Upload an MP4 file (keep it short, under ~15MB for fast loading)."
     )
     thumbnail = models.ImageField(

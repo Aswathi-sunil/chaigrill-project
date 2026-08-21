@@ -212,7 +212,7 @@ body:hover .custom-cursor-outline {
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 120px;
 }
 
 body {
@@ -310,13 +310,15 @@ textarea {
     /* Header */
 
     #main-header {
-        padding-top: 10px !important;
-        padding-bottom: 10px !important;
+        padding-top: 2px !important;
+        padding-bottom: 0px !important;
     }
 
 
     #main-header > div:first-child {
-        min-height: 58px;
+    min-height: 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
     }
 
 
@@ -325,19 +327,9 @@ textarea {
     #main-header a.flex.items-center.gap-3 {
         gap: 8px;
         min-width: 0;
+        margin-left: 30px;
     }
 
-    #main-header a.flex.items-center.gap-3 > div:first-child {
-    width: 54px;
-    height: 54px;
-    min-width: 54px;
-    border-radius: 14px;
-    }
-
-    #main-header a.flex.items-center.gap-3 > div:first-child img {
-    width: 54px;
-    height: 54px;
-    }
 
     #main-header a.flex.items-center.gap-3 i {
         font-size: 17px;
@@ -379,7 +371,7 @@ textarea {
     /* Main */
 
     main {
-        padding-top: 70px !important;
+        padding-top: 120px !important;
     }
 
 
@@ -3596,4 +3588,64 @@ body {
     overflow-x: hidden;
     width: 100%;
     position: relative;
+}
+
+/* =====================================================
+   MOBILE INLINE SCROLLABLE NAV
+   (replaces hamburger drawer)
+====================================================== */
+.mobile-nav-scroll {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 6px 16px 10px;
+    margin-top: 0;
+    border-top: 1px solid rgba(212, 175, 55, 0.12);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.mobile-nav-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-nav-link {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.mobile-nav-link.is-active {
+    color: #17120a;
+    background: linear-gradient(135deg, #f4d77b, #c99c2e);
+    border-color: rgba(244, 215, 123, 0.85);
+    font-weight: 800;
+}
+
+.mobile-nav-hot {
+    font-size: 8px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    background: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.mobile-nav-link.is-active .mobile-nav-hot {
+    background: rgba(23, 18, 10, 0.15);
+    color: #17120a;
+    border-color: rgba(23, 18, 10, 0.2);
 }

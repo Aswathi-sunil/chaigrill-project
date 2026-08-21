@@ -62,16 +62,17 @@
 
       <!-- Brand Logo -->
       <a href="{% url 'home' %}" class="flex items-center gap-3 group">
-  <div class="relative w-28 h-28 flex items-center justify-center group-hover:scale-105 transition-all">
+        <div class="relative inline-flex items-center justify-center group-hover:scale-105 transition-all">
     <img
         src="{% static 'images/logo.png' %}"
         alt="Chai's Grill Logo"
-        class="w-28 h-28 object-contain drop-shadow-[0_0_18px_rgba(212,175,55,0.5)]"
+        class="w-28 md:w-20 h-auto object-contain drop-shadow-[0_0_18px_rgba(212,175,55,0.5)]"
     >
-    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
-    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-red-500"></span>
+    <span class="absolute top-0 right-0 w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+    <span class="absolute top-0 right-0 w-2.5 h-2.5 rounded-full bg-red-500"></span>
 </div>
-        <div class="flex flex-col">
+        <!-- Text hidden on mobile, shown from tablet up -->
+        <div class="hidden md:flex flex-col">
           <span class="font-cinzel text-xl sm:text-2xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500">CHAI'S GRILL</span>
           <span class="text-[9px] tracking-[0.25em] text-slate-400 font-semibold uppercase -mt-1">Kochi • 4 Outlets</span>
         </div>
@@ -100,20 +101,25 @@
         </button>
       </div>
 
-      <!-- Mobile Button -->
-      <button onclick="document.getElementById('mobile-drawer').classList.toggle('hidden')" class="md:hidden w-10 h-10 rounded-xl border border-gold/30 text-gold flex items-center justify-center">
-        <i class="fa-solid fa-bars text-lg"></i>
+      <!-- Mobile Reserve Icon Button (compact) -->
+      <button onclick="openBookingModal()" class="md:hidden w-10 h-10 rounded-xl bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+        <i class="fa-solid fa-mug-hot text-sm"></i>
       </button>
     </div>
 
-    <!-- Mobile Drawer -->
-    <div id="mobile-drawer" class="hidden md:hidden px-6 py-4 bg-charcoal-900 border-b border-gold/20 flex flex-col gap-3 text-sm font-semibold uppercase tracking-wider">
-      <a href="{% url 'home' %}" class="py-1.5 text-slate-200 hover:text-gold">Home</a>
-      <a href="{% url 'menu' %}" class="py-1.5 text-slate-200 hover:text-gold">Full Gourmet Menu</a>
-      <a href="{% url 'combos' %}" class="py-1.5 text-slate-200 hover:text-gold">Loaded Combos & Buckets</a>
-      <a href="{% url 'outlets' %}" class="py-1.5 text-slate-200 hover:text-gold">4 Kochi Outlets</a>
-      <a href="{% url 'about' %}" class="py-1.5 text-slate-200 hover:text-gold">Our Story</a>
-    </div>
+    <!-- =====================================================
+         MOBILE INLINE SCROLLABLE NAV
+         (replaces the old hamburger drawer)
+    ====================================================== -->
+    <nav class="md:hidden mobile-nav-scroll">
+      <a href="{% url 'home' %}" class="mobile-nav-link {% if request.path == '/' %}is-active{% endif %}">Home</a>
+      <a href="{% url 'menu' %}" class="mobile-nav-link {% if '/menu' in request.path %}is-active{% endif %}">
+        Menu <span class="mobile-nav-hot">Hot</span>
+      </a>
+      <a href="{% url 'combos' %}" class="mobile-nav-link {% if '/combos' in request.path %}is-active{% endif %}">Loaded Combos</a>
+      <a href="{% url 'outlets' %}" class="mobile-nav-link {% if '/outlets' in request.path %}is-active{% endif %}">4 Kochi Hubs</a>
+      <a href="{% url 'about' %}" class="mobile-nav-link {% if '/about' in request.path %}is-active{% endif %}">About Us</a>
+    </nav>
   </header>
 
   <!-- Page Content -->
