@@ -3500,8 +3500,8 @@ textarea {
     color: #111;
 }
 
-.promo-video-widget__close { top: 5px; left: 5px; }
-.promo-video-widget__mute  { top: 5px; right: 5px; }
+.promo-video-widget__close { top: 5px; right: 5px; }
+.promo-video-widget__mute  { top: 5px; left: 5px; }
 .promo-video-widget__expand { bottom: 5px; right: 5px; }
 
 .promo-video-widget.hidden { display: none; }

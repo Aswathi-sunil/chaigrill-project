@@ -96,9 +96,10 @@
           <i class="fa-solid fa-phone text-gold"></i>
           <span>89437 77001</span>
         </a>
-        <button onclick="openBookingModal()" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.7)] transition-all transform hover:-translate-y-0.5">
-          <i class="fa-solid fa-mug-hot mr-1"></i> Reserve / Order
-        </button>
+        <!-- Mobile Menu Icon Button (compact) -->
+<a href="{% url 'menu' %}" class="md:hidden w-10 h-10 rounded-xl bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+  <i class="fa-solid fa-mug-hot text-sm"></i>
+</a>
       </div>
 
       <!-- Mobile Reserve Icon Button (compact) -->
