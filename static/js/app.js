@@ -15,8 +15,177 @@ document.addEventListener("DOMContentLoaded", () => {
     initTilt();
     initSmoothScroll();
     initPromoVideoWidget();
+    initNavbarLogoAnimation();
 });
 
+
+/* =========================================================
+   NAVBAR LOGO MOTION
+   Intro  : Baby Steps → Flip In
+   Loop   : Baby Steps → Flip OutIn
+   Outro  : Bounce & Roll Out → Bounce Out Bck
+
+   Background : Transparent
+   Scale      : 80%
+   X          : 0%
+   Y          : 0%
+========================================================= */
+
+function initNavbarLogoAnimation() {
+
+    if (typeof gsap === "undefined") {
+        return;
+    }
+
+    const logo = document.querySelector(".navbar-logo-motion");
+
+    if (!logo) {
+        return;
+    }
+
+    /* -----------------------------------------------------
+       Base state
+       Scale 80%, X 0, Y 0
+    ----------------------------------------------------- */
+
+    gsap.set(logo, {
+        scale: 0.8,
+        x: 0,
+        y: 0,
+        rotation: 0,
+        rotationX: 0,
+        rotationY: 0,
+        opacity: 1,
+        transformOrigin: "50% 50%",
+        transformPerspective: 800
+    });
+
+
+    /* -----------------------------------------------------
+       INTRO
+       Baby Steps → Flip In
+    ----------------------------------------------------- */
+
+    const intro = gsap.timeline();
+
+    intro.fromTo(
+        logo,
+        {
+            opacity: 0,
+            scale: 0.45,
+            rotationY: -90,
+            rotationX: 35,
+            x: 0,
+            y: -8
+        },
+        {
+            opacity: 1,
+            scale: 0.8,
+            rotationY: 0,
+            rotationX: 0,
+            x: 0,
+            y: 0,
+            duration: 0.9,
+            ease: "back.out(1.7)"
+        }
+    );
+
+
+    /* -----------------------------------------------------
+       LOOP
+       Baby Steps → Flip OutIn
+    ----------------------------------------------------- */
+
+    const loop = gsap.timeline({
+        repeat: -1,
+        repeatDelay: 2.5
+    });
+
+    loop
+        .to(logo, {
+            rotationY: 18,
+            rotationX: -8,
+            scale: 0.84,
+            duration: 0.35,
+            ease: "back.out(1.7)"
+        })
+        .to(logo, {
+            rotationY: -18,
+            rotationX: 8,
+            scale: 0.77,
+            duration: 0.35,
+            ease: "back.inOut(1.5)"
+        })
+        .to(logo, {
+            rotationY: 12,
+            rotationX: -5,
+            scale: 0.82,
+            duration: 0.3,
+            ease: "back.out(1.5)"
+        })
+        .to(logo, {
+            rotationY: 0,
+            rotationX: 0,
+            scale: 0.8,
+            x: 0,
+            y: 0,
+            duration: 0.4,
+            ease: "back.out(1.7)"
+        });
+
+
+    /* -----------------------------------------------------
+       Start loop after intro
+    ----------------------------------------------------- */
+
+    intro.eventCallback("onComplete", () => {
+        loop.play(0);
+    });
+
+
+    /* -----------------------------------------------------
+       OUTRO
+       Bounce & Roll Out → Bounce Out Bck
+
+       Runs when user leaves / hides the page.
+    ----------------------------------------------------- */
+
+    const playOutro = () => {
+
+        loop.pause();
+
+        gsap.timeline()
+            .to(logo, {
+                x: 10,
+                y: -5,
+                rotation: 12,
+                scale: 0.86,
+                duration: 0.18,
+                ease: "power2.out"
+            })
+            .to(logo, {
+                x: 55,
+                y: 25,
+                rotation: 150,
+                scale: 0.45,
+                opacity: 0,
+                duration: 0.65,
+                ease: "back.in(1.6)"
+            });
+    };
+
+
+    /* Page visibility */
+    document.addEventListener(
+        "visibilitychange",
+        () => {
+            if (document.visibilityState === "hidden") {
+                playOutro();
+            }
+        }
+    );
+
+}
 
 /* =========================================================
    0b. PAGE PRELOADER

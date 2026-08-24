@@ -7,8 +7,8 @@
 <div class="aurora-bg top-1/2 right-10" style="animation-delay: -6s;"></div>
 
 <!-- 1. Hero Section -->
-<section id="hero" class="relative min-h-screen flex items-center justify-center pt-28 pb-20 overflow-hidden">
-  <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+<section id="hero" class="relative min-h-screen flex items-center justify-center pt-6 sm:pt-10 pb-20 overflow-hidden">
+    <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
 
@@ -24,24 +24,37 @@
   "Where Every Bite Tells a Malabar Story"
 </p>
 
-      <h1 class="hero-title-reveal font-cinzel text-4xl sm:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight text-white">
-        Where <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500">Spiced Chai</span><br />
-        Meets The <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-500 to-orange-400 drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">Charcoal Flame</span>
-      </h1>
+      <h1 class="hero-title-reveal hero-main-heading font-cinzel text-4xl sm:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight text-white">
 
+    <span class="hero-heading-line">
+        Where
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500">
+            Spiced Chai
+        </span>
+    </span>
+
+    <span class="hero-heading-line">
+        Meets The
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-500 to-orange-400 drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">
+            Charcoal Flame
+        </span>
+    </span>
+
+</h1>
+        <br>
       <p class="hero-title-reveal text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
         Step into Kochi’s premier culinary lounge. Uniting artisanal hand-pulled saffron brews, fiery whole-spice charcoal grills, authentic rumali shawarmas, and late-night ambiance.
       </p>
 
       <div class="hero-title-reveal flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-        <a href="#menu" class="w-full sm:w-auto px-9 py-4 rounded-full bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 font-bold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.45)] hover:shadow-[0_0_45px_rgba(212,175,55,0.8)] transform hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-3">
-          <span>Explore Live Menu</span>
-          <i class="fa-solid fa-arrow-right text-xs"></i>
-        </a>
-        <a href="#outlets" class="w-full sm:w-auto px-9 py-4 rounded-full border border-slate-700 bg-charcoal-900/90 hover:bg-charcoal-800 hover:border-gold/50 text-slate-200 font-semibold text-xs tracking-widest uppercase backdrop-blur-md transition-all text-center flex items-center justify-center gap-2">
-          <i class="fa-solid fa-location-dot text-gold"></i>
-          <span>Find Nearest Hub</span>
-        </a>
+        <a href="#menu" class="magnetic-btn w-full sm:w-auto px-9 py-4 rounded-full bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 font-bold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.45)] hover:shadow-[0_0_45px_rgba(212,175,55,0.8)] transform hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-3">
+  <span>Explore Live Menu</span>
+  <i class="fa-solid fa-arrow-right text-xs"></i>
+</a>
+<a href="#outlets" class="magnetic-btn w-full sm:w-auto px-9 py-4 rounded-full border border-slate-700 bg-charcoal-900/90 hover:bg-charcoal-800 hover:border-gold/50 text-slate-200 font-semibold text-xs tracking-widest uppercase backdrop-blur-md transition-all text-center flex items-center justify-center gap-2">
+  <i class="fa-solid fa-location-dot text-gold"></i>
+  <span>Find Nearest Hub</span>
+</a>
       </div>
 
       <!-- Live Counters -->
@@ -62,12 +75,14 @@
     </div>
 
     <!-- Right 3D Visual Stack -->
-    <div class="lg:col-span-5 relative flex items-center justify-center">
-      <div class="relative w-full max-w-md" data-tilt data-tilt-max="14" data-tilt-speed="400">
-        <div class="rounded-3xl p-1 bg-gradient-to-br from-gold via-slate-800 to-amber-600/60 shadow-[0_0_50px_rgba(212,175,55,0.25)]">
-          <div class="rounded-[22px] overflow-hidden bg-charcoal-900 relative">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=80" alt="Chai Grill Feast" class="w-full h-96 object-cover transform hover:scale-108 transition-transform duration-700" />
-            <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/40 to-transparent flex flex-col justify-end p-6">
+<div class="lg:col-span-5 relative flex items-center justify-center hero-3d-perspective">
+  <div class="orbit-ring orbit-ring--one"></div>
+  <div class="orbit-ring orbit-ring--two"></div>
+  <div class="relative w-full max-w-md hero-3d-stack" id="hero3dStack" data-tilt data-tilt-max="14" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.25">
+    <div class="rounded-3xl p-1 bg-gradient-to-br from-gold via-slate-800 to-amber-600/60 shadow-[0_0_50px_rgba(212,175,55,0.25)]">
+      <div class="rounded-[22px] overflow-hidden bg-charcoal-900 relative">
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=80" alt="Chai Grill Feast" class="w-full h-96 object-cover transform hover:scale-108 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/40 to-transparent flex flex-col justify-end p-6">
               <div class="flex items-center justify-between mb-2">
                 <span class="pulse-badge px-3 py-1 bg-gold text-charcoal-950 font-bold text-xs rounded-full uppercase tracking-wider">Master Chef's Smoked Cut</span>
                 <span class="text-gold font-bold text-xl font-cinzel">₹240</span>
@@ -102,6 +117,13 @@
     </div>
 
   </div>
+    <!-- Scroll Cue -->
+  <a href="#specialities" class="scroll-cue" aria-label="Scroll down">
+    <span class="scroll-cue__mouse">
+      <span class="scroll-cue__wheel"></span>
+    </span>
+    <span class="scroll-cue__label"></span>
+  </a>
 </section>
 
 <!-- 2. Infinite Continuous Gold Marquee Ribbon -->
@@ -134,7 +156,7 @@
     <div class="grid md:grid-cols-3 gap-8 mt-14">
 
       <!-- Tea -->
-      <div class="specialty-card luxury-glass-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8">
+      <div class="specialty-card luxury-glass-card glow-3d-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
         <div class="relative h-56 overflow-hidden">
               <img src="{% static 'images/specialities/tea.jpg' %}" alt="Malabar Dum Chai Varieties" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
@@ -151,7 +173,7 @@
       </div>
 
       <!-- Avil Milk -->
-      <div class="specialty-card luxury-glass-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8">
+      <div class="specialty-card luxury-glass-card glow-3d-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
         <div class="relative h-56 overflow-hidden">
             <img src="{% static 'images/specialities/avil-milk.jpg' %}" alt="Signature Avil Milk Shakes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
@@ -168,7 +190,7 @@
       </div>
 
       <!-- Snacks -->
-      <div class="specialty-card luxury-glass-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8">
+      <div class="specialty-card luxury-glass-card glow-3d-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
         <div class="relative h-56 overflow-hidden">
             <img src="{% static 'images/specialities/snacks.jpg' %}" alt="Authentic Malabar Snacks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
           <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
