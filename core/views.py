@@ -8,7 +8,7 @@ def global_outlets_context(request):
     return {
         'all_outlets': Outlet.objects.filter(is_active=True).order_by('order_priority'),
         'current_path': request.path,
-        'promo_video': PromoVideo.objects.filter(is_active=True).first(),
+
     }
 
 def home_view(request):
@@ -29,11 +29,19 @@ def home_view(request):
         is_active=True
     ).order_by('order_priority')
 
+    promo_video = (
+        PromoVideo.objects
+        .filter(page='home', is_active=True)
+        .order_by('-uploaded_at')
+        .first()
+    )
+
     context = {
         'categories': categories,
         'menu_items': menu_items,
         'combos': combos,
         'outlets': outlets,
+        'promo_video': promo_video,
     }
 
     return render(request, 'index.html', context)
@@ -42,14 +50,30 @@ def menu_view(request):
     categories = MenuCategory.objects.filter(is_active=True).prefetch_related('items')
     # Initial load (before any tab/search interaction) shows featured items only
     menu_items = MenuItem.objects.filter(is_available=True, is_bestseller=True).select_related('category')
+    promo_video = (
+        PromoVideo.objects
+        .filter(page='menu', is_active=True)
+        .order_by('-uploaded_at')
+        .first()
+    )
     return render(request, 'menu.html', {
         'categories': categories,
         'menu_items': menu_items,
+        'promo_video': promo_video,
     })
 
 def combos_view(request):
     combos = ComboMeal.objects.filter(is_active=True)
-    return render(request, 'combos.html', {'combos': combos})
+    promo_video = (
+        PromoVideo.objects
+        .filter(page='combos', is_active=True)
+        .order_by('-uploaded_at')
+        .first()
+    )
+    return render(request, 'combos.html', {
+        'combos': combos,
+        'promo_video': promo_video,
+    })
 
 def outlets_view(request):
     outlets = Outlet.objects.filter(is_active=True)

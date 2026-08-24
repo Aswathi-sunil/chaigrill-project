@@ -136,6 +136,11 @@ class PromoVideo(models.Model):
     """A short floating promo video shown as a corner widget on the site.
     Upload the video file from the Django admin — only the most recent
     active one is displayed."""
+    PAGE_CHOICES = [
+        ('home','Home'),
+        ('menu','Menu'),
+        ('combos','Loaded Combos'),
+    ]
     title = models.CharField(max_length=150, help_text="Internal label, e.g. 'Cocktail Pour Reel'")
     video = models.FileField(
         upload_to="promo_videos/%Y/%m/",
@@ -152,6 +157,7 @@ class PromoVideo(models.Model):
         help_text="Optional — where the widget takes users if they tap the expand icon."
     )
     is_active = models.BooleanField(default=True)
+    page = models.CharField(max_length=20, choices=PAGE_CHOICES, default='home')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
