@@ -3882,3 +3882,11 @@ body {
     }
 
 }
+
+/* Reduce desktop hero heading size */
+@media (min-width: 768px) {
+    .hero-main-heading {
+        font-size: clamp(3rem, 5vw, 5rem) !important;
+        line-height: 1.05 !important;
+    }
+}
