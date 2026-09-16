@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 set -o errexit
 
@@ -14,9 +13,9 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-username = os.environ.get('ADMIN_USERNAME')
-password = os.environ.get('ADMIN_PASSWORD')
-email = os.environ.get('ADMIN_EMAIL', '')
+username = os.environ.get('DJANGO_SUPERUSER_USERNAME')
+password = os.environ.get('DJANGO_SUPERUSER_PASSWORD')
+email = os.environ.get('DJANGO_SUPERUSER_EMAIL', '')
 
 if username and password:
     user, created = User.objects.get_or_create(
@@ -36,8 +35,7 @@ if username and password:
     user.set_password(password)
     user.save()
 
-    print(f'Admin user {username} {"created" if created else "updated"} successfully.')
+    print(f'Admin user {username} {\"created\" if created else \"updated\"} successfully.')
 else:
-    print('ADMIN_USERNAME or ADMIN_PASSWORD is not configured. Skipping admin creation.')
+    print('DJANGO_SUPERUSER_USERNAME or DJANGO_SUPERUSER_PASSWORD is not configured. Skipping admin creation.')
 "
-
