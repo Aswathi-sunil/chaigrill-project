@@ -938,163 +938,86 @@ function renderCards() {
 
     function renderCoverflow() {
 
-        const cards =
-            Array.from(
-                menuGrid.querySelectorAll(
-                    ".cf-menu-card"
-                )
-            );
+        const cards = Array.from(
+            menuGrid.querySelectorAll(".cf-menu-card")
+        );
 
+        const dots = menuDots
+            ? Array.from(menuDots.querySelectorAll(".cf-menu-dot"))
+            : [];
 
-        const dots =
-        menuDots
-            ? Array.from(
-                menuDots.querySelectorAll(
-                    ".cf-menu-dot"
-                )
-            )
-        : [];
+        const spacing = getSpacing();
+        const total = cards.length;
 
+        cards.forEach((card, index) => {
 
-        const spacing =
-            getSpacing();
+            /* Wrap offsets so the last item sits next to the first */
+            let offset = index - activeIndex;
 
+            if (total > 2) {
+                if (offset > total / 2) offset -= total;
+                else if (offset < -total / 2) offset += total;
+            }
 
-        cards.forEach(
-            (card, index) => {
+            const abs = Math.abs(offset);
 
-                const offset =
-                    index - activeIndex;
+            /* A card that wraps from one side to the other must jump instantly */
+            const previous = card.dataset.offset;
+            const wrapped =
+                previous !== undefined &&
+                Math.abs(offset - Number(previous)) > total / 2;
 
-                const abs =
-                    Math.abs(offset);
+            card.dataset.offset = String(offset);
 
+            if (wrapped) {
+                card.style.transition = "none";
+            }
 
-                card.classList.toggle(
-                    "is-active",
-                    offset === 0
-                );
+            card.classList.toggle("is-active", offset === 0);
 
+            if (abs > 4) {
 
-                /*
-                 * Hide cards that are too far
-                 * away from the active card.
-                 */
-
-                if (abs > 4) {
-
-                    card.style.opacity = "0";
-
-                    card.style.pointerEvents =
-                        "none";
-
-                    card.style.zIndex = "0";
-
-                    card.style.transform =
-                        `
-                        translateX(${offset * spacing}px)
-                        translateZ(-500px)
-                        rotateY(${offset > 0 ? -18 : 18}deg)
-                        scale(.55)
-                        `;
-
-                    return;
-
-                }
-
-
-                /*
-                 * Active card
-                 */
-
-                const scale =
-                    offset === 0
-                        ? 1
-                        : Math.max(
-                            0.62,
-                            1 - abs * 0.13
-                        );
-
-
-                /*
-                 * Rotation
-                 */
-
-                const rotate =
-                    offset === 0
-                        ? 0
-                        : offset > 0
-                            ? -15
-                            : 15;
-
-
-                /*
-                 * Depth
-                 */
-
-                const translateZ =
-                    offset === 0
-                        ? 0
-                        : -(abs * 100);
-
-
-                /*
-                 * Opacity
-                 */
-
-                const opacity =
-                    offset === 0
-                        ? 1
-                        : Math.max(
-                            0.25,
-                            1 - abs * 0.24
-                        );
-
-
-                card.style.opacity =
-                    String(opacity);
-
-
-                card.style.pointerEvents =
-                    "auto";
-
-
-                card.style.zIndex =
-                    String(
-                        100 - abs
-                    );
-
-
+                card.style.opacity = "0";
+                card.style.pointerEvents = "none";
+                card.style.zIndex = "0";
                 card.style.transform =
-                    `
-                    translateX(${offset * spacing}px)
-                    translateZ(${translateZ}px)
-                    rotateY(${rotate}deg)
-                    scale(${scale})
-                    `;
+                    `translateX(${offset * spacing}px) translateZ(-500px) rotateY(${offset > 0 ? -18 : 18}deg) scale(.55)`;
 
+            } else {
+
+                const scale = offset === 0
+                    ? 1
+                    : Math.max(0.62, 1 - abs * 0.13);
+
+                const rotate = offset === 0
+                    ? 0
+                    : offset > 0 ? -15 : 15;
+
+                const translateZ = offset === 0 ? 0 : -(abs * 100);
+
+                const opacity = offset === 0
+                    ? 1
+                    : Math.max(0.25, 1 - abs * 0.24);
+
+                card.style.opacity = String(opacity);
+                card.style.pointerEvents = "auto";
+                card.style.zIndex = String(100 - abs);
+                card.style.transform =
+                    `translateX(${offset * spacing}px) translateZ(${translateZ}px) rotateY(${rotate}deg) scale(${scale})`;
             }
-        );
 
-
-        dots.forEach(
-            (dot, index) => {
-
-                dot.classList.toggle(
-                    "is-active",
-                    index === activeIndex
-                );
-
+            if (wrapped) {
+                void card.offsetWidth;          /* force reflow */
+                card.style.transition = "";     /* restore CSS transition */
             }
-        );
+        });
 
+        dots.forEach((dot, index) => {
+            dot.classList.toggle("is-active", index === activeIndex);
+        });
 
-        updateDetail(
-            menuItems[activeIndex]
-        );
-
+        updateDetail(menuItems[activeIndex]);
     }
-
 
     /* =====================================================
        SET ACTIVE CARD
@@ -1913,6 +1836,125 @@ function renderCards() {
 
         }
     );
+
+    /* =====================================================
+       AUTOPLAY (v2)
+    ====================================================== */
+
+    const AUTOPLAY_MS = 2000;
+    const AUTOPLAY_DEBUG = true;   /* set to false once it works */
+
+    const stageEl =
+        document.getElementById("menuCoverflow") || menuGrid.parentElement;
+
+    const sectionEl =
+        document.getElementById("menu") || stageEl;
+
+    const reduceMotionQuery =
+        window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const canHover =
+        window.matchMedia("(hover: hover)").matches;
+
+    let autoplayTimer = null;
+    let isInView = true;
+    let lastActivity = Date.now();
+    let lastDebugLog = 0;
+
+    function markActivity() {
+        lastActivity = Date.now();
+    }
+
+    /* Returns the reason autoplay is blocked, or "" when it may advance */
+    function autoplayBlocker() {
+
+        if (menuItems.length < 2) return "fewer than 2 items";
+
+        if (document.hidden) return "tab hidden";
+
+        if (!isInView) return "carousel not in view";
+
+        if (canHover && menuGrid.matches(":hover")) return "mouse over carousel";
+
+        if (
+            searchInput &&
+            document.activeElement === searchInput &&
+            searchInput.value.trim()
+        ) {
+            return "typing in search";
+        }
+
+        const wait = AUTOPLAY_MS - (Date.now() - lastActivity);
+
+        if (wait > 0) return "";   /* simply not time yet */
+
+        return "";
+    }
+
+    function autoplayTick() {
+
+        const blocker = autoplayBlocker();
+
+        if (blocker) {
+
+            if (AUTOPLAY_DEBUG && Date.now() - lastDebugLog > 3000) {
+                lastDebugLog = Date.now();
+                console.log("[menu autoplay] blocked:", blocker);
+            }
+
+            return;
+        }
+
+        if (Date.now() - lastActivity < AUTOPLAY_MS) return;
+
+        markActivity();
+        nextItem();
+    }
+
+    function startAutoplay() {
+
+        if (autoplayTimer || reduceMotionQuery.matches) return;
+
+        markActivity();
+        autoplayTimer = setInterval(autoplayTick, 250);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+    }
+
+    /* Any click, tap, key press or swipe restarts the countdown */
+    ["pointerdown", "keydown", "touchstart", "touchend"].forEach((name) => {
+        sectionEl.addEventListener(name, markActivity, { passive: true });
+    });
+
+    /* Only run while the cards are on screen */
+    if ("IntersectionObserver" in window) {
+        new IntersectionObserver(
+            (entries) => {
+                isInView = entries[entries.length - 1].isIntersecting;
+                if (isInView) markActivity();
+            },
+            { threshold: 0 }
+        ).observe(menuGrid);
+    }
+
+    document.addEventListener("visibilitychange", markActivity);
+
+    /* Respect reduced-motion, even if it changes while the page is open */
+    const onMotionChange = () => {
+        if (reduceMotionQuery.matches) stopAutoplay();
+        else startAutoplay();
+    };
+
+    if (reduceMotionQuery.addEventListener) {
+        reduceMotionQuery.addEventListener("change", onMotionChange);
+    } else if (reduceMotionQuery.addListener) {
+        reduceMotionQuery.addListener(onMotionChange);
+    }
+
+    startAutoplay();
 
 
     /* =====================================================
