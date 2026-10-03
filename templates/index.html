@@ -6,229 +6,127 @@
 <div class="aurora-bg top-10 left-10"></div>
 <div class="aurora-bg top-1/2 right-10" style="animation-delay: -6s;"></div>
 
+<!-- CINEMATIC PINNED INTRO -->
+<section id="cinema" class="cinema" aria-label="Chai's Grill intro">
+  <div class="cinema__stage">
+    <div class="cinema__bg" id="cBg" style="background-image:url('{% static 'images/hero/malabar-specialities.jpg' %}')"></div>
+
+    <h1 class="cinema__title" id="cTitle">
+      <span>Chai</span><span>Meets</span><em>Charcoal</em>
+    </h1>
+
+    <div class="cinema__revealer" id="cRev"></div>
+
+    <div class="cinema__img" style="background-image:url('{% static 'images/specialities/tea.jpg' %}')"></div>
+    <div class="cinema__img" style="background-image:url('{% static 'images/specialities/avil-milk.jpeg' %}')"></div>
+    <div class="cinema__img" style="background-image:url('{% static 'images/specialities/snacks.jpg' %}')"></div>
+
+    <div class="cinema__outro" id="cOutro">
+      <div class="cinema__back" id="cBack">
+        <img id="cLogo" src="{% static 'images/logo.png' %}" alt="Chai's Grill">
+        <p>Kochi · 4 Outlets</p>
+      </div>
+      <div class="cinema__half cinema__half--l" id="cL"><h2 class="cinema__h">Where Every Bite<br>Tells a <span class="cinema__hot">Malabar Story</span></h2></div>
+      <div class="cinema__half cinema__half--r" id="cR"><h2 class="cinema__h">Where Every Bite<br>Tells a <span class="cinema__hot">Malabar Story</span></h2></div>
+    </div>
+
+    <div class="cinema__mark cinema__mark--l">Chai's Grill®</div>
+    <div class="cinema__mark cinema__mark--r">Kochi · Est.</div>
+    <div class="cinema__cue" id="cCue">Scroll</div>
+  </div>
+</section>
+
 <!-- 1. Hero Section -->
 <section id="hero" class="relative min-h-screen flex items-center justify-center pt-6 sm:pt-10 pb-20 overflow-hidden">
-    <canvas id="smokeCanvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
+  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
 
-    <!-- Left Hero Typography -->
-    <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+    <p class="hero-badge-reveal font-cinzel italic text-gold/90 text-base sm:text-xl tracking-wide">
+      "Where Every Bite Tells a Malabar Story"
+    </p>
 
-      <div class="hero-badge-reveal inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-gold/40 bg-charcoal-900/90 backdrop-blur-md shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-        <span class="text-xs font-bold uppercase tracking-[0.25em] text-yellow-300">4 Iconic Kochi Lounges</span>
-      </div>
+    <h1 class="hero-title-reveal hero-main-heading font-cinzel text-4xl sm:text-6xl font-black leading-[1.1] tracking-tight text-white">
+      <span class="hero-heading-line">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500">Where Spiced Chai</span>
+      </span>
+      <span class="hero-heading-line">Meets The</span>
+      <span class="hero-heading-line">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-500 to-orange-400 drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">Charcoal Flame</span>
+      </span>
+    </h1>
 
-        <p class="hero-badge-reveal font-cinzel italic text-gold/85 text-sm sm:text-base tracking-wide">
-  "Where Every Bite Tells a Malabar Story"
-</p>
-
-      <h1 class="hero-title-reveal hero-main-heading font-cinzel text-4xl sm:text-6xl font-black leading-[1.1] tracking-tight text-white">
-
-    <span class="hero-heading-line">
-        Where
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500">
-            Spiced Chai
-        </span>
-    </span>
-
-    <span class="hero-heading-line">
-    Meets The
-</span>
-
-<span class="hero-heading-line">
-    <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-500 to-orange-400 drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">
-        Charcoal Flame
-    </span>
-</span>
-
-</h1>
-        <br>
-      <p class="hero-title-reveal text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-        Step into Kochi’s premier culinary lounge. Uniting artisanal hand-pulled saffron brews, fiery whole-spice charcoal grills, authentic rumali shawarmas, and late-night ambiance.
-      </p>
-
-      <div class="hero-title-reveal flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-        <a href="#menu" class="magnetic-btn w-full sm:w-auto px-9 py-4 rounded-full bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 font-bold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.45)] hover:shadow-[0_0_45px_rgba(212,175,55,0.8)] transform hover:-translate-y-1 transition-all text-center flex items-center justify-center gap-3">
-  <span>Explore Live Menu</span>
-  <i class="fa-solid fa-arrow-right text-xs"></i>
-</a>
-<a href="#outlets" class="magnetic-btn w-full sm:w-auto px-9 py-4 rounded-full border border-slate-700 bg-charcoal-900/90 hover:bg-charcoal-800 hover:border-gold/50 text-slate-200 font-semibold text-xs tracking-widest uppercase backdrop-blur-md transition-all text-center flex items-center justify-center gap-2">
-  <i class="fa-solid fa-location-dot text-gold"></i>
-  <span>Find Nearest Hub</span>
-</a>
-      </div>
-
-      <!-- Live Counters -->
-      <div class="pt-8 grid grid-cols-3 gap-6 border-t border-slate-800/80 text-center lg:text-left">
-        <div>
-          <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">4</div>
-          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Kochi Hubs</div>
-        </div>
-        <div>
-          <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">50+</div>
-          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Craft Recipes</div>
-        </div>
-        <div>
-          <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">4.9 ★</div>
-          <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Foodie Rating</div>
-        </div>
-      </div>
+          <!-- Specialities (text only) -->
+    <div class="hero-title-reveal hero-specs">
+      <div class="hero-spec"><b>200+</b><span>Malabar Snacks</span></div>
+      <div class="hero-spec"><b>21+</b><span>Varieties of Tea</span></div>
+      <div class="hero-spec"><b>60+</b><span>Avil Milk Flavours</span></div>
     </div>
 
-<!-- Right 3D Visual Stack -->
-<div class="lg:col-span-5 relative flex items-center justify-center hero-3d-perspective">
-  <div class="orbit-ring orbit-ring--one"></div>
-  <div class="orbit-ring orbit-ring--two"></div>
-
-  <div class="relative w-full max-w-md hero-3d-stack" id="hero3dStack" data-tilt data-tilt-max="14" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.25">
-
-    <!-- Main Card -->
-    <div class="rounded-3xl p-1 bg-gradient-to-br from-gold via-slate-800 to-amber-600/60 shadow-[0_0_50px_rgba(212,175,55,0.25)]">
-      <div class="rounded-[22px] overflow-hidden bg-charcoal-900 relative">
-        <img src="{% static 'images/hero/malabar-specialities.jpg' %}"
-             alt="Malabar chai, signature avil milk and Kerala snacks at Chai's Grill Kochi"
-             class="w-full h-96 object-cover transform hover:scale-105 transition-transform duration-700" />
-
-        <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/40 to-transparent flex flex-col justify-end p-6">
-          <div class="flex items-center justify-between mb-2">
-            <span class="pulse-badge px-3 py-1 bg-gold text-charcoal-950 font-bold text-xs rounded-full uppercase tracking-wider">Our Malabar Legacy</span>
-            <span class="text-gold font-bold text-sm font-cinzel tracking-wider">Since Day One</span>
-          </div>
-          <h3 class="font-cinzel text-2xl font-bold text-white mb-1">Chai, Avil Milk &amp; Snacks</h3>
-          <p class="text-xs text-slate-300">Slow-brewed teas, beaten-rice milk in 60 flavours and generations-old Malabar recipes, all under one roof.</p>
-        </div>
-      </div>
+      <div class="hero-title-reveal flex items-center justify-center pt-4">
+      <a href="#menu" class="magnetic-btn px-9 py-4 rounded-full bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 font-bold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.45)] hover:shadow-[0_0_45px_rgba(212,175,55,0.8)] transform hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
+        <span>Explore Live Menu</span>
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
     </div>
 
-    <!-- Badge 1: Tea (top-left) -->
-    <div class="absolute -top-4 -left-4 bg-charcoal-900/95 border border-gold/50 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center text-gold">
-        <i class="fa-solid fa-mug-hot"></i>
-      </div>
-      <div>
-        <div class="text-xs font-bold text-gold font-cinzel leading-none">21+</div>
-        <div class="text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Varieties of Tea</div>
-      </div>
-    </div>
-
-    <!-- Badge 2: Avil Milk (right, middle) -->
-    <div class="absolute top-1/2 -right-6 -translate-y-1/2 bg-charcoal-900/95 border border-pink-500/50 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-pink-500/20 flex items-center justify-center text-pink-400">
-        <i class="fa-solid fa-blender"></i>
-      </div>
-      <div>
-        <div class="text-xs font-bold text-white font-cinzel leading-none">60+</div>
-        <div class="text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Avil Milk Flavours</div>
-      </div>
-    </div>
-
-    <!-- Badge 3: Snacks (bottom-right) -->
-    <div class="absolute -bottom-4 -right-4 bg-charcoal-900/95 border border-amber-500/50 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-300 flame-glow">
-        <i class="fa-solid fa-bowl-food"></i>
-      </div>
-      <div>
-        <div class="text-xs font-bold text-white font-cinzel leading-none">200+</div>
-        <div class="text-[9px] uppercase tracking-wider text-slate-400 mt-0.5">Malabar Snacks</div>
-      </div>
-    </div>
-
+    <!-- Live Counters -->
+<!--    <div class="hero-title-reveal pt-8 grid grid-cols-3 gap-6 border-t border-slate-800/80 text-center max-w-2xl mx-auto">-->
+<!--      <div>-->
+<!--        <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">4</div>-->
+<!--        <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Kochi Hubs</div>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">50+</div>-->
+<!--        <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Craft Recipes</div>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">4.9 ★</div>-->
+<!--        <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Foodie Rating</div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
-</div>
 
-  </div>
-    <!-- Scroll Cue -->
+  <!-- Scroll Cue -->
   <a href="#specialities" class="scroll-cue" aria-label="Scroll down">
-    <span class="scroll-cue__mouse">
-      <span class="scroll-cue__wheel"></span>
-    </span>
+    <span class="scroll-cue__mouse"><span class="scroll-cue__wheel"></span></span>
     <span class="scroll-cue__label"></span>
   </a>
 </section>
 
-<!-- 2. Infinite Continuous Gold Marquee Ribbon -->
-<div class="py-4 bg-gradient-to-r from-charcoal-950 via-charcoal-900 to-charcoal-950 border-y border-gold/20 marquee-wrapper">
-  <div class="marquee-content gap-8 text-xs font-bold tracking-[0.3em] uppercase text-gold/90">
-    <span>✦ PADAMUGHAL KAKKANAD</span>
-    <span>✦ CHANGAMPUZHA PARK EDAPPALLY</span>
-    <span>✦ THOPPUMPADY KOCHI</span>
-    <span>✦ WILLINGDON ISLAND MATTANCHERI HALT</span>
-    <span>✦ AUTHENTIC SAFFRON MATKA CHAI</span>
-    <span>✦ LIVE CHARCOAL GRILL</span>
-    <span>✦ PADAMUGHAL KAKKANAD</span>
-    <span>✦ CHANGAMPUZHA PARK EDAPPALLY</span>
-    <span>✦ THOPPUMPADY KOCHI</span>
-    <span>✦ WILLINGDON ISLAND MATTANCHERI HALT</span>
-  </div>
-</div>
+<!-- 2b. Our Malabar Story -->
+<section id="specialities" class="story">
+  <div class="story__wrap">
 
-<!-- 2b. Signature Specialities -->
-<section id="specialities" class="py-24 relative overflow-hidden">
-  <div class="aurora-bg -top-20 -left-20" style="animation-delay:-3s;"></div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="text-center max-w-3xl mx-auto space-y-4 mb-6">
-      <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">Our Malabar Legacy</span>
-      <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-white">Three Specialities, One Soul</h2>
-      <p class="font-cinzel italic text-gold/90 text-sm sm:text-base tracking-wide">"Where Every Bite Tells a Malabar Story"</p>
-      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
+    <div class="story__head rv">
+      <span class="story__eyebrow">Traditional Quality</span>
+      <h2 class="story__title">Our Malabar Story</h2>
+      <i class="story__rule"></i>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8 mt-14">
-
-      <!-- Tea -->
-      <div class="specialty-card luxury-glass-card glow-3d-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-        <div class="relative h-56 overflow-hidden">
-              <img src="{% static 'images/specialities/tea.jpg' %}" alt="Malabar Dum Chai Varieties" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
-          <div class="absolute top-4 left-4 w-12 h-12 rounded-2xl bg-gold/20 border border-gold/40 backdrop-blur-md flex items-center justify-center text-gold text-xl">
-            <i class="fa-solid fa-mug-hot"></i>
-          </div>
-        </div>
-        <div class="p-7">
-          <div class="specialty-count font-cinzel text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500 mb-1">21+</div>
-          <h3 class="font-cinzel text-xl font-bold text-white mb-2">Varieties of Tea</h3>
-          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">From smoky Suleimani and royal Kashmiri Kahwa to our house Saffron Dum Chai — every cup is slow-brewed the traditional Malabar way.</p>
-          <a href="{% url 'menu' %}#categoryTabs" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold hover:gap-3 transition-all">Explore Tea Menu <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+    <article class="story__row rv">
+      <div class="story__photo">
+        <span class="story__ph"><i class="fa-solid fa-user"></i></span>
+        <img src="/static/images/partners/partner1.jpeg" alt="Partner 1" onerror="this.remove()">
       </div>
+      <blockquote class="story__quote">
+        <p>Years of experience in retail and supermarket operations taught me that every successful business begins with hard work,
+            customer trust and the courage to grow. That experience became the foundation for our journey into the food business.</p>
+        - Abdul Gafoor
+      </blockquote>
+    </article>
 
-      <!-- Avil Milk -->
-      <div class="specialty-card luxury-glass-card glow-3d-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-        <div class="relative h-56 overflow-hidden">
-            <img src="{% static 'images/specialities/avil-milk.jpg' %}" alt="Signature Avil Milk Shakes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
-          <div class="absolute top-4 left-4 w-12 h-12 rounded-2xl bg-red-500/20 border border-red-500/40 backdrop-blur-md flex items-center justify-center text-red-400 text-xl">
-            <i class="fa-solid fa-blender"></i>
-          </div>
-        </div>
-        <div class="p-7">
-          <div class="specialty-count font-cinzel text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-amber-400 to-gold mb-1">60+</div>
-          <h3 class="font-cinzel text-xl font-bold text-white mb-2">Signature Avil Milk</h3>
-          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">Our beloved beaten-rice milk speciality, hand-tossed in 60 indulgent flavours — from Kesar Pista to Nutella Fusion and classic Nannari.</p>
-          <a href="{% url 'menu' %}#categoryTabs" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold hover:gap-3 transition-all">Explore Avil Milk <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+    <article class="story__row rv">
+      <div class="story__photo">
+        <span class="story__ph"><i class="fa-solid fa-user"></i></span>
+        <img src="/static/images/partners/partner2.jpeg" alt="Partner 2" onerror="this.remove()">
       </div>
+      <blockquote class="story__quote">
+        <p>Chai Grill started with a simple passion for tea, Malabar snacks and great food. With the love of our customers,
+            that small idea has grown into a vision for a recognizable food brand with multiple locations and endless possibilities.</p>
+        - Shabnas
+      </blockquote>
+    </article>
 
-      <!-- Snacks -->
-      <div class="specialty-card luxury-glass-card glow-3d-card rounded-3xl overflow-hidden group" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-        <div class="relative h-56 overflow-hidden">
-            <img src="{% static 'images/specialities/snacks.jpg' %}" alt="Authentic Malabar Snacks" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/50 to-transparent"></div>
-          <div class="absolute top-4 left-4 w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/40 backdrop-blur-md flex items-center justify-center text-amber-300 text-xl">
-            <i class="fa-solid fa-bowl-food"></i>
-          </div>
-        </div>
-        <div class="p-7">
-          <div class="specialty-count font-cinzel text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-gold to-yellow-200 mb-1">200+</div>
-          <h3 class="font-cinzel text-xl font-bold text-white mb-2">Authentic Malabar Snacks</h3>
-          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">Unniyappam, Pazham Pori, Chicken Cutlets & more — over 200 recipes rooted in generations-old Malabar kitchens.</p>
-          <a href="{% url 'menu' %}#categoryTabs" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold hover:gap-3 transition-all">Explore Snacks <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-      </div>
-
-    </div>
   </div>
 </section>
 
@@ -275,103 +173,118 @@
   </div>
 </section>
 
-<!-- 4. Interactive Master Gourmet Menu -->
-<section id="menu" class="py-24 bg-charcoal-900/50 border-y border-slate-800 relative overflow-hidden">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<!-- 4. Special Avil Milks -->
+<section id="menu" class="avil">
+  <div class="avil__wrap"><h2 class="avil__title rv">Special Avil Milks</h2></div>
+  <div class="avc" id="avcAvil"><div class="avc__track"></div></div>
+</section>
 
-    <div class="text-center max-w-3xl mx-auto space-y-4 mb-10">
-      <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">The Epicurean Collection</span>
-      <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-white">Chai Grill Curated Menu</h2>
+<!-- 4b. Chai Varieties -->
+<section id="chai-varieties" class="avil avil--next">
+  <div class="avil__wrap"><h2 class="avil__title rv">Chai Varieties</h2></div>
+  <div class="avc avc--cards" id="avcTea"><div class="avc__track"></div></div>
+</section>
 
-      <!-- Live Search Bar -->
-      <div class="relative max-w-md mx-auto mt-6">
-        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gold"></i>
-        <input type="text" id="menuSearch" placeholder="Search Chai, Alfaham, Shawarma, Burgers..." class="w-full pl-11 pr-4 py-3.5 rounded-full bg-charcoal-800/90 border border-slate-700 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-gold transition-all shadow-inner" />
-      </div>
-    </div>
+<!-- 4c. Malabar Snack Varieties -->
+<section id="snack-varieties" class="avil avil--next">
+  <div class="avil__wrap">
+    <h2 class="avil__title rv">Malabar Snack Varieties</h2>
+  </div>
+  <div class="avc avc--cards" id="avcSnacks"><div class="avc__track"></div></div>
 
-    <!-- =====================================================
-         CATEGORY SELECTOR (now ABOVE the menu cards)
-    ====================================================== -->
-    <div class="chai-menu-categories flex items-center justify-center gap-2.5 sm:gap-3.5 flex-wrap mb-10" id="categoryTabs">
-      <button type="button" class="category-pill active px-6 py-2.5 rounded-full text-xs uppercase tracking-wider" data-category="all">All Specialties</button>
-      {% for cat in categories %}
-        <button type="button" class="category-pill px-6 py-2.5 rounded-full text-xs uppercase tracking-wider" data-category="{{ cat.slug }}">{{ cat.name }}</button>
-      {% endfor %}
-    </div>
-
-    <!-- =====================================================
-         CATEGORY STATUS
-    ====================================================== -->
-    <div class="text-center mb-3">
-      <div id="menuCategoryLabel" class="text-[10px] uppercase tracking-[0.3em] font-bold text-gold/80">
-        Featured Selection
-      </div>
-    </div>
-
-    <!-- =====================================================
-         COVERFLOW MENU STAGE
-    ====================================================== -->
-    <section class="cf-menu-stage" id="menuCoverflow" aria-label="Menu items">
-
-      <!-- Decorative glow -->
-      <div class="cf-menu-stage__glow" aria-hidden="true"></div>
-
-      <!-- Top information -->
-      <div class="cf-menu-stage__head">
-        <span class="cf-menu-eyebrow">CHAI GRILL / MENU</span>
-        <h2 id="menuCoverflowTitle" class="cf-menu-title">Featured Favourites</h2>
-      </div>
-
-      <!-- COVERFLOW TRACK -->
-      <div class="cf-menu-track-wrap">
-        <div class="cf-menu-track" id="menuGrid" role="list">
-          <!-- Menu cards are generated dynamically by app.js from /api/menu/. -->
-          <div class="cf-menu-loading" id="menuLoading">
-            <div class="cf-menu-loader"></div>
-            <span>Preparing the menu...</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- EMPTY STATE -->
-      <div class="cf-menu-empty hidden" id="menuEmpty">
-        <div class="cf-menu-empty__icon"><i class="fa-solid fa-utensils"></i></div>
-        <h3>No menu items found</h3>
-        <p>Try another category or search for something else.</p>
-      </div>
-
-      <!-- PREVIOUS BUTTON -->
-      <button type="button" class="cf-menu-nav cf-menu-nav--prev" id="menuPrev" aria-label="Previous menu item">
-        <span class="cf-menu-nav__icon">&#8249;</span>
-        <span class="cf-menu-nav__label">Previous</span>
-      </button>
-
-      <!-- NEXT BUTTON -->
-      <button type="button" class="cf-menu-nav cf-menu-nav--next" id="menuNext" aria-label="Next menu item">
-        <span class="cf-menu-nav__label">Next</span>
-        <span class="cf-menu-nav__icon">&#8250;</span>
-      </button>
-
-      <!-- DOT NAVIGATION -->
-      <div class="cf-menu-dots" id="menuDots" role="tablist" aria-label="Menu item navigation"></div>
-
-      <!-- INSTRUCTION -->
-      <div class="cf-menu-instruction">
-        <span><i class="fa-solid fa-arrow-left"></i><i class="fa-solid fa-arrow-right"></i></span>
-        <span>Swipe, click or use arrow keys</span>
-      </div>
-
-    </section>
-
-    <div class="text-center mt-12">
+  <div class="avil__wrap">
+    <div class="text-center mt-14">
       <a href="{% url 'menu' %}" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gold/40 text-gold text-xs font-bold uppercase tracking-widest hover:bg-gold hover:text-charcoal-950 transition-all">
         View Full Master Menu <i class="fa-solid fa-arrow-right"></i>
       </a>
     </div>
-
   </div>
 </section>
+
+<script>
+(function () {
+  var HOLD = 1850, SLIDE = 500;                 // ms between slides / ms the slide takes
+  var EXTS = ["png", "webp", "jpg", "jpeg"];
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // [display name, file name without extension]
+  var AVIL = [
+    ["Badam", "badam"], ["Royal", "royal"], ["Dates", "dates"], ["Russian", "russian"],
+    ["Pista", "pista"], ["Irani", "irani"], ["Fruit Special", "fruit_special"], ["Fig Honey", "fig_honey"]
+  ];
+  var TEA = [
+    ["Biscuit Tea", "biscuit"], ["Elaichi Tea", "cardamom"], ["Saffron Tea", "saffron"],
+    ["Masala Tea", "masala"], ["Ginger Tea", "ginger"], ["Lemon Tea", "limet"], ["Muhabbath Tea", "muhabbath"],
+    ["Special Tea", "special_tea"]
+  ];
+  var SNACKS = [
+    ["Beef Ball", "beef"], ["Chatti Pathiri", "chatti_pathiri"], ["Chicken Cutlet", "cutlet"],
+    ["Chicken Samosa", "chicken_samosa"], ["Kallumakkaya", "kallummakaya"], ["Spring Roll", "spring"], ["Unnakkaya", "unnakkaya"],
+    ["Chicken Roll", "roll"], ["Pathiri", "pathiri"]
+  ];
+
+  // tries .png, then .webp, .jpg, .jpeg; shows a placeholder if none exist
+  window.cgNext = function (img) {
+    var n = (+img.dataset.n || 0) + 1;
+    if (n < EXTS.length) { img.dataset.n = n; img.src = img.dataset.b + img.dataset.f + "." + EXTS[n]; }
+    else { img.parentNode.classList.add("is-empty"); img.remove(); }
+  };
+
+  function make(boxId, base, list, cards, delay) {
+    var box = document.getElementById(boxId), track = box.firstElementChild, N = list.length;
+    function item(it, copy) {
+      var img = '<img src="' + base + it[1] + '.png" data-b="' + base + '" data-f="' + it[1] +
+                '" alt="' + (copy ? '' : it[0]) + '" draggable="false" loading="lazy" onerror="cgNext(this)">';
+      return '<div class="avc__item"' + (copy ? ' aria-hidden="true"' : '') + '>' +
+        (cards ? '<div class="avc__card">' + img + '<h3 class="avc__name">' + it[0] + '</h3></div>'
+               : '<div class="avc__glass">' + img + '</div><h3 class="avc__name">' + it[0] + '</h3>') + '</div>';
+    }
+    // the first 3 are repeated at the end so the loop has no gap
+    track.innerHTML = list.map(function (it) { return item(it, false); }).join("") +
+                      list.slice(0, 3).map(function (it) { return item(it, true); }).join("");
+
+    var vis = 3, idx = 0, paused = false;
+    function perView() {
+      var w = innerWidth;
+      if (cards && w >= 1100) return 4;          // chai + snack cards: 4 per row on desktop
+      return w >= 900 ? 3 : (w >= 600 ? 2 : 1);
+    }
+    function go(i, anim) {
+      track.style.transition = anim ? "transform " + SLIDE + "ms cubic-bezier(.65,0,.35,1)" : "none";
+      track.style.transform = "translateX(" + (-i * 100 / vis) + "%)";
+    }
+    function next() { idx++; go(idx, true); if (idx >= N) setTimeout(function () { idx = 0; go(0, false); }, SLIDE + 30); }
+    function prev() { if (idx === 0) { go(N, false); void track.offsetWidth; idx = N; } idx--; go(idx, true); }
+    function layout() { vis = perView(); box.style.setProperty("--vis", vis); idx = 0; go(0, false); }
+    layout(); addEventListener("resize", layout);
+
+    if (!reduce) setTimeout(function () {                 // staggered start so rows don't slide together
+      setInterval(function () { if (!paused && !document.hidden) next(); }, HOLD);
+    }, delay);
+    box.addEventListener("mouseenter", function () { paused = true; });
+    box.addEventListener("mouseleave", function () { paused = false; });
+
+    var sx = null;                                         // swipe on phones
+    box.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; paused = true; }, { passive: true });
+    box.addEventListener("touchend", function (e) {
+      if (sx !== null) { var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); } }
+      sx = null; setTimeout(function () { paused = false; }, 2500);
+    });
+  }
+
+  make("avcAvil",   "/static/images/avil/",   AVIL,   false, 0);
+  make("avcTea",    "/static/images/tea/",    TEA,    true,  600);
+  make("avcSnacks", "/static/images/snacks/", SNACKS, true,  1200);
+
+  // title reveal
+  if (!("IntersectionObserver" in window) || reduce) return;
+  document.documentElement.classList.add("rv-on");
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll(".rv").forEach(function (el) { io.observe(el); });
+})();
+</script>
 
 <!-- 5. 4 Kochi Outlets Showcase -->
 <section id="outlets" class="py-24 relative">
