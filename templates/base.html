@@ -16,6 +16,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800;900&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
 <!-- FontAwesome 6 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -42,9 +44,9 @@
 <body class="bg-charcoal-950 text-slate-100 font-outfit overflow-x-hidden antialiased selection:bg-gold selection:text-charcoal-950">
 
   <!-- Scroll Progress Bar -->
-  <div class="scroll-progress-track">
-    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
-  </div>
+<!--  <div class="scroll-progress-track">-->
+<!--    <div class="scroll-progress-bar" id="scrollProgressBar"></div>-->
+<!--  </div>-->
 
 <!-- =====================================================
        PAGE PRELOADER
@@ -78,15 +80,15 @@
       </a>
 
       <!-- Desktop Links with Active Indicators -->
-                       <nav class="hidden md:flex items-center gap-7 text-xs uppercase tracking-widest font-semibold">
-        <a href="{% url 'home' %}" class="hover:text-gold transition-colors {% if request.path == '/' %}text-gold font-bold border-b border-gold pb-1{% else %}text-slate-300{% endif %}">Home</a>
-        <a href="{% url 'home' %}#specialities" class="hover:text-gold transition-colors text-slate-300">About Us</a>
-        <a href="{% url 'home' %}#menu" class="hover:text-gold transition-colors text-slate-300">Menus</a>
-        <a href="{% url 'combos' %}" class="hover:text-gold transition-colors flex items-center gap-1.5 {% if '/combos' in request.path %}text-gold font-bold border-b border-gold pb-1{% else %}text-slate-300{% endif %}">
+                             <nav class="hidden md:flex items-center gap-8 font-medium">
+        <a href="{% url 'home' %}" class="hover:text-gold transition-colors {% if request.path == '/' %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Home</a>
+        <a href="{% url 'about' %}" class="hover:text-gold transition-colors {% if '/about' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">About Us</a>
+        <a href="{% url 'menu' %}" class="hover:text-gold transition-colors {% if '/menu' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Menus</a>
+        <a href="{% url 'combos' %}" class="hover:text-gold transition-colors flex items-center gap-1.5 {% if '/combos' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">
           <span>Offers</span>
           <span class="px-1.5 py-0.2 text-[8px] bg-red-500/30 text-red-300 rounded border border-red-500/40">Hot</span>
         </a>
-        <a href="{% url 'home' %}#outlets" class="hover:text-gold transition-colors text-slate-300">Outlets</a>
+        <a href="{% url 'outlets' %}" class="hover:text-gold transition-colors {% if '/outlets' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Outlets</a>
       </nav>
 
       <!-- Action Button -->
@@ -95,27 +97,19 @@
           <i class="fa-solid fa-phone text-gold"></i>
           <span>89437 77001</span>
         </a>
-        <a href="{% url 'menu' %}" class="md:hidden w-10 h-10 rounded-xl bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
-  <i class="fa-solid fa-mug-hot text-sm"></i>Menu
-</a>
       </div>
-
-      <!-- Mobile Menu Icon Button (compact) -->
-<a href="{% url 'menu' %}" class="md:hidden w-10 h-10 rounded-xl bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
-  <i class="fa-solid fa-mug-hot text-sm"></i>
-</a>
     </div>
 
     <!-- =====================================================
          MOBILE INLINE SCROLLABLE NAV
          (replaces the old hamburger drawer)
     ====================================================== -->
-                <nav class="md:hidden mobile-nav-scroll">
+                   <nav class="md:hidden mobile-nav-scroll">
       <a href="{% url 'home' %}" class="mobile-nav-link {% if request.path == '/' %}is-active{% endif %}">Home</a>
-      <a href="{% url 'home' %}#specialities" class="mobile-nav-link">About Us</a>
-      <a href="{% url 'home' %}#menu" class="mobile-nav-link">Menus</a>
+      <a href="{% url 'about' %}" class="mobile-nav-link {% if '/about' in request.path %}is-active{% endif %}">About Us</a>
+      <a href="{% url 'menu' %}" class="mobile-nav-link {% if '/menu' in request.path %}is-active{% endif %}">Menus</a>
       <a href="{% url 'combos' %}" class="mobile-nav-link {% if '/combos' in request.path %}is-active{% endif %}">Offers <span class="mobile-nav-hot">Hot</span></a>
-      <a href="{% url 'home' %}#outlets" class="mobile-nav-link">Outlets</a>
+      <a href="{% url 'outlets' %}" class="mobile-nav-link {% if '/outlets' in request.path %}is-active{% endif %}">Outlets</a>
     </nav>
   </header>
 
@@ -308,5 +302,29 @@
 <script src="{% static 'js/app.js' %}"></script>
 <script src="{% static 'js/enhance.js' %}"></script>
 <script src="{% static 'js/cinema.js' %}"></script>
+
+<!-- WhatsApp chat button -->
+<a class="wa-float" href="https://wa.me/918943777001?text=Hi%20Chai%20Grill%2C%20I%20have%20a%20question" target="_blank" rel="noopener" aria-label="Chat with Chai Grill on WhatsApp">
+  <span class="wa-float__icon"><i class="fa-brands fa-whatsapp"></i></span>
+  <span class="wa-float__text"><small>Hungry?</small>Chat with us</span>
+</a>
+
+<script>
+/* header height -> --hdr, and scroll reveal, for every page */
+(function () {
+  var h = document.getElementById("main-header");
+  if (h) {
+    var set = function () { document.documentElement.style.setProperty("--hdr", h.offsetHeight + "px"); };
+    set(); addEventListener("resize", set); addEventListener("load", set);
+  }
+  var els = document.querySelectorAll(".rv");
+  if (!els.length || !("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.documentElement.classList.add("rv-on");
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>

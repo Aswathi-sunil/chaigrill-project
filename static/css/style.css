@@ -4531,3 +4531,1023 @@ main:has(.offers) { padding-top: 0 !important; background: var(--cg-orange); }
   }
 }
 
+/* =====================================================
+   v3: frankeats-style navbar, Poppins, hero, qualities, WhatsApp
+===================================================== */
+body.font-outfit { font-family: 'Poppins', 'Inter', sans-serif !important; }
+
+/* ---- navbar ---- */
+.scroll-progress-track { display: none !important; }                       /* removes the loading line */
+#main-header { background: #0a0a0a !important; border-bottom: 1px solid rgba(255,255,255,.08) !important; } /* no orange line */
+#main-header img[alt="Chai's Grill Logo"] { width: clamp(150px, 13vw, 200px) !important; height: auto !important; }
+#main-header nav a { font-family: 'Poppins', sans-serif !important; text-transform: none !important; letter-spacing: .01em !important;
+  font-weight: 500 !important; font-size: 1.05rem !important; }
+#main-header .mobile-nav-link { font-size: .95rem !important; }
+@media (max-width: 767px) { #main-header img[alt="Chai's Grill Logo"] { width: 150px !important; } }
+
+/* every page starts below the (now taller) header */
+main { padding-top: var(--hdr, 110px) !important; }
+main:has(#hero.mz-hero), main:has(.offers) { padding-top: 0 !important; }
+
+/* ---- hero ---- */
+.mz-hero__inner { max-width: 80rem; }
+#hero .mz-hero__title { font-size: clamp(2.2rem, 4.8vw, 4.6rem) !important; line-height: 1 !important; }
+.mz-stats { margin-top: 2.4rem; }
+.mz-hero__cta { margin-top: 2.6rem; }
+.mz-btn--white { background: #fff; color: #0a0a0a; }
+.mz-btn.mz-btn--white:hover { background: var(--cg-orange); color: #0a0a0a; }
+@media (max-width: 767px) {
+  #hero .mz-hero__title { font-size: clamp(1.7rem, 8vw, 2.5rem) !important; }
+  .mz-hero__title .mz-line { white-space: normal; text-wrap: balance; }
+}
+
+/* ---- OUR TRADITIONAL QUALITIES ---- */
+.tq { background: var(--cg-orange); color: #0a0a0a; padding: 6rem 0 5rem; font-family: 'Poppins', sans-serif; }
+.tq__wrap { max-width: 76rem; margin: 0 auto; padding: 0 1.5rem; }
+.tq__head { text-align: center; margin-bottom: 4.5rem; }
+.tq__pill { display: inline-block; padding: .35rem .95rem; border-radius: 999px; background: var(--cg-lime); color: #0a0a0a;
+  font-size: .72rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.tq__title { margin: 1.1rem 0 0; font-family: 'Inter', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -.035em;
+  line-height: 1; font-size: clamp(2rem, 5vw, 4.4rem); }
+.tq__title em { font-style: normal; text-decoration: underline; text-decoration-color: var(--cg-lime);
+  text-decoration-thickness: .12em; text-underline-offset: .1em; }
+
+.tq-item { margin-bottom: 5rem; }
+.tq-item:last-child { margin-bottom: 0; }
+.tq-item__banner { position: relative; margin: 0; overflow: hidden; aspect-ratio: 21 / 9; border-radius: 1.75rem;
+  border: 3px solid #0a0a0a; background: linear-gradient(135deg, #1b1b24, #0a0a0a); }
+.tq-item__banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.08); transition: transform 1.8s cubic-bezier(.2,.7,.2,1); }
+.tq-item:hover .tq-item__banner img { transform: scale(1.15); }
+.tq-item__banner::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.8), rgba(0,0,0,.15) 55%, transparent); }
+.tq-item__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: clamp(1rem, 3vw, 2.4rem); color: #fff; }
+.tq-item__title { margin: 0; font-family: 'Inter', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -.03em;
+  line-height: 1; font-size: clamp(1.6rem, 4.2vw, 3.6rem); }
+.tq-item__title em { font-style: normal; color: var(--cg-lime); }
+.tq-item__no { position: absolute; top: clamp(.8rem, 2vw, 1.6rem); right: clamp(1rem, 2.4vw, 2rem); z-index: 2;
+  font-family: 'Inter', sans-serif; font-weight: 900; line-height: 1; font-size: clamp(2.4rem, 7vw, 6rem);
+  color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,.85); }
+.tq-item:nth-of-type(even) .tq-item__cap { text-align: right; }
+.tq-item:nth-of-type(even) .tq-item__no { right: auto; left: clamp(1rem, 2.4vw, 2rem); }
+
+.tq-item__body { width: min(100%, 44rem); margin: 2rem 0 0 auto; padding-top: 1.4rem; border-top: 3px solid #0a0a0a; }
+.tq-item:nth-of-type(even) .tq-item__body { margin-left: 0; margin-right: auto; }
+.tq-item__body p { margin: 0 0 1.3rem; font-size: clamp(.95rem, 1.15vw, 1.05rem); line-height: 1.8; }
+.tq-item__link { display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1.6rem; border-radius: 999px;
+  background: #0a0a0a; color: #fff; font-weight: 600; font-size: .88rem; transition: background .3s, color .3s, transform .3s; }
+.tq-item__link:hover { background: #fff; color: #0a0a0a; transform: translateY(-3px); }
+
+/* wipe reveal on scroll */
+.rv-on .tq-item.rv { opacity: 1; transform: none; transition: none; }
+.rv-on .tq-item .tq-item__banner { clip-path: inset(0 0 100% 0); transition: clip-path 1.2s cubic-bezier(.7,0,.2,1); }
+.rv-on .tq-item.in .tq-item__banner { clip-path: inset(0); }
+.rv-on .tq-item .tq-item__body { opacity: 0; transform: translateY(24px); transition: opacity .9s .5s, transform .9s .5s; }
+.rv-on .tq-item.in .tq-item__body { opacity: 1; transform: none; }
+@media (max-width: 767px) {
+  .tq { padding: 4rem 0 3.5rem; }
+  .tq__head { margin-bottom: 3rem; }
+  .tq-item { margin-bottom: 3.5rem; }
+  .tq-item__banner { aspect-ratio: 4 / 3; border-radius: 1.25rem; }
+  .tq-item__body, .tq-item:nth-of-type(even) .tq-item__body { margin: 1.5rem 0 0; width: 100%; }
+}
+
+/* ---- WhatsApp chat button ---- */
+.wa-float { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 70; display: flex; align-items: center; gap: .7rem;
+  padding: .4rem 1.2rem .4rem .4rem; border-radius: 999px; background: #0a0a0a; border: 2px solid var(--cg-orange); color: #fff;
+  font-family: 'Poppins', sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,.35); transition: transform .3s; }
+.wa-float:hover { transform: translateY(-4px); }
+.wa-float__icon { position: relative; display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%;
+  background: var(--cg-lime); color: #0a0a0a; font-size: 1.5rem; }
+.wa-float__icon::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--cg-lime); animation: waPulse 2s ease-out infinite; }
+@keyframes waPulse { from { transform: scale(1); opacity: .8; } to { transform: scale(1.7); opacity: 0; } }
+.wa-float__text { display: flex; flex-direction: column; line-height: 1.15; font-weight: 600; font-size: .9rem; }
+.wa-float__text small { font-size: .65rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--cg-orange); }
+@media (max-width: 575px) { .wa-float { padding: .35rem; } .wa-float__text { display: none; } }
+@media (prefers-reduced-motion: reduce) { .wa-float__icon::after { animation: none; } }
+
+/* =====================================================
+   v4: fonts, lines, borders, hero fixes, 4 unique specialities
+===================================================== */
+
+/* ---- fonts: Poppins everywhere (icons untouched) ---- */
+body, body :where(h1,h2,h3,h4,h5,h6,p,a,li,span,small,b,strong,em,div,blockquote,cite,label,input,textarea,select,button) {
+  font-family: 'Poppins', sans-serif !important; }
+.font-cinzel { font-family: 'Poppins', sans-serif !important; }
+
+/* headings: same style as the frankeats headings (bold, wide tracking, normal case) */
+.mz-hero__title, .tq__title, .tq-a__title, .tq-b__title, .tq-c__title, .tq-d__title, .avil__title, .story__title,
+.ast__title, .ast__sub, .offers__title, .offer-card__name, h1.font-cinzel, h2.font-cinzel, h3.font-cinzel {
+  font-weight: 700 !important; text-transform: none !important; letter-spacing: .04em !important; line-height: 1.15 !important; }
+#hero .mz-hero__title { font-size: clamp(2rem, 4.2vw, 4rem) !important; }
+.tq__title { font-size: clamp(1.8rem, 4vw, 3.4rem); }
+@media (max-width: 767px) { #hero .mz-hero__title { font-size: clamp(1.6rem, 7.4vw, 2.3rem) !important; } }
+
+/* ---- thin lines removed ---- */
+#main-header { border-bottom: 0 !important; }
+.mobile-nav-scroll { border-top: 0 !important; }
+.mobile-nav-link.is-active { background: var(--cg-orange); border-color: var(--cg-orange); color: #0a0a0a; }
+
+/* ---- black borders removed from cards ---- */
+.avc__card, #chai-varieties .avc__card, #grills-broasted .avc__card,
+.story__photo, #specialities .story__photo { border: 0 !important; }
+
+/* ---- hero: spacing + landscape video ---- */
+#hero .mz-stats { margin-top: 2.4rem !important; }
+#hero .mz-hero__cta { margin-top: 2.8rem !important; }
+.mz-hero__bg { display: block !important; filter: none !important; transform: none !important; object-fit: cover; object-position: center; }
+
+/* ===== OUR TRADITIONAL QUALITIES: four different layouts ===== */
+.tq-a, .tq-b, .tq-c, .tq-d { margin-bottom: 6.5rem; }
+.tq-d { margin-bottom: 0; }
+.tq-link { display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1.6rem; border-radius: 999px;
+  background: #0a0a0a; color: #fff !important; font-weight: 600; font-size: .88rem; transition: background .3s, color .3s, transform .3s; }
+.tq-link:hover { background: #fff; color: #0a0a0a !important; transform: translateY(-3px); }
+.tq-link--orange { background: var(--cg-orange); color: #0a0a0a !important; }
+.tq-link--orange:hover { background: var(--cg-lime); }
+.tq-a p, .tq-b p, .tq-c p, .tq-d p { margin: 0 0 1.4rem; line-height: 1.85; font-size: clamp(.95rem, 1.15vw, 1.05rem); }
+
+/* hero-style title colours for text on images / dark panels */
+.tq-a__title, .tq-c__title, .tq-d__title { margin: 0; font-size: clamp(1.5rem, 3.6vw, 3rem);
+  background: linear-gradient(90deg, #FFD27A, #FBAA1B); -webkit-background-clip: text; background-clip: text; color: transparent !important; }
+.tq-a__title em, .tq-c__title em, .tq-d__title em { font-style: normal; color: var(--cg-lime) !important; }
+
+/* 1 | snacks: cinematic banner */
+.tq-a__banner { position: relative; margin: 0; overflow: hidden; aspect-ratio: 21 / 9; border-radius: 1.75rem;
+  background: linear-gradient(135deg, #1b1b24, #0a0a0a); }
+.tq-a__banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 1.8s cubic-bezier(.2,.7,.2,1); }
+.tq-a:hover .tq-a__banner img { transform: scale(1.15); }
+.tq-a__banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.82), rgba(0,0,0,.1) 60%, transparent); }
+.tq-a__cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: clamp(1rem, 3vw, 2.4rem); }
+.tq-a__body { width: min(100%, 44rem); margin: 2rem 0 0 auto; }
+.rv-on .tq-a .tq-a__banner { clip-path: inset(0 0 100% 0); transition: clip-path 1.2s cubic-bezier(.7,0,.2,1); }
+.rv-on .tq-a.in .tq-a__banner { clip-path: inset(0); }
+
+/* 2 | avil milk: floating glasses over a giant 60+ */
+.tq-b { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; }
+.tq-b__visual { position: relative; height: clamp(320px, 38vw, 520px); }
+.tq-b__big { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); white-space: nowrap; line-height: 1;
+  font-weight: 800; font-size: clamp(7rem, 19vw, 16rem); color: transparent; -webkit-text-stroke: 3px #0a0a0a; opacity: .85; }
+.tq-b__g { position: absolute; bottom: 0; width: auto; filter: drop-shadow(0 20px 22px rgba(0,0,0,.35)); animation: tqFloat 5s ease-in-out infinite; }
+.tq-b__g--1 { left: 2%; height: 74%; transform: rotate(-8deg); animation-delay: .4s; }
+.tq-b__g--2 { left: 50%; height: 96%; transform: translateX(-50%); z-index: 2; }
+.tq-b__g--3 { right: 2%; height: 78%; transform: rotate(8deg); animation-delay: .8s; }
+@keyframes tqFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+.tq-b__title { margin: 0 0 1.2rem; font-size: clamp(1.5rem, 3.6vw, 3rem); color: #0a0a0a; }
+.tq-b__title em { font-style: normal; text-decoration: underline; text-decoration-color: var(--cg-lime);
+  text-decoration-thickness: .12em; text-underline-offset: .1em; }
+
+/* 3 | chai: black panel with an arch photo */
+.tq-c { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; background: #0a0a0a; color: #fff;
+  border-radius: 2rem; padding: clamp(1.5rem, 4vw, 3.5rem); }
+.tq-c__title { margin: 0 0 1.2rem; }
+.tq-c p { color: #d4d4d8; }
+.tq-c__media { position: relative; }
+.tq-c__photo { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px 1.5rem 1.5rem; background: #1b1b24; }
+.tq-c__photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.6s cubic-bezier(.2,.7,.2,1); }
+.tq-c:hover .tq-c__photo img { transform: scale(1.08); }
+.tq-c__badge { position: absolute; left: -1.2rem; bottom: 2.2rem; width: 6.4rem; height: 6.4rem; border-radius: 50%; transform: rotate(-8deg);
+  background: var(--cg-lime); color: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1; }
+.tq-c__badge b { font-size: 2.1rem; font-weight: 800; }
+.tq-c__badge small { font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-top: .2rem; }
+
+/* 4 | grills: full image with a glass text card */
+.tq-d { position: relative; display: flex; align-items: flex-end; overflow: hidden; border-radius: 2rem;
+  min-height: clamp(460px, 48vw, 620px); background: linear-gradient(135deg, #3a1208, #0a0a0a); }
+.tq-d__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tq-d::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(90deg, rgba(0,0,0,.85), rgba(0,0,0,.35) 60%, rgba(0,0,0,.1)); }
+.tq-d__card { position: relative; z-index: 2; max-width: 38rem; margin: clamp(1rem, 3vw, 2.5rem); padding: clamp(1.2rem, 2.5vw, 2.2rem);
+  border-radius: 1.5rem; background: rgba(10,10,10,.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #fff; }
+.tq-d__card p { color: #e4e4e7; }
+.tq-d__chips { display: flex; gap: .6rem; margin-bottom: 1rem; }
+.tq-d__chips span { padding: .3rem .85rem; border-radius: 999px; border: 1.5px solid var(--cg-orange); color: var(--cg-orange);
+  font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.tq-d__title { margin: 0 0 1rem; }
+
+@media (max-width: 767px) {
+  .tq-a, .tq-b, .tq-c, .tq-d { margin-bottom: 4rem; }
+  .tq-d { margin-bottom: 0; }
+  .tq-a__banner { aspect-ratio: 4 / 3; border-radius: 1.25rem; }
+  .tq-a__body { width: 100%; margin-top: 1.5rem; }
+  .tq-b, .tq-c { grid-template-columns: 1fr; gap: 1.8rem; }
+  .tq-b__visual { height: 300px; }
+  .tq-c { border-radius: 1.5rem; }
+  .tq-c__media { max-width: 300px; margin: 0 auto; }
+  .tq-d { border-radius: 1.5rem; }
+}
+@media (prefers-reduced-motion: reduce) { .tq-b__g { animation: none; } }
+
+/* NO MOVING EFFECT on "Why Kochi Loves" and "Loved By Thousands" cards */
+#experience .luxury-glass-card,
+#experience .luxury-glass-card:hover,
+#reviews .luxury-glass-card,
+#reviews .luxury-glass-card:hover {
+  transform: none !important;
+  transition: none;
+}
+#experience .luxury-glass-card::before,
+#reviews .luxury-glass-card::before,
+#experience .js-tilt-glare,
+#reviews .js-tilt-glare { display: none !important; }
+
+/* ===================== ABOUT PAGE ===================== */
+.ab-wrap { max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; }
+.ab-wrap--narrow { max-width: 56rem; }
+
+.ab-head { text-align: center; margin-bottom: 3.5rem; }
+.ab-pill { display: inline-block; padding: .35rem .95rem; border-radius: 999px; background: var(--cg-lime, #7CFF01); color: #0a0a0a;
+  font-size: .7rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; }
+.ab-title { margin: 1.1rem 0 1rem; font-family: 'Poppins', sans-serif; font-weight: 600; letter-spacing: .06em; line-height: 1.15;
+  color: #fff; font-size: clamp(1.9rem, 4.4vw, 3.2rem); }
+.ab-title--dark { color: #1a1109; }
+.ab-rule { display: block; width: 96px; height: 4px; margin: 0 auto; border-radius: 4px; background: var(--cg-orange, #FBAA1B); }
+
+/* hero */
+.ab-hero { position: relative; display: flex; align-items: center; justify-content: center; text-align: center;
+  min-height: clamp(380px, 52vw, 520px); padding: 4rem 1.5rem;
+  background-size: cover; background-position: center; background-repeat: no-repeat; isolation: isolate; }
+.ab-hero::before { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(rgba(10,6,4,.62), rgba(10,6,4,.78)), rgba(90,20,10,.28); }
+.ab-hero__inner { max-width: 54rem; }
+.ab-hero__title { margin: 0 0 1.6rem; font-family: 'Poppins', sans-serif; font-weight: 600; letter-spacing: .14em;
+  font-size: clamp(2.6rem, 7vw, 4.6rem); color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,.5); }
+.ab-hero__text { margin: 0 auto; font-family: 'Poppins', sans-serif; font-weight: 500; line-height: 1.7; color: #f6ece4;
+  font-size: clamp(1rem, 1.9vw, 1.35rem); text-shadow: 0 2px 12px rgba(0,0,0,.55); }
+
+/* founders */
+.ab-founders { background: radial-gradient(ellipse at 50% 0%, #1d1405 0%, #0a0a0a 65%); padding: 6rem 0; }
+.ab-founders__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
+.ab-founder { position: relative; border-radius: 1.75rem; overflow: hidden;
+  background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.015));
+  border: 1px solid rgba(251,170,27,.35); box-shadow: 0 30px 60px -25px rgba(0,0,0,.9), 0 0 0 6px rgba(251,170,27,.05); }
+.ab-founder__frame { position: relative; aspect-ratio: 4 / 4.2; overflow: hidden; }
+.ab-founder__frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.ab-founder__frame::after { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,.95) 0%, rgba(10,10,10,0) 45%); }
+.ab-founder__body { position: relative; padding: 0 2rem 2.2rem; margin-top: -3.2rem; z-index: 2; }
+.ab-founder__body h3 { margin: 0; font-family: 'Playfair Display', serif; font-weight: 800; font-size: 1.9rem; color: #fff; }
+.ab-founder__role { display: inline-block; margin: .45rem 0 1.1rem; font-size: .68rem; font-weight: 800; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--cg-orange, #FBAA1B); }
+.ab-founder__body p { margin: 0; font-style: italic; line-height: 1.75; color: #d4d4d8; font-size: .98rem; }
+
+/* story */
+.ab-story { background: #f5f3ef; padding: 6rem 0; color: #2a2118; }
+.ab-block { margin-bottom: 3rem; padding: 2.2rem 2.4rem; background: #fff; border-radius: 1.25rem;
+  border-left: 6px solid var(--cg-orange, #FBAA1B); box-shadow: 0 14px 40px -22px rgba(0,0,0,.25); }
+.ab-block:last-child { margin-bottom: 0; }
+.ab-block h3 { margin: 0 0 1rem; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.5rem; color: #0a0a0a; }
+.ab-block p { margin: 0 0 1rem; line-height: 1.85; font-size: 1.02rem; color: #3b3126; }
+.ab-block p:last-child { margin-bottom: 0; }
+.ab-aims { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.ab-aims li { padding: 1.1rem 1.3rem; border-radius: .9rem; background: #faf7f1; border: 1px solid #eadfcc; }
+.ab-aims b { display: block; margin-bottom: .3rem; font-size: 1.02rem; color: #0a0a0a; }
+.ab-aims span { line-height: 1.7; color: #4a3f33; font-size: .98rem; }
+
+/* vision & mission */
+.ab-vm { background: #000; padding: 6rem 0; }
+.ab-vm__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
+.ab-vm__col { display: flex; flex-direction: column; }
+.ab-vm__label { margin: 0 0 1rem; font-size: .8rem; font-weight: 800; letter-spacing: .3em; text-transform: uppercase; color: var(--cg-orange, #FBAA1B); }
+.ab-vm__text { margin: 0 0 2rem; font-weight: 600; line-height: 1.65; color: #9cc6ea; font-size: clamp(1.05rem, 1.6vw, 1.3rem); }
+.ab-goal { margin-top: auto; display: flex; align-items: center; gap: 1.1rem; padding: 1.2rem 1.4rem; border-radius: .9rem; background: #f6efe5; }
+.ab-goal__icon { flex: 0 0 auto; width: 3.4rem; height: 3.4rem; display: grid; place-items: center; border-radius: 50%;
+  background: #b9503a; color: #fff; font-size: 1.3rem; }
+.ab-goal small { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #b9503a; }
+.ab-goal strong { display: block; margin-top: .15rem; font-size: 1.12rem; line-height: 1.4; color: #1c1612; }
+
+@media (max-width: 767px) {
+  .ab-founders, .ab-story, .ab-vm { padding: 4rem 0; }
+  .ab-founders__grid, .ab-vm__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .ab-head { margin-bottom: 2.4rem; }
+  .ab-block { padding: 1.5rem 1.3rem; }
+  .ab-hero { padding-top: 5rem; }
+}
+
+/* NO GLOW on "Why Kochi Loves" and "Loved By Thousands" cards */
+#experience .luxury-glass-card,
+#experience .luxury-glass-card:hover,
+#reviews .luxury-glass-card,
+#reviews .luxury-glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8) !important;   /* plain dark shadow, no gold */
+}
+
+/* flame icon: no glow, no flicker */
+#experience .flame-glow {
+  filter: none !important;
+  animation: none !important;
+}
+
+/* =========================================
+   FOUNDERS SECTION - CHAI GRILL BRAND COLORS
+   ========================================= */
+
+/* Remove green background from the small label */
+.ab-founders .ab-pill {
+  background: transparent !important;
+  color: #7CFC00 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Make "Meet Our Founders" orange/gold */
+.ab-founders .ab-title {
+  color: #F5A623 !important;
+}
+
+/* Keep the underline in the same orange/gold */
+.ab-founders .ab-rule {
+  background: #F5A623 !important;
+}
+
+/* =========================================================
+   CHAI GRILL - ABOUT PAGE PREMIUM HEADING & STORY STYLING
+   Add this at the VERY BOTTOM of style.css
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. COMMON ABOUT-PAGE SECTION HEADINGS
+   --------------------------------------------------------- */
+
+/* Remove the green filled pill */
+.ab-head .ab-pill {
+  background: transparent !important;
+  color: #7CFC00 !important;
+  border: none !important;
+  box-shadow: none !important;
+
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* Main headings - Chai Grill logo orange */
+.ab-head .ab-title {
+  color: #F5A623 !important;
+  font-weight: 800;
+}
+
+/* Orange underline */
+.ab-head .ab-rule {
+  background: #F5A623 !important;
+}
+
+
+/* ---------------------------------------------------------
+   2. FOUNDERS SECTION
+   --------------------------------------------------------- */
+
+.ab-founders .ab-pill {
+  background: transparent !important;
+  color: #7CFC00 !important;
+}
+
+.ab-founders .ab-title {
+  color: #F5A623 !important;
+}
+
+.ab-founders .ab-rule {
+  background: #F5A623 !important;
+}
+
+
+/* Founder names */
+.ab-founder__body h3 {
+  color: #F5A623 !important;
+}
+
+
+/* ---------------------------------------------------------
+   3. STORY SECTION - PREMIUM DARK DESIGN
+   --------------------------------------------------------- */
+
+.ab-story {
+  background: #0b0b0b !important;
+  color: #f5f1e8 !important;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+/* Story section heading */
+.ab-story .ab-head .ab-pill {
+  color: #7CFC00 !important;
+  background: transparent !important;
+}
+
+.ab-story .ab-head .ab-title {
+  color: #F5A623 !important;
+}
+
+.ab-story .ab-head .ab-rule {
+  background: #F5A623 !important;
+}
+
+
+/* Individual story cards */
+.ab-story .ab-block {
+  background: #151515 !important;
+  border-left: 4px solid #F5A623 !important;
+
+  border-radius: 0 22px 22px 0 !important;
+
+  padding: 42px 48px !important;
+  margin-bottom: 32px !important;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.30) !important;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* Slight hover effect */
+.ab-story .ab-block:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.45) !important;
+}
+
+
+/* Story card headings */
+.ab-story .ab-block h3 {
+  color: #F5A623 !important;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+
+/* Story paragraphs */
+.ab-story .ab-block p {
+  color: #f3efe6 !important;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+
+/* Our Aim list */
+.ab-story .ab-aims li {
+  color: #f3efe6 !important;
+}
+
+.ab-story .ab-aims li b {
+  color: #F5A623 !important;
+}
+
+.ab-story .ab-aims li span {
+  color: #e8e2d7 !important;
+}
+
+
+/* ---------------------------------------------------------
+   4. VISION & MISSION
+   --------------------------------------------------------- */
+
+.ab-vm {
+  background: #0b0b0b !important;
+  color: #f5f1e8 !important;
+}
+
+/* Heading */
+.ab-vm .ab-head .ab-pill {
+  color: #7CFC00 !important;
+  background: transparent !important;
+}
+
+.ab-vm .ab-head .ab-title {
+  color: #F5A623 !important;
+}
+
+.ab-vm .ab-head .ab-rule {
+  background: #F5A623 !important;
+}
+
+
+/* Vision / Mission titles */
+.ab-vm__label {
+  color: #F5A623 !important;
+}
+
+
+/* Vision / Mission text */
+.ab-vm__text {
+  color: #f3efe6 !important;
+}
+
+
+/* Goal text */
+.ab-goal small {
+  color: #7CFC00 !important;
+}
+
+.ab-goal strong {
+  color: #f3efe6 !important;
+}
+
+
+/* ---------------------------------------------------------
+   5. AVIL MILK SECTION
+   --------------------------------------------------------- */
+
+/* Remove bright green frame / border */
+.ast__photo {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Remove green decorative pseudo-element */
+.ast__photo::before,
+.ast__photo::after {
+  display: none !important;
+  content: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* If the green effect is attached to the image */
+.ast__photo img {
+  border: 3px solid #F5A623 !important;
+  box-shadow: none !important;
+}
+
+
+/* Avil Milk heading */
+.ast__title {
+  color: #f5f1e8 !important;
+}
+
+.ast__title em {
+  color: #F5A623 !important;
+}
+
+
+/* Avil Milk small heading */
+.ast__pill {
+  background: transparent !important;
+  color: #7CFC00 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Avil Milk paragraphs */
+.ast__text p {
+  color: #f3efe6 !important;
+}
+
+
+/* Highlighted words */
+.ast__text p b,
+.ast__text p i {
+  color: #F5A623 !important;
+}
+
+
+/* Avil Milk lower steps */
+.ast__step b {
+  color: #F5A623 !important;
+}
+
+.ast__step span {
+  color: #f3efe6 !important;
+}
+
+
+/* "What's inside?" */
+.ast__sub {
+  color: #F5A623 !important;
+}
+
+
+/* Ingredient chips */
+.ast__chips span {
+  color: #f3efe6 !important;
+}
+
+
+/* ---------------------------------------------------------
+   6. MOBILE RESPONSIVE ADJUSTMENTS
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .ab-story {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .ab-story .ab-block {
+    padding: 30px 24px !important;
+    border-left-width: 3px !important;
+  }
+
+  .ab-story .ab-block h3 {
+    font-size: 25px;
+  }
+
+  .ab-story .ab-block p {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+
+  .ab-head .ab-pill {
+    letter-spacing: 2.5px;
+  }
+}
+/* =========================================
+   AVIL MILK - FINAL STYLING
+   ========================================= */
+
+/* Remove ALL borders / frames around Avil Milk image */
+.ast__photo,
+.ast__photo img {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Remove any decorative green/orange frame */
+.ast__photo::before,
+.ast__photo::after {
+  content: none !important;
+  display: none !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* Avil Milk heading */
+.ast__title {
+  color: #f5f1e8 !important;
+}
+
+.ast__title em {
+  color: #F5A623 !important;
+  font-style: normal !important;
+}
+
+/* "Did You Know?" */
+.ast__pill {
+  background: transparent !important;
+  color: #7CFC00 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* =========================================================
+   CHAI GRILL ABOUT PAGE - FINAL COLOR FIX
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   1. HERO "ABOUT US" HEADING
+   --------------------------------------------------------- */
+
+/* Change the main About Us hero heading to Chai Grill orange */
+.ab-hero__title {
+  color: #F5A623 !important;
+}
+
+
+/* Hero description - warm off-white */
+.ab-hero__text {
+  color: #f5f1e8 !important;
+}
+
+
+/* ---------------------------------------------------------
+   2. ALL ABOUT PAGE SECTION HEADINGS
+   --------------------------------------------------------- */
+
+/* Small section labels */
+.ab-head .ab-pill {
+  background: transparent !important;
+  color: #7CFC00 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Main section headings */
+.ab-head .ab-title {
+  color: #F5A623 !important;
+}
+
+/* Underline */
+.ab-head .ab-rule {
+  background: #F5A623 !important;
+}
+
+
+/* ---------------------------------------------------------
+   3. STORY SECTION
+   --------------------------------------------------------- */
+
+.ab-story .ab-block {
+  background: #151515 !important;
+  border-left: 4px solid #F5A623 !important;
+}
+
+/* Our Story / Motivation / Aim */
+.ab-story .ab-block h3 {
+  color: #F5A623 !important;
+}
+
+.ab-story .ab-block p {
+  color: #f5f1e8 !important;
+}
+
+
+/* Aim headings */
+.ab-story .ab-aims li b {
+  color: #F5A623 !important;
+}
+
+.ab-story .ab-aims li span {
+  color: #f5f1e8 !important;
+}
+
+
+/* ---------------------------------------------------------
+   4. VISION & MISSION
+   --------------------------------------------------------- */
+
+/* Vision and Mission labels */
+.ab-vm__label {
+  color: #F5A623 !important;
+}
+
+/* Main Vision / Mission paragraph */
+.ab-vm__text {
+  color: #f5f1e8 !important;
+}
+
+
+/* ---------------------------------------------------------
+   5. GOAL CARDS - FIX INVISIBLE TEXT
+   --------------------------------------------------------- */
+
+.ab-goal {
+  background: #171717 !important;
+  border: 1px solid rgba(245, 166, 35, 0.25) !important;
+
+  border-radius: 18px !important;
+
+  color: #f5f1e8 !important;
+
+  padding: 24px !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Goal label */
+.ab-goal small {
+  color: #7CFC00 !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+}
+
+
+/* Goal description - IMPORTANT */
+.ab-goal strong {
+  color: #f5f1e8 !important;
+  display: block !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  opacity: 1 !important;
+}
+
+
+/* Goal icon circle */
+.ab-goal__icon {
+  background: #F5A623 !important;
+  color: #111 !important;
+  border: none !important;
+}
+
+
+/* Icon itself */
+.ab-goal__icon i {
+  color: #111 !important;
+}
+
+
+/* ---------------------------------------------------------
+   6. AVIL MILK
+   --------------------------------------------------------- */
+
+/* Remove every image border */
+.ast__photo,
+.ast__photo img {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Remove decorative frames */
+.ast__photo::before,
+.ast__photo::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Did You Know */
+.ast__pill {
+  background: transparent !important;
+  color: #7CFC00 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Avil Milk heading */
+.ast__title {
+  color: #f5f1e8 !important;
+}
+
+.ast__title em {
+  color: #F5A623 !important;
+  font-style: normal !important;
+}
+
+
+/* Avil Milk text */
+.ast__text p {
+  color: #f5f1e8 !important;
+}
+
+
+/* Highlighted words */
+.ast__text p b,
+.ast__text p i {
+  color: #F5A623 !important;
+}
+
+/* =========================================================
+   OUR AIM - FINAL FIX
+   ========================================================= */
+
+/* Our Aim heading */
+.ab-story .ab-block h3 {
+    color: #F5A623 !important;
+}
+
+
+/* The whole Aim list */
+.ab-story ul.ab-aims {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 25px 0 0 !important;
+}
+
+
+/* Each Aim card */
+.ab-story ul.ab-aims li {
+    display: block !important;
+
+    background: #1c1c1c !important;
+
+    border: 1px solid rgba(245, 166, 35, 0.20) !important;
+    border-left: 3px solid #F5A623 !important;
+
+    border-radius: 16px !important;
+
+    padding: 25px 28px !important;
+    margin-bottom: 18px !important;
+
+    color: #f5f1e8 !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    box-shadow: none !important;
+}
+
+
+/* Aim title */
+.ab-story ul.ab-aims li b {
+    display: block !important;
+
+    color: #F5A623 !important;
+
+    font-size: 19px !important;
+    font-weight: 700 !important;
+
+    margin-bottom: 8px !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+
+/* Aim description - THIS FIXES THE INVISIBLE TEXT */
+.ab-story ul.ab-aims li span {
+    display: block !important;
+
+    color: #f5f1e8 !important;
+
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+    font-weight: 400 !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    text-shadow: none !important;
+}
+
+
+/* Make sure nothing inside the Aim cards becomes transparent */
+.ab-story ul.ab-aims li *,
+.ab-story ul.ab-aims li span,
+.ab-story ul.ab-aims li b {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+
+/* Hover */
+.ab-story ul.ab-aims li:hover {
+    border-color: rgba(245, 166, 35, 0.55) !important;
+    transform: translateX(4px);
+    transition: all 0.25s ease;
+}
+
+
+/* =========================================================
+   ABOUT PAGE HERO HEADING
+   ========================================================= */
+
+.ab-hero__title {
+    color: #F5A623 !important;
+}
+
+
+/* Hero paragraph */
+.ab-hero__text {
+    color: #f5f1e8 !important;
+}
+
+
+/* =========================================================
+   AVIL MILK - NO BORDER
+   ========================================================= */
+
+.ast__photo,
+.ast__photo img {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.ast__photo::before,
+.ast__photo::after {
+    display: none !important;
+    content: none !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+
+/* Avil Milk heading */
+.ast__title {
+    color: #f5f1e8 !important;
+}
+
+.ast__title em {
+    color: #F5A623 !important;
+    font-style: normal !important;
+}
+
+
+/* Did You Know */
+.ast__pill {
+    background: transparent !important;
+    color: #7CFC00 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ========================================================= SPECIAL AVIL MILKS - PISTA GREEN BACKGROUND ========================================================= */
+#menu.avil {
+    background: #DDE8C8 !important;
+}
+
+/* Keep the heading clearly visible */
+#menu.avil .avil__title {
+    color: #111111 !important;
+}

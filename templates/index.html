@@ -8,121 +8,98 @@
 
 <!-- 1. Hero Section (video background) -->
 <section id="hero" class="mz-hero">
-  <video class="mz-hero__bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"
-         poster="/static/video/hero-poster.jpg">
-      <source src="/static/video/hero.mp4" type="video/mp4">
-  </video>
+    <video id="heroVideo" class="mz-hero__bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
+  <script>
+    (function () {
+      var v = document.getElementById("heroVideo");
+      var phone = matchMedia("(max-width: 767px)").matches;
+      v.poster = phone ? "/static/video/hero-mobile-poster.jpg" : "/static/video/hero-poster.jpg";
+      v.addEventListener("error", function () {            // no phone file? fall back to the landscape one
+        if (v.src.indexOf("hero-mobile") > -1) { v.src = "/static/video/hero.mp4"; v.play(); }
+      });
+      v.src = phone ? "/static/video/hero-mobile.mp4" : "/static/video/hero.mp4";
+      var p = v.play(); if (p && p.catch) p.catch(function () {});
+    })();
+  </script>
     <div class="mz-hero__veil"></div>
 
   <div class="mz-hero__inner">
-    <p class="mz-hero__eyebrow hero-badge-reveal">Where Every Bite Tells a Malabar Story</p>
-
-    <h1 class="mz-hero__title hero-title-reveal">
-      <span class="mz-line mz-line--1">Where Spiced Chai</span>
-      <span class="mz-line mz-line--2">Meets The</span>
-      <span class="mz-line mz-line--3">Charcoal Flame</span>
+ <h1 class="mz-hero__title hero-title-reveal">
+      <span class="mz-line mz-line--1">Where Every Bite Tells</span>
+      <span class="mz-line mz-line--3">A Malabar Story</span>
     </h1>
-
-    <div class="hero-title-reveal">
-      <a href="#menu" class="mz-btn">Explore Now <i class="fa-solid fa-arrow-right"></i></a>
-    </div>
 
     <div class="mz-stats hero-title-reveal">
       <div><b>200+</b><span>Malabar Snacks</span></div>
       <div><b>21+</b><span>Varieties of Tea</span></div>
       <div><b>60+</b><span>Avil Milk Flavours</span></div>
     </div>
+      <div class="mz-hero__cta hero-title-reveal">
+      <a href="{% url 'menu' %}" class="mz-btn mz-btn--white">Go to Menu <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
   </div>
 </section>
 
-<script>
-/* heading breaks apart on scroll: lines slide out left / right */
-(function () {
-  var hero = document.getElementById("hero"); if (!hero) return;
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  var lines = [].slice.call(hero.querySelectorAll(".mz-line")), raf = 0;
-  function update() {
-    raf = 0;
-    var p = Math.min(1, Math.max(0, scrollY / (hero.offsetHeight * 0.55)));
-    var e = 1 - Math.pow(1 - p, 2);
-    lines.forEach(function (el, i) {
-      el.style.transform = "translate3d(" + ((i % 2 === 0 ? -1 : 1) * e * 60) + "vw,0,0)";
-      el.style.opacity = String(1 - e);
-    });
-  }
-  addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
-  update();
-})();
-</script>
+<!-- 2. Our Traditional Qualities -->
+<section id="qualities" class="tq">
+  <div class="tq__wrap">
 
-<!-- 2b. Our Malabar Story -->
-<section id="specialities" class="story">
-  <div class="story__wrap">
-
-    <div class="story__head rv">
-      <span class="story__eyebrow">Traditional Quality</span>
-      <h2 class="story__title">Our Malabar Story</h2>
-      <i class="story__rule"></i>
+    <div class="tq__head rv">
+<!--      <span class="tq__pill">Four Signatures</span>-->
+      <h2 class="tq__title">Our Traditional <em>Qualities</em></h2>
     </div>
 
-    <article class="story__row rv">
-      <div class="story__photo">
-        <span class="story__ph"><i class="fa-solid fa-user"></i></span>
-        <img src="/static/images/partners/partner1.jpeg" alt="Partner 1" onerror="this.remove()">
+    <!-- 1. Snacks: cinematic banner -->
+    <article class="tq-a rv">
+      <figure class="tq-a__banner">
+        <img src="/static/images/specialities/snacks.jpg" alt="Malabar snacks" loading="lazy" onerror="this.remove()">
+        <figcaption class="tq-a__cap"><h3 class="tq-a__title">A Taste of <em>Malabar</em></h3></figcaption>
+      </figure>
+      <div class="tq-a__body">
+        <p>Experience the authentic flavours of Malabar with our delicious selection of traditional snacks. From crispy Pazham Pori and sweet Unnakkaya to flavourful Chatti Pathiri and savoury bites, every snack brings a taste of Kerala’s rich food culture. Freshly prepared with traditional flavours and quality ingredients, they are perfect to enjoy with a hot cup of Chai Grill chai. Traditional taste, comforting flavours, and something delicious in every bite.</p>
+        <a class="tq-link" href="{% url 'menu' %}#snack-varieties">Explore Snacks <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-      <blockquote class="story__quote">
-        <p>Years of experience in retail and supermarket operations taught me that every successful business begins with hard work,
-            customer trust and the courage to grow. That experience became the foundation for our journey into the food business.</p>
-        - Abdul Gafoor
-      </blockquote>
     </article>
 
-    <article class="story__row rv">
-      <div class="story__photo">
-        <span class="story__ph"><i class="fa-solid fa-user"></i></span>
-        <img src="/static/images/partners/partner2.jpeg" alt="Partner 2" onerror="this.remove()">
+    <!-- 2. Avil milk: floating glasses over a giant 60+ -->
+    <article class="tq-b rv">
+      <div class="tq-b__visual" aria-hidden="true">
+        <span class="tq-b__big">60+</span>
+        <img class="tq-b__g tq-b__g--1" src="/static/images/avil/pista.png" alt="" loading="lazy" onerror="this.remove()">
+        <img class="tq-b__g tq-b__g--2" src="/static/images/avil/irani.png" alt="" loading="lazy" onerror="this.remove()">
+        <img class="tq-b__g tq-b__g--3" src="/static/images/avil/fruit_special.png" alt="" loading="lazy" onerror="this.remove()">
       </div>
-      <blockquote class="story__quote">
-        <p>Chai Grill started with a simple passion for tea, Malabar snacks and great food. With the love of our customers,
-            that small idea has grown into a vision for a recognizable food brand with multiple locations and endless possibilities.</p>
-        - Shabnas
-      </blockquote>
+      <div class="tq-b__text">
+        <h3 class="tq-b__title">Avil Milk – <em>60+ Varieties</em></h3>
+        <p>Discover the delicious world of Avil Milk with 60+ exciting varieties, crafted with creamy milk, fresh aval and a delicious mix of flavours and toppings. From classic favourites to indulgent combinations like Fig &amp; Honey, Dry Fruit, Irish Latte and more, there’s a flavour for every craving. Rich, creamy and refreshing, every glass is made to be a satisfying treat.</p>
+        <a class="tq-link" href="{% url 'menu' %}#menu">Explore Avil Milks <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
     </article>
 
-  </div>
-</section>
-
-<!-- 4a. The Story of Avil Milk -->
-<section id="avil-story" class="ast">
-  <div class="ast__wrap">
-
-    <div class="ast__top">
-      <div class="ast__photo rv">
-        <img src="/static/images/specialities/avil-milk.jpeg" alt="Avil milk" loading="lazy" onerror="this.remove()">
+    <!-- 3. Chai: black panel with arch photo -->
+    <article class="tq-c rv">
+      <div class="tq-c__text">
+        <h3 class="tq-c__title"><em>21+</em> Varieties of Chai</h3>
+        <p>Explore 21+ delicious varieties of Chai, crafted to bring together traditional flavours and exciting new tastes. From classic Masala Chai and Ginger Tea to aromatic Cardamom Chai, refreshing Lemon Tea and rich speciality blends, there’s something for every chai lover. Each cup is freshly prepared with carefully selected ingredients and authentic flavours.</p>
+        <a class="tq-link tq-link--orange" href="{% url 'menu' %}#chai-varieties">Explore Chai <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-
-      <div class="ast__text rv">
-        <span class="ast__pill">Did you know?</span>
-        <h2 class="ast__title">The Story of <em>Avil Milk</em></h2>
-        <p>Avil milk is a Malabar original: a cold, filling street drink from northern Kerala, built on <b>aval</b>, the beaten rice flakes that have long been part of Kerala kitchens.</p>
-        <p>Its roots are humble. In Malappuram, aval soaked in water, called <i>avil vellam</i>, was an everyday drink at home. The banana-and-milk drink we know today is much younger. It is generally traced to Kottakkal in Malappuram, where the first avil milk stall in Kerala is reported to have opened in 1993.</p>
-        <p>From there it spread through the juice shops and bakeries of Kerala, picking up new layers along the way: crunchy roasted aval, ripe banana, chilled milk and peanuts, then dry fruits, ice cream and more. That is how one simple drink became the 60+ flavours you see at Chai's Grill.</p>
-        <!-- EDIT: add one paragraph here about how Chai's Grill started serving avil milk -->
+      <div class="tq-c__media">
+        <div class="tq-c__photo"><img src="/static/images/specialities/tea.jpg" alt="Chai varieties" loading="lazy" onerror="this.remove()"></div>
+        <span class="tq-c__badge"><b>21+</b><small>Varieties</small></span>
       </div>
-    </div>
+    </article>
 
-    <div class="ast__steps">
-      <div class="ast__step rv"><b>At home</b><span>Avil vellam, rice flakes in water, a daily drink in Malappuram homes.</span></div>
-      <div class="ast__step rv"><b>1993*</b><span>The first avil milk stall opens in Kottakkal, Malappuram.</span></div>
-      <div class="ast__step rv"><b>Today</b><span>Layered, loaded and served in 60+ flavours across Kochi.</span></div>
-    </div>
+    <!-- 4. Grills & Broasted: full image with text card -->
+    <article class="tq-d rv">
+      <img class="tq-d__bg" src="/static/images/specialities/grills.jpg" alt="Grills and broasted" loading="lazy" onerror="this.remove()">
+      <div class="tq-d__card">
+        <div class="tq-d__chips"><span>Arabic Grills</span><span>Broasted</span></div>
+        <h3 class="tq-d__title">Grills &amp; <em>Broasted</em></h3>
+        <p>Experience the rich flavours of authentic Arabic-style grills, prepared with carefully selected spices and traditional seasoning. From juicy grilled chicken and smoky Alfaham to perfectly charred meats, every dish is marinated to bring out deep, authentic flavours. Our Broasted favourites are crispy on the outside, tender and juicy inside, with a delicious blend of Arabic-inspired spices. Bold flavours, smoky grills and authentic Arabic taste — made fresh at Chai Grill.</p>
+        <a class="tq-link tq-link--orange" href="{% url 'menu' %}#grills-broasted">Explore Grills <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </article>
 
-    <h3 class="ast__sub rv">What's inside?</h3>
-    <div class="ast__chips rv">
-      <span>Roasted Aval</span><span>Ripe Banana</span><span>Chilled Milk</span><span>Nuts &amp; Dry Fruits</span>
-    </div>
-
-<!--    <p class="ast__src">*As reported by The Better India. The classic recipe uses aval, banana, milk and nuts, and every outlet adds its own twists.</p>-->
   </div>
 </section>
 
@@ -136,7 +113,7 @@
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="exp-card luxury-glass-card p-8 rounded-3xl" data-tilt>
+      <div class="exp-card luxury-glass-card p-8 rounded-3xl">
         <div class="w-14 h-14 rounded-2xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold text-2xl mb-6">
           <i class="fa-solid fa-mug-saucer"></i>
         </div>
@@ -146,7 +123,7 @@
         </p>
       </div>
 
-      <div class="exp-card luxury-glass-card p-8 rounded-3xl" data-tilt>
+      <div class="exp-card luxury-glass-card p-8 rounded-3xl">
         <div class="w-14 h-14 rounded-2xl bg-red-500/15 border border-red-500/40 flex items-center justify-center text-red-400 text-2xl mb-6 flame-glow">
           <i class="fa-solid fa-fire-flame-curved"></i>
         </div>
@@ -156,7 +133,7 @@
         </p>
       </div>
 
-      <div class="exp-card luxury-glass-card p-8 rounded-3xl" data-tilt>
+      <div class="exp-card luxury-glass-card p-8 rounded-3xl">
         <div class="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-300 text-2xl mb-6">
           <i class="fa-solid fa-clock"></i>
         </div>
@@ -169,183 +146,7 @@
   </div>
 </section>
 
-<!-- 4. Special Avil Milks -->
-<section id="menu" class="avil">
-  <div class="avil__wrap"><h2 class="avil__title rv">Special Avil Milks</h2></div>
-  <div class="avc" id="avcAvil"><div class="avc__track"></div></div>
-</section>
 
-<!-- 4b. Chai Varieties -->
-<section id="chai-varieties" class="avil avil--next">
-  <div class="avil__wrap"><h2 class="avil__title rv">Chai Varieties</h2></div>
-  <div class="avc avc--cards" id="avcTea"><div class="avc__track"></div></div>
-</section>
-
-<!-- 4c. Malabar Snack Varieties -->
-<section id="snack-varieties" class="avil avil--next">
-  <div class="avil__wrap"><h2 class="avil__title rv">Malabar Snack Varieties</h2></div>
-  <div class="avc avc--cards" id="avcSnacks"><div class="avc__track"></div></div>
-</section>
-
-<!-- 4d. Grills & Broasted -->
-<section id="grills-broasted" class="avil avil--next">
-  <div class="avil__wrap"><h2 class="avil__title rv">Grills &amp; Broasted</h2></div>
-  <div class="avc avc--cards" id="avcGrills"><div class="avc__track"></div></div>
-
-</section>
-
-<script>
-(function () {
-  var HOLD = 1850, SLIDE = 500;                 // ms between slides / ms the slide takes
-  var EXTS = ["png", "webp", "jpg", "jpeg"];
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // [display name, file name without extension]
-  var AVIL = [
-    ["Badam", "badam"], ["Royal", "royal"], ["Dates", "dates"], ["Russian", "russian"],
-    ["Pista", "pista"], ["Irani", "irani"], ["Fruit Special", "fruit_special"], ["Fig Honey", "fig_honey"]
-  ];
-  var TEA = [
-    ["Biscuit Tea", "biscuit"], ["Elaichi Tea", "cardamom"], ["Saffron Tea", "saffron"],
-    ["Masala Tea", "masala"], ["Ginger Tea", "ginger"], ["Lemon Tea", "limet"], ["Muhabbath Tea", "muhabbath"],
-    ["Special Tea", "special_tea"]
-  ];
-  var SNACKS = [
-    ["Beef Ball", "beef"], ["Chatti Pathiri", "chatti_pathiri"], ["Chicken Cutlet", "cutlet"],
-    ["Chicken Samosa", "chicken_samosa"], ["Kallumakkaya", "kallummakaya"], ["Spring Roll", "spring"], ["Unnakkaya", "unnakkaya"],
-    ["Chicken Roll", "roll"], ["Pathiri", "pathiri"]
-  ];
-    var GRILLS = [
-    ["Shawaya Mandhi", "shawaya_mandhi"], ["Masala Shawaya", "masala_shawaya"],
-    ["Honey Chillie Shawaya", "honey_chillie_shawaya"], ["Peri Peri Shawaya", "peri_peri_shawaya"],
-    ["Crispy Fried Chicken", "crispy_fried_chicken"],
-    ["Wings", "wings"], ["Boneless Strips", "boneless_strips"], ["Pops", "pops"]
-  ];
-
-  // tries .png, then .webp, .jpg, .jpeg; shows a placeholder if none exist
-  window.cgNext = function (img) {
-    var n = (+img.dataset.n || 0) + 1;
-    if (n < EXTS.length) { img.dataset.n = n; img.src = img.dataset.b + img.dataset.f + "." + EXTS[n]; }
-    else { img.parentNode.classList.add("is-empty"); img.remove(); }
-  };
-
-  function make(boxId, base, list, cards, delay) {
-    var box = document.getElementById(boxId), track = box.firstElementChild, N = list.length;
-    function item(it, copy) {
-      var img = '<img src="' + base + it[1] + '.png" data-b="' + base + '" data-f="' + it[1] +
-                '" alt="' + (copy ? '' : it[0]) + '" draggable="false" loading="lazy" onerror="cgNext(this)">';
-      return '<div class="avc__item"' + (copy ? ' aria-hidden="true"' : '') + '>' +
-        (cards ? '<div class="avc__card">' + img + '<h3 class="avc__name">' + it[0] + '</h3></div>'
-               : '<div class="avc__glass">' + img + '</div><h3 class="avc__name">' + it[0] + '</h3>') + '</div>';
-    }
-    // the first 3 are repeated at the end so the loop has no gap
-    track.innerHTML = list.map(function (it) { return item(it, false); }).join("") +
-                      list.slice(0, 3).map(function (it) { return item(it, true); }).join("");
-
-    var vis = 3, idx = 0, paused = false;
-    function perView() {
-      var w = innerWidth;
-      if (cards && w >= 1100) return 4;          // chai + snack cards: 4 per row on desktop
-      return w >= 900 ? 3 : (w >= 600 ? 2 : 1);
-    }
-    function go(i, anim) {
-      track.style.transition = anim ? "transform " + SLIDE + "ms cubic-bezier(.65,0,.35,1)" : "none";
-      track.style.transform = "translateX(" + (-i * 100 / vis) + "%)";
-    }
-    function next() { idx++; go(idx, true); if (idx >= N) setTimeout(function () { idx = 0; go(0, false); }, SLIDE + 30); }
-    function prev() { if (idx === 0) { go(N, false); void track.offsetWidth; idx = N; } idx--; go(idx, true); }
-    function layout() { vis = perView(); box.style.setProperty("--vis", vis); idx = 0; go(0, false); }
-    layout(); addEventListener("resize", layout);
-
-    if (!reduce) setTimeout(function () {                 // staggered start so rows don't slide together
-      setInterval(function () { if (!paused && !document.hidden) next(); }, HOLD);
-    }, delay);
-    box.addEventListener("mouseenter", function () { paused = true; });
-    box.addEventListener("mouseleave", function () { paused = false; });
-
-    var sx = null;                                         // swipe on phones
-    box.addEventListener("touchstart", function (e) { sx = e.touches[0].clientX; paused = true; }, { passive: true });
-    box.addEventListener("touchend", function (e) {
-      if (sx !== null) { var dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); } }
-      sx = null; setTimeout(function () { paused = false; }, 2500);
-    });
-  }
-
-  make("avcAvil",   "/static/images/avil/",   AVIL,   false, 0);
-  make("avcTea",    "/static/images/tea/",    TEA,    true,  600);
-  make("avcSnacks", "/static/images/snacks/", SNACKS, true,  1200);
-    make("avcGrills", "/static/images/grills/", GRILLS, true, 1800);
-
-  // title reveal
-  if (!("IntersectionObserver" in window) || reduce) return;
-  document.documentElement.classList.add("rv-on");
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-  }, { threshold: 0.15 });
-  document.querySelectorAll(".rv").forEach(function (el) { io.observe(el); });
-})();
-</script>
-<script>
-/* keep the hero clear of the fixed header, whatever its height */
-(function () {
-  var h = document.getElementById("main-header");
-  if (!h) return;
-  function set() { document.documentElement.style.setProperty("--hdr", h.offsetHeight + "px"); }
-  set();
-  addEventListener("resize", set);
-  addEventListener("load", set);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
-})();
-</script>
-
-<!-- 5. 4 Kochi Outlets Showcase -->
-<section id="outlets" class="py-24 relative">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-      <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">Our Kochi Destinations</span>
-      <h2 class="font-cinzel text-3xl sm:text-5xl font-extrabold text-white">4 Strategic Outlets</h2>
-      <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"></div>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {% for outlet in outlets %}
-      <div class="outlet-card-anim luxury-glass-card p-6 rounded-3xl flex flex-col justify-between group" data-tilt>
-        <div>
-          <div class="flex items-center justify-between mb-4">
-            <span class="w-9 h-9 rounded-xl bg-gold/15 text-gold border border-gold/30 flex items-center justify-center font-cinzel font-bold text-sm">0{{ forloop.counter }}</span>
-            <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> OPEN NOW
-            </span>
-          </div>
-          <h3 class="font-cinzel text-xl font-bold text-white group-hover:text-gold transition-colors">{{ outlet.name }}</h3>
-          <p class="text-xs text-slate-400 mt-1">{{ outlet.area }}</p>
-
-          <div class="mt-5 pt-4 border-t border-slate-700/60 text-xs text-slate-300 space-y-2.5">
-            <div class="flex items-center gap-2">
-              <i class="fa-solid fa-clock text-gold"></i>
-              <span>{{ outlet.opening_time }}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <i class="fa-solid fa-phone text-gold"></i>
-              <a href="tel:{{ outlet.phone }}" class="hover:underline font-bold text-white">{{ outlet.phone }}</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center gap-2">
-          <a href="tel:{{ outlet.phone }}" class="flex-1 py-3 text-center text-xs font-bold rounded-xl bg-gold text-charcoal-950 hover:bg-gold-400 transition-all shadow-md">
-            <i class="fa-solid fa-phone mr-1"></i> Call Branch
-          </a>
-          <a href="https://wa.me/{{ outlet.whatsapp_number }}?text=Hi%20Chai%20Grill%20{{ outlet.name|urlencode }},%20I%20would%20like%20to%20order" target="_blank" class="w-11 h-11 flex items-center justify-center rounded-xl bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600 hover:text-white transition-all border border-emerald-500/30 shadow-md">
-            <i class="fa-brands fa-whatsapp text-lg"></i>
-          </a>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-  </div>
-</section>
 
 <!-- 6. Verified Reviews -->
 <section id="reviews" class="py-20 bg-charcoal-900/40 border-t border-slate-800">
