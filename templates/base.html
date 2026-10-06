@@ -27,7 +27,7 @@
     theme: {
       extend: {
         colors: {
-          gold: { 300: '#FDE047', 400: '#FACC15', 500: '#EAB308', DEFAULT: '#D4AF37', 600: '#CA8A04', 700: '#A16207' },
+          gold: { 300: '#FFD27A', 400: '#FDBA3B', 500: '#FBAA1B', DEFAULT: '#FBAA1B', 600: '#E8960C', 700: '#B87009' },
           charcoal: { 950: '#040406', 900: '#0a0a0c', 800: '#121218', 700: '#1a1a24', 600: '#262634' }
         },
         fontFamily: {
@@ -78,15 +78,15 @@
       </a>
 
       <!-- Desktop Links with Active Indicators -->
-            <nav class="hidden md:flex items-center gap-7 text-xs uppercase tracking-widest font-semibold">
+                       <nav class="hidden md:flex items-center gap-7 text-xs uppercase tracking-widest font-semibold">
         <a href="{% url 'home' %}" class="hover:text-gold transition-colors {% if request.path == '/' %}text-gold font-bold border-b border-gold pb-1{% else %}text-slate-300{% endif %}">Home</a>
-        <a href="{% url 'about' %}" class="hover:text-gold transition-colors {% if '/about' in request.path %}text-gold font-bold border-b border-gold pb-1{% else %}text-slate-300{% endif %}">About Us</a>
-        <a href="{% url 'menu' %}" class="hover:text-gold transition-colors flex items-center gap-1.5 {% if '/menu' in request.path %}text-gold font-bold border-b border-gold pb-1{% else %}text-slate-300{% endif %}">
-          <span>Menu</span>
+        <a href="{% url 'home' %}#specialities" class="hover:text-gold transition-colors text-slate-300">About Us</a>
+        <a href="{% url 'home' %}#menu" class="hover:text-gold transition-colors text-slate-300">Menus</a>
+        <a href="{% url 'combos' %}" class="hover:text-gold transition-colors flex items-center gap-1.5 {% if '/combos' in request.path %}text-gold font-bold border-b border-gold pb-1{% else %}text-slate-300{% endif %}">
+          <span>Offers</span>
           <span class="px-1.5 py-0.2 text-[8px] bg-red-500/30 text-red-300 rounded border border-red-500/40">Hot</span>
         </a>
-        <a href="{% url 'combos' %}" class="hover:text-gold transition-colors {% if '/combos' in request.path %}text-gold font-bold border-b border-gold pb-1{% else %}text-slate-300{% endif %}">Offers</a>
-        <a href="{% url 'outlets' %}" class="hover:text-gold transition-colors {% if '/outlets' in request.path %}text-gold font-bold border-b border-gold pb-1{% else %}text-slate-300{% endif %}">Outlets</a>
+        <a href="{% url 'home' %}#outlets" class="hover:text-gold transition-colors text-slate-300">Outlets</a>
       </nav>
 
       <!-- Action Button -->
@@ -110,14 +110,12 @@
          MOBILE INLINE SCROLLABLE NAV
          (replaces the old hamburger drawer)
     ====================================================== -->
-        <nav class="md:hidden mobile-nav-scroll">
+                <nav class="md:hidden mobile-nav-scroll">
       <a href="{% url 'home' %}" class="mobile-nav-link {% if request.path == '/' %}is-active{% endif %}">Home</a>
-      <a href="{% url 'about' %}" class="mobile-nav-link {% if '/about' in request.path %}is-active{% endif %}">About Us</a>
-      <a href="{% url 'menu' %}" class="mobile-nav-link {% if '/menu' in request.path %}is-active{% endif %}">
-        Menu <span class="mobile-nav-hot">Hot</span>
-      </a>
-      <a href="{% url 'combos' %}" class="mobile-nav-link {% if '/combos' in request.path %}is-active{% endif %}">Offers</a>
-      <a href="{% url 'outlets' %}" class="mobile-nav-link {% if '/outlets' in request.path %}is-active{% endif %}">Outlets</a>
+      <a href="{% url 'home' %}#specialities" class="mobile-nav-link">About Us</a>
+      <a href="{% url 'home' %}#menu" class="mobile-nav-link">Menus</a>
+      <a href="{% url 'combos' %}" class="mobile-nav-link {% if '/combos' in request.path %}is-active{% endif %}">Offers <span class="mobile-nav-hot">Hot</span></a>
+      <a href="{% url 'home' %}#outlets" class="mobile-nav-link">Outlets</a>
     </nav>
   </header>
 
@@ -186,16 +184,51 @@
           <p class="text-slate-400 italic">"Where Every Bite Tells a Malabar Story."</p>
             <p class="text-slate-400">Traditional Quality & Authentic Spices. Partnered with Big Fresh Hypermarket.</p>        <p class="text-slate-500">Email: <a href="mailto:chaisgrills@gmail.com" class="text-gold">chaisgrills@gmail.com</a></p>
       </div>
-      <div>
-        <h4 class="font-cinzel text-sm font-bold text-white mb-3 uppercase tracking-wider">Quick Navigation</h4>
-        <ul class="space-y-2 text-slate-400">
-          <li><a href="{% url 'home' %}" class="hover:text-gold">Home</a></li>
-          <li><a href="{% url 'menu' %}" class="hover:text-gold">Full Gourmet Menu</a></li>
-          <li><a href="{% url 'combos' %}" class="hover:text-gold">Loaded Combos</a></li>
-          <li><a href="{% url 'outlets' %}" class="hover:text-gold">4 Kochi Branches</a></li>
-          <li><a href="{% url 'about' %}" class="hover:text-gold">About Story</a></li>
-        </ul>
-      </div>
+<div>
+  <h4 class="font-cinzel text-sm font-bold text-white mb-3 uppercase tracking-wider">
+    Quick Navigation
+  </h4>
+
+  <ul class="space-y-2 text-slate-400">
+
+    <!-- Same link as Navbar: Home -->
+    <li>
+      <a href="{% url 'home' %}" class="hover:text-gold transition-colors">
+        Home
+      </a>
+    </li>
+
+    <!-- Same link as Navbar: About Us -->
+    <li>
+      <a href="{% url 'home' %}#specialities" class="hover:text-gold transition-colors">
+        About Us
+      </a>
+    </li>
+
+    <!-- Same link as Navbar: Menus -->
+    <li>
+      <a href="{% url 'home' %}#menu" class="hover:text-gold transition-colors">
+        Menus
+      </a>
+    </li>
+
+    <!-- Same link as Navbar: Offers -->
+    <li>
+      <a href="{% url 'combos' %}" class="hover:text-gold transition-colors">
+        Offers
+      </a>
+    </li>
+
+    <!-- Same link as Navbar: Outlets -->
+    <li>
+      <a href="{% url 'home' %}#outlets" class="hover:text-gold transition-colors">
+        Outlets
+      </a>
+    </li>
+
+  </ul>
+</div>
+
       <div>
         <h4 class="font-cinzel text-sm font-bold text-white mb-3 uppercase tracking-wider">Our 4 Hubs</h4>
         <ul class="space-y-1.5 text-slate-400">
@@ -213,9 +246,25 @@
         </a>
       </div>
     </div>
-    <div class="max-w-7xl mx-auto px-4 pt-6 text-center text-slate-600 text-xs">
-      © {% now "Y" %} Chai's Grill Kochi. Traditional Quality. All Rights Reserved.
-    </div>
+
+<div class="max-w-7xl mx-auto px-4 pt-6 text-center text-slate-600 text-xs">
+  <p>
+    © {% now "Y" %} Chai's Grill Kochi. Traditional Quality. All Rights Reserved.
+  </p>
+
+  <p class="mt-2">
+    Powered by
+    <a
+      href="https://getellaam.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-slate-400 hover:text-gold font-semibold transition-colors"
+    >
+      Getellaam
+    </a>
+  </p>
+</div>
+
   </footer>
 
   <!-- =====================================================

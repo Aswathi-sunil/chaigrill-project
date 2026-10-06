@@ -6,92 +6,54 @@
 <div class="aurora-bg top-10 left-10"></div>
 <div class="aurora-bg top-1/2 right-10" style="animation-delay: -6s;"></div>
 
-<!-- CINEMATIC PINNED INTRO -->
-<section id="cinema" class="cinema" aria-label="Chai's Grill intro">
-  <div class="cinema__stage">
-    <div class="cinema__bg" id="cBg" style="background-image:url('{% static 'images/hero/malabar-specialities.jpg' %}')"></div>
+<!-- 1. Hero Section (video background) -->
+<section id="hero" class="mz-hero">
+  <video class="mz-hero__bg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"
+         poster="/static/video/hero-poster.jpg">
+      <source src="/static/video/hero.mp4" type="video/mp4">
+  </video>
+    <div class="mz-hero__veil"></div>
 
-    <h1 class="cinema__title" id="cTitle">
-      <span>Chai</span><span>Meets</span><em>Charcoal</em>
+  <div class="mz-hero__inner">
+    <p class="mz-hero__eyebrow hero-badge-reveal">Where Every Bite Tells a Malabar Story</p>
+
+    <h1 class="mz-hero__title hero-title-reveal">
+      <span class="mz-line mz-line--1">Where Spiced Chai</span>
+      <span class="mz-line mz-line--2">Meets The</span>
+      <span class="mz-line mz-line--3">Charcoal Flame</span>
     </h1>
 
-    <div class="cinema__revealer" id="cRev"></div>
-
-    <div class="cinema__img" style="background-image:url('{% static 'images/specialities/tea.jpg' %}')"></div>
-    <div class="cinema__img" style="background-image:url('{% static 'images/specialities/avil-milk.jpeg' %}')"></div>
-    <div class="cinema__img" style="background-image:url('{% static 'images/specialities/snacks.jpg' %}')"></div>
-
-    <div class="cinema__outro" id="cOutro">
-      <div class="cinema__back" id="cBack">
-        <img id="cLogo" src="{% static 'images/logo.png' %}" alt="Chai's Grill">
-        <p>Kochi · 4 Outlets</p>
-      </div>
-      <div class="cinema__half cinema__half--l" id="cL"><h2 class="cinema__h">Where Every Bite<br>Tells a <span class="cinema__hot">Malabar Story</span></h2></div>
-      <div class="cinema__half cinema__half--r" id="cR"><h2 class="cinema__h">Where Every Bite<br>Tells a <span class="cinema__hot">Malabar Story</span></h2></div>
+    <div class="hero-title-reveal">
+      <a href="#menu" class="mz-btn">Explore Now <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 
-    <div class="cinema__mark cinema__mark--l">Chai's Grill®</div>
-    <div class="cinema__mark cinema__mark--r">Kochi · Est.</div>
-    <div class="cinema__cue" id="cCue">Scroll</div>
+    <div class="mz-stats hero-title-reveal">
+      <div><b>200+</b><span>Malabar Snacks</span></div>
+      <div><b>21+</b><span>Varieties of Tea</span></div>
+      <div><b>60+</b><span>Avil Milk Flavours</span></div>
+    </div>
   </div>
 </section>
 
-<!-- 1. Hero Section -->
-<section id="hero" class="relative min-h-screen flex items-center justify-center pt-6 sm:pt-10 pb-20 overflow-hidden">
-
-  <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-
-    <p class="hero-badge-reveal font-cinzel italic text-gold/90 text-base sm:text-xl tracking-wide">
-      "Where Every Bite Tells a Malabar Story"
-    </p>
-
-    <h1 class="hero-title-reveal hero-main-heading font-cinzel text-4xl sm:text-6xl font-black leading-[1.1] tracking-tight text-white">
-      <span class="hero-heading-line">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-gold to-amber-500">Where Spiced Chai</span>
-      </span>
-      <span class="hero-heading-line">Meets The</span>
-      <span class="hero-heading-line">
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-amber-500 to-orange-400 drop-shadow-[0_0_30px_rgba(239,68,68,0.5)]">Charcoal Flame</span>
-      </span>
-    </h1>
-
-          <!-- Specialities (text only) -->
-    <div class="hero-title-reveal hero-specs">
-      <div class="hero-spec"><b>200+</b><span>Malabar Snacks</span></div>
-      <div class="hero-spec"><b>21+</b><span>Varieties of Tea</span></div>
-      <div class="hero-spec"><b>60+</b><span>Avil Milk Flavours</span></div>
-    </div>
-
-      <div class="hero-title-reveal flex items-center justify-center pt-4">
-      <a href="#menu" class="magnetic-btn px-9 py-4 rounded-full bg-gradient-to-r from-gold via-amber-500 to-gold-600 text-charcoal-950 font-bold text-xs tracking-widest uppercase shadow-[0_0_30px_rgba(212,175,55,0.45)] hover:shadow-[0_0_45px_rgba(212,175,55,0.8)] transform hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
-        <span>Explore Live Menu</span>
-        <i class="fa-solid fa-arrow-right text-xs"></i>
-      </a>
-    </div>
-
-    <!-- Live Counters -->
-<!--    <div class="hero-title-reveal pt-8 grid grid-cols-3 gap-6 border-t border-slate-800/80 text-center max-w-2xl mx-auto">-->
-<!--      <div>-->
-<!--        <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">4</div>-->
-<!--        <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Kochi Hubs</div>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--        <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">50+</div>-->
-<!--        <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Craft Recipes</div>-->
-<!--      </div>-->
-<!--      <div>-->
-<!--        <div class="font-cinzel text-3xl sm:text-4xl font-extrabold text-gold">4.9 ★</div>-->
-<!--        <div class="text-xs text-slate-400 uppercase tracking-wider mt-1">Foodie Rating</div>-->
-<!--      </div>-->
-<!--    </div>-->
-  </div>
-
-  <!-- Scroll Cue -->
-  <a href="#specialities" class="scroll-cue" aria-label="Scroll down">
-    <span class="scroll-cue__mouse"><span class="scroll-cue__wheel"></span></span>
-    <span class="scroll-cue__label"></span>
-  </a>
-</section>
+<script>
+/* heading breaks apart on scroll: lines slide out left / right */
+(function () {
+  var hero = document.getElementById("hero"); if (!hero) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var lines = [].slice.call(hero.querySelectorAll(".mz-line")), raf = 0;
+  function update() {
+    raf = 0;
+    var p = Math.min(1, Math.max(0, scrollY / (hero.offsetHeight * 0.55)));
+    var e = 1 - Math.pow(1 - p, 2);
+    lines.forEach(function (el, i) {
+      el.style.transform = "translate3d(" + ((i % 2 === 0 ? -1 : 1) * e * 60) + "vw,0,0)";
+      el.style.opacity = String(1 - e);
+    });
+  }
+  addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+  update();
+})();
+</script>
 
 <!-- 2b. Our Malabar Story -->
 <section id="specialities" class="story">
@@ -127,6 +89,40 @@
       </blockquote>
     </article>
 
+  </div>
+</section>
+
+<!-- 4a. The Story of Avil Milk -->
+<section id="avil-story" class="ast">
+  <div class="ast__wrap">
+
+    <div class="ast__top">
+      <div class="ast__photo rv">
+        <img src="/static/images/specialities/avil-milk.jpeg" alt="Avil milk" loading="lazy" onerror="this.remove()">
+      </div>
+
+      <div class="ast__text rv">
+        <span class="ast__pill">Did you know?</span>
+        <h2 class="ast__title">The Story of <em>Avil Milk</em></h2>
+        <p>Avil milk is a Malabar original: a cold, filling street drink from northern Kerala, built on <b>aval</b>, the beaten rice flakes that have long been part of Kerala kitchens.</p>
+        <p>Its roots are humble. In Malappuram, aval soaked in water, called <i>avil vellam</i>, was an everyday drink at home. The banana-and-milk drink we know today is much younger. It is generally traced to Kottakkal in Malappuram, where the first avil milk stall in Kerala is reported to have opened in 1993.</p>
+        <p>From there it spread through the juice shops and bakeries of Kerala, picking up new layers along the way: crunchy roasted aval, ripe banana, chilled milk and peanuts, then dry fruits, ice cream and more. That is how one simple drink became the 60+ flavours you see at Chai's Grill.</p>
+        <!-- EDIT: add one paragraph here about how Chai's Grill started serving avil milk -->
+      </div>
+    </div>
+
+    <div class="ast__steps">
+      <div class="ast__step rv"><b>At home</b><span>Avil vellam, rice flakes in water, a daily drink in Malappuram homes.</span></div>
+      <div class="ast__step rv"><b>1993*</b><span>The first avil milk stall opens in Kottakkal, Malappuram.</span></div>
+      <div class="ast__step rv"><b>Today</b><span>Layered, loaded and served in 60+ flavours across Kochi.</span></div>
+    </div>
+
+    <h3 class="ast__sub rv">What's inside?</h3>
+    <div class="ast__chips rv">
+      <span>Roasted Aval</span><span>Ripe Banana</span><span>Chilled Milk</span><span>Nuts &amp; Dry Fruits</span>
+    </div>
+
+<!--    <p class="ast__src">*As reported by The Better India. The classic recipe uses aval, banana, milk and nuts, and every outlet adds its own twists.</p>-->
   </div>
 </section>
 
@@ -187,18 +183,15 @@
 
 <!-- 4c. Malabar Snack Varieties -->
 <section id="snack-varieties" class="avil avil--next">
-  <div class="avil__wrap">
-    <h2 class="avil__title rv">Malabar Snack Varieties</h2>
-  </div>
+  <div class="avil__wrap"><h2 class="avil__title rv">Malabar Snack Varieties</h2></div>
   <div class="avc avc--cards" id="avcSnacks"><div class="avc__track"></div></div>
+</section>
 
-  <div class="avil__wrap">
-    <div class="text-center mt-14">
-      <a href="{% url 'menu' %}" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-gold/40 text-gold text-xs font-bold uppercase tracking-widest hover:bg-gold hover:text-charcoal-950 transition-all">
-        View Full Master Menu <i class="fa-solid fa-arrow-right"></i>
-      </a>
-    </div>
-  </div>
+<!-- 4d. Grills & Broasted -->
+<section id="grills-broasted" class="avil avil--next">
+  <div class="avil__wrap"><h2 class="avil__title rv">Grills &amp; Broasted</h2></div>
+  <div class="avc avc--cards" id="avcGrills"><div class="avc__track"></div></div>
+
 </section>
 
 <script>
@@ -221,6 +214,12 @@
     ["Beef Ball", "beef"], ["Chatti Pathiri", "chatti_pathiri"], ["Chicken Cutlet", "cutlet"],
     ["Chicken Samosa", "chicken_samosa"], ["Kallumakkaya", "kallummakaya"], ["Spring Roll", "spring"], ["Unnakkaya", "unnakkaya"],
     ["Chicken Roll", "roll"], ["Pathiri", "pathiri"]
+  ];
+    var GRILLS = [
+    ["Shawaya Mandhi", "shawaya_mandhi"], ["Masala Shawaya", "masala_shawaya"],
+    ["Honey Chillie Shawaya", "honey_chillie_shawaya"], ["Peri Peri Shawaya", "peri_peri_shawaya"],
+    ["Crispy Fried Chicken", "crispy_fried_chicken"],
+    ["Wings", "wings"], ["Boneless Strips", "boneless_strips"], ["Pops", "pops"]
   ];
 
   // tries .png, then .webp, .jpg, .jpeg; shows a placeholder if none exist
@@ -275,6 +274,7 @@
   make("avcAvil",   "/static/images/avil/",   AVIL,   false, 0);
   make("avcTea",    "/static/images/tea/",    TEA,    true,  600);
   make("avcSnacks", "/static/images/snacks/", SNACKS, true,  1200);
+    make("avcGrills", "/static/images/grills/", GRILLS, true, 1800);
 
   // title reveal
   if (!("IntersectionObserver" in window) || reduce) return;
@@ -283,6 +283,18 @@
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { threshold: 0.15 });
   document.querySelectorAll(".rv").forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script>
+/* keep the hero clear of the fixed header, whatever its height */
+(function () {
+  var h = document.getElementById("main-header");
+  if (!h) return;
+  function set() { document.documentElement.style.setProperty("--hdr", h.offsetHeight + "px"); }
+  set();
+  addEventListener("resize", set);
+  addEventListener("load", set);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
 })();
 </script>
 
