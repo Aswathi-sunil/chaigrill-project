@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us | Chai's Grill Kochi{% endblock %}
+
+{% block content %}
+
+<!-- Banner -->
+<section class="cnt-hero" style="background-image: url('/static/images/hero/malabar-specialities.jpg');">
+  <div class="cnt-hero__veil"></div>
+  <h1 class="cnt-hero__title">We'd Love to Hear From You</h1>
+</section>
+
+<!-- Form -->
+<section class="cnt">
+  <div class="cnt__card rv">
+
+    <form id="contactForm" novalidate>
+      <div class="cnt__field">
+        <label for="cntName">Full Name <span>*</span></label>
+        <input id="cntName" type="text" autocomplete="name" required>
+        <small class="cnt__err" data-for="cntName">Please enter your name.</small>
+      </div>
+
+      <div class="cnt__field">
+        <label for="cntPhone">Mobile Number <span>*</span></label>
+        <input id="cntPhone" type="tel" inputmode="tel" autocomplete="tel" required>
+        <small class="cnt__err" data-for="cntPhone">Please enter a valid mobile number.</small>
+      </div>
+
+      <div class="cnt__field">
+        <label for="cntEmail">E-mail <em>(optional)</em></label>
+        <input id="cntEmail" type="email" autocomplete="email">
+        <small class="cnt__err" data-for="cntEmail">Please enter a valid e-mail address.</small>
+      </div>
+
+      <div class="cnt__field">
+        <label for="cntMsg">Message <em>(optional)</em></label>
+        <textarea id="cntMsg" rows="5"></textarea>
+      </div>
+
+      <button type="submit" class="cnt__btn"><i class="fa-brands fa-whatsapp"></i> Submit</button>
+      <p class="cnt__note" id="cntStatus">Submitting opens WhatsApp with your message ready to send.</p>
+    </form>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var WA = "918943777001";                       // WhatsApp number that receives the messages
+  var form = document.getElementById("contactForm");
+  if (!form) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var status = $("cntStatus");
+
+  function flag(id, bad) {
+    $(id).classList.toggle("is-bad", bad);
+    var e = form.querySelector('.cnt__err[data-for="' + id + '"]');
+    if (e) e.style.display = bad ? "block" : "none";
+  }
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var name = $("cntName").value.trim();
+    var phone = $("cntPhone").value.trim();
+    var email = $("cntEmail").value.trim();
+    var msg = $("cntMsg").value.trim();
+
+    var okName = name.length > 1;
+    var okPhone = phone.replace(/\D/g, "").length >= 10 && /^[0-9+\s\-()]+$/.test(phone);
+    var okEmail = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    flag("cntName", !okName); flag("cntPhone", !okPhone); flag("cntEmail", !okEmail);
+    if (!(okName && okPhone && okEmail)) return;
+
+    var text = "*New enquiry from the Chai Grill website*\n" +
+               "*Name:* " + name + "\n" +
+               "*Phone:* " + phone + "\n" +
+               (email ? "*Email:* " + email + "\n" : "") +
+               (msg ? "*Message:* " + msg : "");
+
+    status.textContent = "Opening WhatsApp…";
+    window.location.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(text);
+    setTimeout(function () { form.reset(); status.textContent = "Submitting opens WhatsApp with your message ready to send."; }, 2500);
+  });
+})();
+</script>
+{% endblock %}

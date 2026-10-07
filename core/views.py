@@ -82,6 +82,9 @@ def outlets_view(request):
 def about_view(request):
     return render(request, 'about.html')
 
+def contact_view(request):
+    return render(request, 'contact.html')
+
 def api_menu_items(request):
     category_slug = request.GET.get('category', 'all')
     search_query = request.GET.get('q', '').strip()

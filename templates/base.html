@@ -89,7 +89,8 @@
           <span class="px-1.5 py-0.2 text-[8px] bg-red-500/30 text-red-300 rounded border border-red-500/40">Hot</span>
         </a>
         <a href="{% url 'outlets' %}" class="hover:text-gold transition-colors {% if '/outlets' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Outlets</a>
-      </nav>
+                                 <a href="{% url 'contact' %}" class="hover:text-gold transition-colors {% if '/contact' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Contact</a>
+                             </nav>
 
       <!-- Action Button -->
       <div class="hidden lg:flex items-center gap-3">
@@ -110,6 +111,7 @@
       <a href="{% url 'menu' %}" class="mobile-nav-link {% if '/menu' in request.path %}is-active{% endif %}">Menus</a>
       <a href="{% url 'combos' %}" class="mobile-nav-link {% if '/combos' in request.path %}is-active{% endif %}">Offers <span class="mobile-nav-hot">Hot</span></a>
       <a href="{% url 'outlets' %}" class="mobile-nav-link {% if '/outlets' in request.path %}is-active{% endif %}">Outlets</a>
+                       <a href="{% url 'contact' %}" class="mobile-nav-link {% if '/contact' in request.path %}is-active{% endif %}">Contact</a>
     </nav>
   </header>
 
@@ -170,97 +172,69 @@
     </div>
   </div>
 
-  <!-- Luxury Footer -->
-  <footer class="bg-black border-t border-gold/20 pt-16 pb-12 mt-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-8 pb-10 border-b border-slate-800 text-xs">
-      <div class="space-y-3">
-        <div class="font-cinzel text-lg font-bold text-gold">CHAI'S GRILL</div>
-          <p class="text-slate-400 italic">"Where Every Bite Tells a Malabar Story."</p>
-            <p class="text-slate-400">Traditional Quality & Authentic Spices. Partnered with Big Fresh Hypermarket.</p>        <p class="text-slate-500">Email: <a href="mailto:chaisgrills@gmail.com" class="text-gold">chaisgrills@gmail.com</a></p>
-      </div>
-<div>
-  <h4 class="font-cinzel text-sm font-bold text-white mb-3 uppercase tracking-wider">
-    Quick Navigation
-  </h4>
+  <!-- Footer -->
+  <footer class="ft">
+    <div class="ft__wrap">
 
-  <ul class="space-y-2 text-slate-400">
+      <div class="ft__cols">
 
-    <!-- Same link as Navbar: Home -->
-    <li>
-      <a href="{% url 'home' %}" class="hover:text-gold transition-colors">
-        Home
-      </a>
-    </li>
+        <!-- CONTACT US -->
+        <div class="ft__col">
+          <h4 class="ft__h">Contact Us</h4>
+          <ul class="ft__list">
+            <li><i class="fa-regular fa-envelope"></i><a href="mailto:chaisgrills@gmail.com">chaisgrills@gmail.com</a></li>
+            <li><i class="fa-solid fa-phone"></i><a href="tel:8943777001">+91 89437 77001</a></li>
+          </ul>
+        </div>
 
-    <!-- Same link as Navbar: About Us -->
-    <li>
-      <a href="{% url 'home' %}#specialities" class="hover:text-gold transition-colors">
-        About Us
-      </a>
-    </li>
+        <!-- LOCATIONS -->
+        <div class="ft__col">
+          <h4 class="ft__h">Locations</h4>
+          <ul class="ft__list">
+            <li class="ft__hub"><i class="fa-solid fa-location-dot"></i>
+              <span>Thoppumpady<br><a href="tel:8943777001">8943777001</a></span></li>
+            <li class="ft__hub"><i class="fa-solid fa-location-dot"></i>
+              <span>Padamughal, Kakkanad<br><a href="tel:9747478092">9747478092</a></span></li>
+            <li class="ft__hub"><i class="fa-solid fa-location-dot"></i>
+              <span>Changampuzha Park, Edappally<br><a href="tel:9747478092">9747478092</a></span></li>
+            <li class="ft__hub"><i class="fa-solid fa-location-dot"></i>
+              <span>Willingdon Island, Mattancheri<br><a href="tel:8943777001">8943777001</a></span></li>
+          </ul>
+        </div>
 
-    <!-- Same link as Navbar: Menus -->
-    <li>
-      <a href="{% url 'home' %}#menu" class="hover:text-gold transition-colors">
-        Menus
-      </a>
-    </li>
+        <!-- INFORMATION -->
+        <div class="ft__col">
+          <h4 class="ft__h">Information</h4>
+          <ul class="ft__list ft__list--plain">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'menu' %}">Menus</a></li>
+            <li><a href="{% url 'combos' %}">Offers</a></li>
+            <li><a href="{% url 'outlets' %}">Outlets</a></li>
+          </ul>
+        </div>
 
-    <!-- Same link as Navbar: Offers -->
-    <li>
-      <a href="{% url 'combos' %}" class="hover:text-gold transition-colors">
-        Offers
-      </a>
-    </li>
-
-    <!-- Same link as Navbar: Outlets -->
-    <li>
-      <a href="{% url 'home' %}#outlets" class="hover:text-gold transition-colors">
-        Outlets
-      </a>
-    </li>
-
-  </ul>
+        <!-- SOCIAL MEDIA -->
+        <div class="ft__col">
+          <h4 class="ft__h">Social Media</h4>
+          <div class="ft__social">
+  <a href="https://www.facebook.com/YOUR_PAGE" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+  <a href="https://www.instagram.com/chai_grill_/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+  <a href="https://www.youtube.com/@YOUR_CHANNEL" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+  <a href="https://wa.me/918943777001" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 </div>
+          <p class="ft__note">Also available on Swiggy &amp; Zomato for prompt home delivery.</p>
+        </div>
 
-      <div>
-        <h4 class="font-cinzel text-sm font-bold text-white mb-3 uppercase tracking-wider">Our 4 Hubs</h4>
-        <ul class="space-y-1.5 text-slate-400">
-          <li>✦ Thoppumpady (8943777001)</li>
-          <li>✦ Padamughal, Kakkanad (9747478092)</li>
-          <li>✦ Changampuzha Park, Edappally (9747478092)</li>
-          <li>✦ Willingdon Island, Mattancheri (8943777001)</li>
-        </ul>
       </div>
-      <div>
-        <h4 class="font-cinzel text-sm font-bold text-white mb-3 uppercase tracking-wider">Online Order & Social</h4>
-        <p class="text-slate-400 mb-3">Available on Swiggy & Zomato for prompt home delivery.</p>
-        <a href="https://www.instagram.com/chai_grill_/" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-pink-600/20 text-pink-300 border border-pink-500/30 font-semibold hover:bg-pink-600 hover:text-white transition-all">
-          <i class="fa-brands fa-instagram text-base"></i> @chai_grill_
-        </a>
-      </div>
+
+      <p class="ft__copy">
+        &copy; {% now "Y" %} Chai's Grill Kochi. All Rights Reserved. &nbsp;&middot;&nbsp;
+        Powered by <a href="https://getellaam.com" target="_blank" rel="noopener noreferrer">Getellaam</a>
+      </p>
+
     </div>
-
-<div class="max-w-7xl mx-auto px-4 pt-6 text-center text-slate-600 text-xs">
-  <p>
-    © {% now "Y" %} Chai's Grill Kochi. Traditional Quality. All Rights Reserved.
-  </p>
-
-  <p class="mt-2">
-    Powered by
-    <a
-      href="https://getellaam.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-slate-400 hover:text-gold font-semibold transition-colors"
-    >
-      Getellaam
-    </a>
-  </p>
-</div>
-
   </footer>
-
   <!-- =====================================================
      FLOATING PROMO VIDEO WIDGET
      (uploaded via Django Admin → Floating Promo Videos)

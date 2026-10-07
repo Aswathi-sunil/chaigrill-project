@@ -29,6 +29,86 @@
 
 </section>
 
+<!-- 4e. Our Full Menu (items are added from the Django admin) -->
+<section id="full-menu" class="avil avil--next">
+  <div class="avil__wrap"><h2 class="avil__title rv">Our Full Menu</h2></div>
+
+  <div class="mm">
+    <div class="mm__tabs" id="mmTabs">
+      <button type="button" class="mm-pill is-active" data-category="all">Featured</button>
+      {% for cat in categories %}
+        <button type="button" class="mm-pill" data-category="{{ cat.slug }}">{{ cat.name }}</button>
+      {% endfor %}
+    </div>
+
+    <p class="mm__status" id="mmStatus"></p>
+    <div class="mm__grid" id="mmGrid"></div>
+    <p class="mm__empty" id="mmEmpty" hidden>No menu items in this category yet.</p>
+    <div class="mm__more"><button type="button" class="mm-pill" id="mmMore" hidden>Show more</button></div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var STEP = 8, items = [], shown = 0, token = 0;
+  var grid = document.getElementById("mmGrid"), more = document.getElementById("mmMore"),
+      empty = document.getElementById("mmEmpty"), status = document.getElementById("mmStatus"),
+      tabs = document.querySelectorAll("#mmTabs .mm-pill");
+  if (!grid) return;
+
+  function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : String(s); return d.innerHTML; }
+
+  function card(it) {
+    var img = it.image
+      ? '<img src="' + esc(it.image) + '" alt="' + esc(it.name) + '" loading="lazy" draggable="false" onerror="this.parentNode.classList.add(\'is-empty\');this.remove()">'
+      : "";
+    return '<div class="mm__item"><div class="avc__card' + (it.image ? "" : " is-empty") + '">' + img +
+           '<h3 class="avc__name">' + esc(it.name || "Menu item") + '</h3></div></div>';
+  }
+
+  function render(reset) {
+    if (reset) { grid.innerHTML = ""; shown = 0; }
+    var end = Math.min(items.length, shown + STEP);
+    grid.insertAdjacentHTML("beforeend", items.slice(shown, end).map(card).join(""));
+    shown = end;
+    empty.hidden = items.length > 0;
+    more.hidden = shown >= items.length;
+  }
+
+  function load(cat, label) {
+    var t = ++token;
+    grid.classList.add("is-loading");
+    fetch("/api/menu/?category=" + encodeURIComponent(cat) + "&q=&show_all=0")
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (d) {
+        if (t !== token) return;
+        items = (d && Array.isArray(d.items)) ? d.items : [];
+        status.textContent = label + " \u00b7 " + items.length + " item" + (items.length === 1 ? "" : "s");
+        render(true);
+      })
+      .catch(function () {
+        if (t !== token) return;
+        items = []; grid.innerHTML = ""; more.hidden = true;
+        empty.hidden = false; empty.textContent = "Unable to load the menu. Please refresh the page.";
+        status.textContent = "";
+      })
+      .then(function () { grid.classList.remove("is-loading"); });
+  }
+
+  tabs.forEach(function (b) {
+    b.addEventListener("click", function () {
+      tabs.forEach(function (x) { x.classList.remove("is-active"); });
+      b.classList.add("is-active");
+      empty.textContent = "No menu items in this category yet.";
+      load(b.dataset.category, b.textContent.trim());
+    });
+  });
+  more.addEventListener("click", function () { render(false); });
+
+  load("all", "Featured");
+})();
+</script>
+
 <script>
 (function () {
   var HOLD = 1850, SLIDE = 500;                 // ms between slides / ms the slide takes
