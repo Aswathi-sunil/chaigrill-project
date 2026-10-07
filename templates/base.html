@@ -88,7 +88,16 @@
           <span>Offers</span>
           <span class="px-1.5 py-0.2 text-[8px] bg-red-500/30 text-red-300 rounded border border-red-500/40">Hot</span>
         </a>
-        <a href="{% url 'outlets' %}" class="hover:text-gold transition-colors {% if '/outlets' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Outlets</a>
+        <div class="nav-dd">
+          <a href="{% url 'outlets' %}" class="nav-dd__link hover:text-gold transition-colors {% if '/outlets' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}" aria-haspopup="true">Locate Us <i class="fa-solid fa-chevron-down nav-dd__chev"></i></a>
+          {% if all_outlets %}
+          <ul class="nav-dd__menu">
+            {% for o in all_outlets|slice:":4" %}
+            <li><a href="{% url 'outlets' %}#outlet-{{ o.id }}">{{ o.name }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
                                  <a href="{% url 'contact' %}" class="hover:text-gold transition-colors {% if '/contact' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Contact</a>
                              </nav>
 
@@ -110,7 +119,7 @@
       <a href="{% url 'about' %}" class="mobile-nav-link {% if '/about' in request.path %}is-active{% endif %}">About Us</a>
       <a href="{% url 'menu' %}" class="mobile-nav-link {% if '/menu' in request.path %}is-active{% endif %}">Menus</a>
       <a href="{% url 'combos' %}" class="mobile-nav-link {% if '/combos' in request.path %}is-active{% endif %}">Offers <span class="mobile-nav-hot">Hot</span></a>
-      <a href="{% url 'outlets' %}" class="mobile-nav-link {% if '/outlets' in request.path %}is-active{% endif %}">Outlets</a>
+      <a href="{% url 'outlets' %}" class="mobile-nav-link {% if '/outlets' in request.path %}is-active{% endif %}">Locate Us</a>
                        <a href="{% url 'contact' %}" class="mobile-nav-link {% if '/contact' in request.path %}is-active{% endif %}">Contact</a>
     </nav>
   </header>
@@ -218,9 +227,8 @@
         <div class="ft__col">
           <h4 class="ft__h">Social Media</h4>
           <div class="ft__social">
-  <a href="https://www.facebook.com/YOUR_PAGE" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+  <a href="https://www.facebook.com/chaisgrill" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
   <a href="https://www.instagram.com/chai_grill_/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-  <a href="https://www.youtube.com/@YOUR_CHANNEL" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
   <a href="https://wa.me/918943777001" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
 </div>
           <p class="ft__note">Also available on Swiggy &amp; Zomato for prompt home delivery.</p>

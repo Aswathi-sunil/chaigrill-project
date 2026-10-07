@@ -5799,3 +5799,148 @@ main:has(.offers),
   border: 0 !important;
   box-shadow: 0 18px 40px -22px rgba(0,0,0,.45) !important;
 }
+/* off-white -> white */
+#outlets,
+main:has(.offers),
+.offers,
+.av3 {
+  background: #ffffff !important;
+}
+/* ===== CONTACT: franchise tabs + WhatsApp-green submit ===== */
+.cnt__wrap { max-width: 46rem; margin: 0 auto; }
+.cnt__tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.6rem; }
+.cnt__tab { display: flex; flex-direction: column; align-items: flex-start; gap: .25rem; padding: 1.1rem 1.2rem; text-align: left;
+  border: 2px solid #eadfcc; border-radius: 1.1rem; background: #fff; cursor: pointer; font-family: 'Poppins', sans-serif;
+  transition: border-color .25s, background .25s, box-shadow .25s; }
+.cnt__tab i { font-size: 1.3rem; color: var(--cg-orange); }
+.cnt__tab b { font-weight: 600; font-size: 1rem; color: #0a0a0a; }
+.cnt__tab span { font-size: .78rem; color: #71717a; }
+.cnt__tab:hover { border-color: var(--cg-orange); }
+.cnt__tab.is-on { border-color: var(--cg-orange); background: #fff7e6; box-shadow: 0 8px 24px rgba(251,170,27,.25); }
+
+.cnt__fran { display: none; margin-bottom: 1.6rem; padding: 1.7rem; border-radius: 1.25rem; background: #0a0a0a; color: #fff; }
+.cnt__fran.is-on { display: block; }
+.cnt__fran h2 { margin: 0 0 .7rem; color: var(--cg-orange); font-weight: 600; font-size: 1.4rem; letter-spacing: .04em; }
+.cnt__fran p { margin: 0 0 1.1rem; color: #d4d4d8; line-height: 1.75; font-size: .95rem; }
+.cnt__fran ul { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.cnt__fran li { padding: .45rem .95rem; border-radius: 999px; border: 1.5px solid var(--cg-orange); color: var(--cg-orange); font-size: .8rem; font-weight: 600; }
+.cnt__fran li i { margin-right: .4rem; }
+
+.cnt__extra { display: none; }
+.cnt__extra.is-on { display: block; }
+.cnt__field select { width: 100%; padding: .9rem 1rem; border: 1.5px solid #d4d4d8; border-radius: .7rem; background: #fff; color: #0a0a0a; font-size: 1rem; }
+.cnt__field select:focus { outline: 0; border-color: var(--cg-orange); box-shadow: 0 0 0 4px rgba(251,170,27,.25); }
+
+/* submit turns WhatsApp green */
+.cnt__btn { transition: background .35s, color .35s, transform .3s; }
+.cnt__btn.is-wa, .cnt__btn.is-wa:hover { background: #25D366; color: #fff; transform: none; }
+.cnt__btn.is-wa i { animation: cntPulse .9s ease-in-out infinite; }
+.cnt__btn:disabled { cursor: default; }
+@keyframes cntPulse { 50% { transform: scale(1.3); } }
+@media (max-width: 560px) { .cnt__tabs { grid-template-columns: 1fr; } }
+/* ===== OUR AIM: centred heading, one rounded box per aim, stacked ===== */
+.ab-story .ab-block:last-child > h3 { text-align: center !important; }
+.ab-story .ab-block:last-child ul.ab-aims {
+  grid-template-columns: 1fr !important;
+  max-width: 52rem; margin: 0 auto !important; gap: 18px !important;
+}
+.ab-story .ab-block:last-child ul.ab-aims li {
+  border-radius: 26px !important; min-height: 0 !important; padding: 26px 32px !important; text-align: left;
+}
+
+/* ===== MISSION & VISION + CORE VALUES: no boxes, styled like "Our Promise" ===== */
+.vm3__grid { display: block !important; }
+.vm3__card { max-width: 56rem; margin: 0 auto 4rem !important; padding: 0 !important; border-radius: 0 !important;
+  background: transparent !important; text-align: center; }
+.vm3__title { margin: 0 0 1.2rem !important; font-size: clamp(1.6rem, 3vw, 2.2rem) !important; letter-spacing: .06em;
+  color: #FBAA1B !important; text-align: center; }
+.vm3__lead { margin: 0 0 1rem !important; color: #d4d4d8 !important; font-weight: 400 !important; line-height: 1.85 !important; font-size: 1.02rem !important; }
+.vm3__list { gap: 1rem !important; }
+.vm3__list li { padding-left: 0 !important; color: #d4d4d8 !important; font-weight: 400 !important; font-size: 1.02rem !important;
+  line-height: 1.85 !important; text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
+.vm3__list li::before { display: none !important; }
+.vm3__list b { color: #FBAA1B !important; }
+.vm3__promise { margin-top: 0 !important; }
+/* ===== box headings in logo green ===== */
+.ab-story .ab-block:last-child ul.ab-aims li b { color: var(--cg-lime) !important; }   /* Our Aim boxes */
+#experience .exp-card h3 { color: var(--cg-lime) !important; }                        /* Why Kochi Loves Chai Grill boxes */
+
+/* ===== "The Alchemy of Spices" label: slightly bigger ===== */
+#experience .text-center > span { font-size: clamp(.9rem, 1.3vw, 1.1rem) !important; letter-spacing: .24em !important; }
+
+/* ===== contact Submit: WhatsApp green the moment it is pressed ===== */
+.cnt__btn:hover, .cnt__btn:active, .cnt__btn:focus-visible {
+  background: #25D366; color: #fff; transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(37,211,102,.45);
+}
+.cnt__btn i { font-size: 1.4rem; }
+/* ===== Navbar dropdown: Outlets ===== */
+.nav-dd { position: relative; }
+.nav-dd__link { display: inline-flex; align-items: center; gap: .4rem; }
+.nav-dd__chev { font-size: .6rem; transition: transform .25s; }
+.nav-dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 1rem; }   /* keeps the menu open while the mouse moves down */
+
+.nav-dd__menu { position: absolute; top: 100%; left: 50%; z-index: 80; min-width: 15rem; margin: 0; padding: .9rem .6rem;
+  list-style: none; background: #fff; border-radius: 1.4rem; box-shadow: 0 18px 50px rgba(0,0,0,.35);
+  opacity: 0; visibility: hidden; transform: translate(-50%, 10px);
+  transition: opacity .25s, transform .25s, visibility .25s; }
+.nav-dd:hover .nav-dd__menu, .nav-dd:focus-within .nav-dd__menu { opacity: 1; visibility: visible; transform: translate(-50%, .6rem); }
+.nav-dd:hover .nav-dd__chev, .nav-dd:focus-within .nav-dd__chev { transform: rotate(180deg); }
+
+#main-header .nav-dd__menu a { display: block; padding: .75rem 1.1rem; border-radius: .9rem; white-space: nowrap;
+  color: #0a0a0a !important; font-size: .98rem !important; font-weight: 500 !important; transition: background .2s; }
+#main-header .nav-dd__menu a:hover { background: #FFF1D6; }
+
+/* the outlet you picked is highlighted when the Outlets page opens */
+.outlet-card-anim { scroll-margin-top: calc(var(--hdr, 100px) + 24px); }
+.outlet-card-anim:target { box-shadow: 0 0 0 3px var(--cg-orange), 0 20px 50px rgba(251,170,27,.25); }
+/* ===== FOODIE FEEDBACK: real reviews ===== */
+.rvw-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.6rem; text-align: left; align-items: stretch; }
+.rvw { display: flex; flex-direction: column; gap: 1.1rem; padding: 1.8rem; border-radius: 1.5rem; background: #121212; color: #fff;
+  box-shadow: 0 18px 40px rgba(0,0,0,.18); }
+.rvw__head { display: flex; align-items: center; justify-content: space-between; gap: .8rem; }
+.rvw__src { display: inline-flex; align-items: center; gap: .45rem; padding: .35rem .8rem; border-radius: 999px;
+  background: rgba(251,170,27,.14); color: var(--cg-orange); font-size: .7rem; font-weight: 600; letter-spacing: .06em; }
+.rvw__stars { display: flex; gap: .15rem; color: var(--cg-orange); font-size: .85rem; }
+.rvw__stars .off { color: #4b4b52; }
+.rvw__heart { color: #ff4d6d; font-size: 1rem; }
+.rvw__text { margin: 0; font-size: .9rem; line-height: 1.85; color: #e4e4e7; }
+.rvw__scores { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.rvw__scores li { padding: .3rem .75rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.16); font-size: .72rem; color: #d4d4d8; }
+.rvw__scores b { margin-left: .25rem; color: var(--cg-lime); font-weight: 600; }
+.rvw__by { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,.12); }
+.rvw__by b { display: block; font-size: .95rem; font-weight: 600; color: #fff; }
+.rvw__by span { font-size: .75rem; color: var(--cg-orange); }
+.rvw__more { display: inline-flex; align-items: center; gap: .6rem; margin-top: 2.4rem; padding: .85rem 1.8rem; border-radius: 999px;
+  background: #0a0a0a; color: #fff; font-weight: 600; font-size: .9rem; transition: background .3s, color .3s, transform .3s; }
+.rvw__more:hover { background: var(--cg-orange); color: #0a0a0a; transform: translateY(-3px); }
+@media (max-width: 899px) { .rvw-grid { grid-template-columns: 1fr; max-width: 34rem; margin: 0 auto; } }
+/* REVIEWS: overlapping source icon, no line above the name, green names */
+.rvw { position: relative; overflow: visible !important; }
+
+.rvw__badge { position: absolute; top: -1.3rem; left: -1rem; z-index: 3; width: 3.4rem; height: 3.4rem;
+  display: grid; place-items: center; border-radius: 50%; border: 3px solid #fff;
+  box-shadow: 0 8px 18px rgba(0,0,0,.28); }
+.rvw__badge--google { background: #fff; }
+.rvw__badge--google svg { width: 1.55rem; height: 1.55rem; }
+.rvw__badge--instagram { color: #fff; font-size: 1.55rem;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+
+.rvw__head { justify-content: flex-end !important; min-height: 2rem; }
+
+.rvw__by { border: 0 !important; border-top: 0 !important; }
+.rvw__by::before { display: none !important; }
+
+.rvw__text { text-align: left !important; hyphens: manual; -webkit-hyphens: manual; }
+.rvw__by b { color: #FBAA1B !important; }      /* customer name: orange */
+.rvw__by span { color: #ffffff !important; }   /* "Google Local Guide" text: white */
+
+/* Navbar phone number: green */
+#main-header a[href^="tel:"] {
+  background: #7CFF01 !important;
+  border-color: #7CFF01 !important;
+  color: #0a0a0a !important;
+}
+#main-header a[href^="tel:"] * {
+  color: #0a0a0a !important;
+}

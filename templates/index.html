@@ -148,29 +148,65 @@
 
 
 
-<!-- 6. Verified Reviews -->
+<!-- 6. Foodie Feedback -->
 <section id="reviews" class="py-20 bg-charcoal-900/40 border-t border-slate-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <span class="text-xs font-bold uppercase tracking-[0.3em] text-gold">Foodie Feedback</span>
     <h2 class="font-cinzel text-3xl sm:text-4xl font-extrabold text-white mt-2 mb-12">Loved By Thousands In Kochi</h2>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="luxury-glass-card p-8 rounded-3xl text-left space-y-4">
-        <div class="flex text-gold gap-1 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p class="text-slate-300 text-xs leading-relaxed italic">"The Malabar Alfaham with Saffron Dum Chai in Kakkanad is legendary. Open till late night, incredible vibe!"</p>
-        <div class="text-xs font-bold text-white pt-2">— Rohit Nair, Kakkanad Foodie</div>
-      </div>
-      <div class="luxury-glass-card p-8 rounded-3xl text-left space-y-4">
-        <div class="flex text-gold gap-1 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p class="text-slate-300 text-xs leading-relaxed italic">"Best jumbo shawarma in Edappally! Fluffy garlic sauce, soft rumali, and juicy spiced chicken."</p>
-        <div class="text-xs font-bold text-white pt-2">— Devika Menon, Regular Customer</div>
-      </div>
-      <div class="luxury-glass-card p-8 rounded-3xl text-left space-y-4">
-        <div class="flex text-gold gap-1 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p class="text-slate-300 text-xs leading-relaxed italic">"The Willingdon Island outlet is perfect for evening tea with a breeze. Highly recommended!"</p>
-        <div class="text-xs font-bold text-white pt-2">— Fazil Ahmed, Kochi</div>
-      </div>
+    <div class="rvw-grid">
+
+      <!-- Google review: Nazeeb Muhammed -->
+      <article class="rvw rv">
+        <span class="rvw__badge rvw__badge--google" role="img" aria-label="Google review">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        </span>
+        <header class="rvw__head">
+          <div class="rvw__stars" aria-label="4 out of 5 stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star off"></i>
+          </div>
+        </header>
+        <p class="rvw__text">
+          “A must-visit spot near Changampuzha Park! Loved the wide variety of rich and flavorful Avil Milk, delicious fresh snacks, quick service, pocket-friendly prices, and welcoming vibe. Perfect for catching up with friends. Highly recommended!”
+        </p>
+        <footer class="rvw__by"><b>Nazeeb Muhammed</b><span>Google Local Guide</span></footer>
+      </article>
+
+      <!-- Instagram review -->
+      <article class="rvw rv">
+        <span class="rvw__badge rvw__badge--instagram" role="img" aria-label="Instagram review">
+          <i class="fa-brands fa-instagram"></i>
+        </span>
+        <header class="rvw__head">
+          <i class="fa-solid fa-heart rvw__heart" aria-hidden="true"></i>
+        </header>
+        <p class="rvw__text">
+          “A heartfelt thank you to Chai Grill for making my sister’s birthday so special. Your warm hospitality, thoughtful support, and wonderful service made the celebration truly memorable. We truly appreciate everything you did!”
+        </p>
+        <footer class="rvw__by"><b>Instagram customer</b><span>Birthday celebration at Chai Grill</span></footer>
+      </article>
+
+      <!-- Google review: anandexpee -->
+      <article class="rvw rv">
+        <span class="rvw__badge rvw__badge--google" role="img" aria-label="Google review">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        </span>
+        <header class="rvw__head">
+          <div class="rvw__stars" aria-label="4 out of 5 stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star off"></i>
+          </div>
+        </header>
+        <p class="rvw__text">
+          “Chai Grill, opposite Big Fresh Supermarket, is a great spot for tea lovers. The smoky tandoori-style chai is unique and refreshing at ₹15 (May 2026). The Kannur Cocktail is a must-try, with fresh, tasty snacks and great quality. Portions may be slightly small, but the taste makes up for it.”
+        </p>
+        <footer class="rvw__by"><b>anandexpee</b><span>Google Local Guide</span></footer>
+      </article>
+
     </div>
+
+<!--    <a class="rvw__more" href="https://www.instagram.com/chai_grill_/" target="_blank" rel="noopener">-->
+<!--      <i class="fa-brands fa-instagram"></i> See more on Instagram-->
+<!--    </a>-->
   </div>
 </section>
 

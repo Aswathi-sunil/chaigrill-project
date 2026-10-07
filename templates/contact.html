@@ -4,42 +4,86 @@
 {% block content %}
 
 <!-- Banner -->
-<section class="cnt-hero" style="background-image: url('/static/images/hero/malabar-specialities.jpg');">
+<section class="cnt-hero" style="background-image: url('/static/images/hero/malabar-snacks.jpg');">
   <div class="cnt-hero__veil"></div>
   <h1 class="cnt-hero__title">We'd Love to Hear From You</h1>
 </section>
 
-<!-- Form -->
 <section class="cnt">
-  <div class="cnt__card rv">
+  <div class="cnt__wrap">
 
-    <form id="contactForm" novalidate>
-      <div class="cnt__field">
-        <label for="cntName">Full Name <span>*</span></label>
-        <input id="cntName" type="text" autocomplete="name" required>
-        <small class="cnt__err" data-for="cntName">Please enter your name.</small>
-      </div>
+    <!-- What is this about? -->
+    <div class="cnt__tabs rv" role="tablist" aria-label="Enquiry type">
+      <button type="button" class="cnt__tab is-on" data-type="general" role="tab" aria-selected="true">
+        <i class="fa-solid fa-comments"></i><b>General Enquiry</b><span>Questions or feedback</span>
+      </button>
+      <button type="button" class="cnt__tab" data-type="franchise" role="tab" aria-selected="false">
+        <i class="fa-solid fa-handshake"></i><b>Franchise Opportunities</b><span>Start a Chai Grill outlet with us</span>
+      </button>
+    </div>
 
-      <div class="cnt__field">
-        <label for="cntPhone">Mobile Number <span>*</span></label>
-        <input id="cntPhone" type="tel" inputmode="tel" autocomplete="tel" required>
-        <small class="cnt__err" data-for="cntPhone">Please enter a valid mobile number.</small>
-      </div>
+    <!-- Franchise intro (shown when Franchise is selected) -->
+    <div class="cnt__fran" id="cntFran">
+      <h2>Grow With Chai Grill</h2>
+      <p>We are building a recognizable outlet network with flexible formats that adapt to different locations, customer profiles and investment levels. If you are an entrepreneur or an NRI looking to build a lasting business with a brand rooted in Malabar, we would love to talk.</p>
+      <ul>
+<!--        <li><i class="fa-solid fa-store"></i>Flexible outlet formats</li>-->
+<!--        <li><i class="fa-solid fa-repeat"></i>A repeatable business model</li>-->
+<!--        <li><i class="fa-solid fa-handshake"></i>Trust-based partnerships</li>-->
+      </ul>
+    </div>
 
-      <div class="cnt__field">
-        <label for="cntEmail">E-mail <em>(optional)</em></label>
-        <input id="cntEmail" type="email" autocomplete="email">
-        <small class="cnt__err" data-for="cntEmail">Please enter a valid e-mail address.</small>
-      </div>
+    <div class="cnt__card rv">
+      <form id="contactForm" novalidate>
 
-      <div class="cnt__field">
-        <label for="cntMsg">Message <em>(optional)</em></label>
-        <textarea id="cntMsg" rows="5"></textarea>
-      </div>
+        <div class="cnt__field">
+          <label for="cntName">Full Name <span>*</span></label>
+          <input id="cntName" type="text" autocomplete="name" required>
+          <small class="cnt__err" data-for="cntName">Please enter your name.</small>
+        </div>
 
-      <button type="submit" class="cnt__btn"><i class="fa-brands fa-whatsapp"></i> Submit</button>
-      <p class="cnt__note" id="cntStatus">Submitting opens WhatsApp with your message ready to send.</p>
-    </form>
+        <div class="cnt__field">
+          <label for="cntPhone">Mobile Number <span>*</span></label>
+          <input id="cntPhone" type="tel" inputmode="tel" autocomplete="tel" required>
+          <small class="cnt__err" data-for="cntPhone">Please enter a valid mobile number.</small>
+        </div>
+
+        <div class="cnt__field">
+          <label for="cntEmail">E-mail <em>(optional)</em></label>
+          <input id="cntEmail" type="email" autocomplete="email">
+          <small class="cnt__err" data-for="cntEmail">Please enter a valid e-mail address.</small>
+        </div>
+
+        <!-- Franchise-only fields -->
+        <div class="cnt__extra" id="cntFranFields">
+          <div class="cnt__field">
+            <label for="cntCity">Preferred City / Location <span>*</span></label>
+            <input id="cntCity" type="text">
+            <small class="cnt__err" data-for="cntCity">Please tell us where you would like to open.</small>
+          </div>
+          <div class="cnt__field">
+            <label for="cntSpace">Do you already have a space? <em>(optional)</em></label>
+            <select id="cntSpace">
+              <option value="">Select…</option>
+              <option>Yes, I have a space</option>
+              <option>No, I am looking for one</option>
+            </select>
+          </div>
+          <div class="cnt__field">
+            <label for="cntBudget">Investment range you have in mind <em>(optional)</em></label>
+            <input id="cntBudget" type="text" placeholder="Your approximate budget">
+          </div>
+        </div>
+
+        <div class="cnt__field">
+          <label for="cntMsg">Message <em>(optional)</em></label>
+          <textarea id="cntMsg" rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="cnt__btn" id="cntBtn"><i class="fa-brands fa-whatsapp"></i><span id="cntBtnTxt">Submit</span></button>
+        <p class="cnt__note" id="cntStatus">Submitting opens WhatsApp with your message ready to send.</p>
+      </form>
+    </div>
 
   </div>
 </section>
@@ -50,37 +94,66 @@
   var form = document.getElementById("contactForm");
   if (!form) return;
   var $ = function (id) { return document.getElementById(id); };
-  var status = $("cntStatus");
+  var btn = $("cntBtn"), btnTxt = $("cntBtnTxt"), status = $("cntStatus");
+  var NOTE = "Submitting opens WhatsApp with your message ready to send.";
+  var type = "general";
+
+  function setType(t) {
+    type = t;
+    document.querySelectorAll(".cnt__tab").forEach(function (b) {
+      var on = b.dataset.type === t;
+      b.classList.toggle("is-on", on); b.setAttribute("aria-selected", on);
+    });
+    $("cntFran").classList.toggle("is-on", t === "franchise");
+    $("cntFranFields").classList.toggle("is-on", t === "franchise");
+    $("cntMsg").placeholder = t === "franchise" ? "Tell us about yourself and your plans" : "";
+  }
+  document.querySelectorAll(".cnt__tab").forEach(function (b) {
+    b.addEventListener("click", function () { setType(b.dataset.type); });
+  });
+  // links like /contact/#franchise open the franchise tab directly
+  if (location.hash === "#franchise" || /[?&]type=franchise/.test(location.search)) setType("franchise");
 
   function flag(id, bad) {
     $(id).classList.toggle("is-bad", bad);
     var e = form.querySelector('.cnt__err[data-for="' + id + '"]');
     if (e) e.style.display = bad ? "block" : "none";
   }
+  function resetBtn() {
+    btn.classList.remove("is-wa"); btn.disabled = false; btnTxt.textContent = "Submit"; status.textContent = NOTE;
+  }
 
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
-    var name = $("cntName").value.trim();
-    var phone = $("cntPhone").value.trim();
-    var email = $("cntEmail").value.trim();
-    var msg = $("cntMsg").value.trim();
+    var name = $("cntName").value.trim(), phone = $("cntPhone").value.trim(),
+        email = $("cntEmail").value.trim(), msg = $("cntMsg").value.trim(),
+        city = $("cntCity").value.trim(), space = $("cntSpace").value, budget = $("cntBudget").value.trim();
 
     var okName = name.length > 1;
     var okPhone = phone.replace(/\D/g, "").length >= 10 && /^[0-9+\s\-()]+$/.test(phone);
     var okEmail = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    flag("cntName", !okName); flag("cntPhone", !okPhone); flag("cntEmail", !okEmail);
-    if (!(okName && okPhone && okEmail)) return;
+    var okCity = type !== "franchise" || city.length > 1;
+    flag("cntName", !okName); flag("cntPhone", !okPhone); flag("cntEmail", !okEmail); flag("cntCity", !okCity);
+    if (!(okName && okPhone && okEmail && okCity)) return;
 
-    var text = "*New enquiry from the Chai Grill website*\n" +
+    var text = (type === "franchise" ? "*FRANCHISE enquiry from the Chai Grill website*\n" : "*New enquiry from the Chai Grill website*\n") +
                "*Name:* " + name + "\n" +
                "*Phone:* " + phone + "\n" +
                (email ? "*Email:* " + email + "\n" : "") +
+               (type === "franchise" ? "*Preferred location:* " + city + "\n" +
+                 (space ? "*Space:* " + space + "\n" : "") +
+                 (budget ? "*Budget:* " + budget + "\n" : "") : "") +
                (msg ? "*Message:* " + msg : "");
+    var url = "https://wa.me/" + WA + "?text=" + encodeURIComponent(text);
 
-    status.textContent = "Opening WhatsApp…";
-    window.location.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent(text);
-    setTimeout(function () { form.reset(); status.textContent = "Submitting opens WhatsApp with your message ready to send."; }, 2500);
+    // the button turns WhatsApp green so the visitor can see where this is going
+    btn.classList.add("is-wa"); btn.disabled = true;
+    btnTxt.textContent = "Opening WhatsApp…";
+    status.textContent = "Sending your details to WhatsApp…";
+    setTimeout(function () { window.location.href = url; }, 700);
+    setTimeout(function () { form.reset(); setType(type); resetBtn(); }, 4000);
   });
+  window.addEventListener("pageshow", function (e) { if (e.persisted) resetBtn(); });   // back button
 })();
 </script>
 {% endblock %}
