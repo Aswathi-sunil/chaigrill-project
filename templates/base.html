@@ -83,8 +83,28 @@
                              <nav class="hidden md:flex items-center gap-8 font-medium">
         <a href="{% url 'home' %}" class="hover:text-gold transition-colors {% if request.path == '/' %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Home</a>
         <a href="{% url 'about' %}" class="hover:text-gold transition-colors {% if '/about' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">About Us</a>
-        <a href="{% url 'menu' %}" class="hover:text-gold transition-colors {% if '/menu' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Menus</a>
-        <a href="{% url 'combos' %}" class="hover:text-gold transition-colors flex items-center gap-1.5 {% if '/combos' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">
+<div class="nav-dd">
+  <a href="{% url 'menu' %}"
+     class="nav-dd__link hover:text-gold transition-colors {% if '/menu' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}"
+     aria-haspopup="true">
+    Menus
+    <i class="fa-solid fa-chevron-down nav-dd__chev"></i>
+  </a>
+
+  <ul class="nav-dd__menu">
+    <li>
+      <a href="{% url 'menu' %}#menu">Specialities</a>
+    </li>
+    <li>
+      <a href="{% static 'pdf/full-menu.pdf' %}"
+         target="_blank"
+         rel="noopener">
+        Full Menu
+      </a>
+    </li>
+  </ul>
+</div>
+                                 <a href="{% url 'combos' %}" class="hover:text-gold transition-colors flex items-center gap-1.5 {% if '/combos' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">
           <span>Offers</span>
           <span class="px-1.5 py-0.2 text-[8px] bg-red-500/30 text-red-300 rounded border border-red-500/40">Hot</span>
         </a>
@@ -98,16 +118,26 @@
           </ul>
           {% endif %}
         </div>
-                                 <a href="{% url 'contact' %}" class="hover:text-gold transition-colors {% if '/contact' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Contact</a>
+                                 <a href="{% url 'contact' %}" class="hover:text-gold transition-colors {% if '/contact' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">Reach Us</a>
                              </nav>
 
-      <!-- Action Button -->
-      <div class="hidden lg:flex items-center gap-3">
-        <a href="tel:8943777001" class="flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-full border border-slate-800 bg-charcoal-900 hover:border-gold/50 text-slate-200 transition-all">
-          <i class="fa-solid fa-phone text-gold"></i>
-          <span>89437 77001</span>
-        </a>
-      </div>
+      <!-- Desktop Enquiry Button -->
+<div class="hidden lg:flex items-center gap-3">
+  <a href="tel:8943777001"
+     class="desktop-enquiry-btn"
+     aria-label="Enquiry - Call 89437 77001">
+
+    <span class="desktop-enquiry-icon">
+      <i class="fa-solid fa-phone"></i>
+    </span>
+
+    <span class="desktop-enquiry-text">
+      <small>ENQUIRY</small>
+      <strong>89437 77001</strong>
+    </span>
+
+  </a>
+</div>
     </div>
 
     <!-- =====================================================
@@ -117,10 +147,45 @@
                    <nav class="md:hidden mobile-nav-scroll">
       <a href="{% url 'home' %}" class="mobile-nav-link {% if request.path == '/' %}is-active{% endif %}">Home</a>
       <a href="{% url 'about' %}" class="mobile-nav-link {% if '/about' in request.path %}is-active{% endif %}">About Us</a>
-      <a href="{% url 'menu' %}" class="mobile-nav-link {% if '/menu' in request.path %}is-active{% endif %}">Menus</a>
-      <a href="{% url 'combos' %}" class="mobile-nav-link {% if '/combos' in request.path %}is-active{% endif %}">Offers <span class="mobile-nav-hot">Hot</span></a>
+<div class="mobile-menu-dropdown">
+
+    <button
+        type="button"
+        class="mobile-nav-link mobile-menu-trigger"
+        aria-expanded="false"
+        aria-controls="mobile-menu-submenu">
+
+        <span>Menus</span>
+
+        <i class="fa-solid fa-chevron-down mobile-menu-chevron"></i>
+
+    </button>
+
+    <div
+        id="mobile-menu-submenu"
+        class="mobile-menu-dropdown__items">
+
+        <a href="{% url 'menu' %}#menu">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Specialities</span>
+        </a>
+
+        <a
+            href="{% static 'pdf/full-menu.pdf' %}"
+            target="_blank"
+            rel="noopener">
+
+            <i class="fa-solid fa-book-open"></i>
+            <span>Full Menu</span>
+
+        </a>
+
+    </div>
+
+</div>
+                       <a href="{% url 'combos' %}" class="mobile-nav-link {% if '/combos' in request.path %}is-active{% endif %}">Offers <span class="mobile-nav-hot">Hot</span></a>
       <a href="{% url 'outlets' %}" class="mobile-nav-link {% if '/outlets' in request.path %}is-active{% endif %}">Locate Us</a>
-                       <a href="{% url 'contact' %}" class="mobile-nav-link {% if '/contact' in request.path %}is-active{% endif %}">Contact</a>
+                       <a href="{% url 'contact' %}" class="mobile-nav-link {% if '/contact' in request.path %}is-active{% endif %}">Reach Us</a>
     </nav>
   </header>
 
@@ -219,7 +284,7 @@
             <li><a href="{% url 'about' %}">About Us</a></li>
             <li><a href="{% url 'menu' %}">Menus</a></li>
             <li><a href="{% url 'combos' %}">Offers</a></li>
-            <li><a href="{% url 'outlets' %}">Outlets</a></li>
+            <li><a href="{% url 'outlets' %}">Locate Us</a></li>
           </ul>
         </div>
 
@@ -307,6 +372,109 @@
   }, { threshold: 0.15 });
   els.forEach(function (el) { io.observe(el); });
 })();
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const dropdown = document.querySelector(".mobile-menu-dropdown");
+    const trigger = document.querySelector(".mobile-menu-trigger");
+    const submenu = document.getElementById("mobile-menu-submenu");
+
+    if (!dropdown || !trigger || !submenu) {
+        return;
+    }
+
+
+    function positionDropdown() {
+
+        const rect = trigger.getBoundingClientRect();
+
+        const dropdownWidth = 190;
+
+        let left = rect.left;
+
+        /*
+         * Keep dropdown inside the screen
+         */
+        if (left + dropdownWidth > window.innerWidth - 10) {
+            left = window.innerWidth - dropdownWidth - 10;
+        }
+
+        if (left < 10) {
+            left = 10;
+        }
+
+
+        submenu.style.top = (rect.bottom + 8) + "px";
+        submenu.style.left = left + "px";
+    }
+
+
+    trigger.addEventListener("click", function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen =
+            dropdown.classList.toggle("is-open");
+
+        trigger.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+
+
+        if (isOpen) {
+            positionDropdown();
+        }
+
+    });
+
+
+    /*
+     * Reposition if the user scrolls
+     */
+    window.addEventListener("scroll", function () {
+
+        if (dropdown.classList.contains("is-open")) {
+            positionDropdown();
+        }
+
+    }, { passive: true });
+
+
+    /*
+     * Reposition after screen rotation / resize
+     */
+    window.addEventListener("resize", function () {
+
+        if (dropdown.classList.contains("is-open")) {
+            positionDropdown();
+        }
+
+    });
+
+
+    /*
+     * Close when tapping outside
+     */
+    document.addEventListener("click", function (event) {
+
+        if (!dropdown.contains(event.target)) {
+
+            dropdown.classList.remove("is-open");
+
+            trigger.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    });
+
+});
 </script>
 </body>
 </html>
