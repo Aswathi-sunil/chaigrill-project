@@ -109,7 +109,7 @@ def api_menu_items(request):
             'name': item.name,
             'category': item.category.name,
             'category_slug': item.category.slug,
-            'price': str(item.price),
+            'price': str(item.price) if item.price is not None else '',
             'portion': item.portion_info,
             'desc': item.description,
             'image': item.display_image(),

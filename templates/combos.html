@@ -15,7 +15,9 @@
       <article class="offer-card">
         <div class="offer-card__top">
           <span class="offer-card__badge">{{ combo.badge }}</span>
-<!--          <span class="offer-card__price">₹{{ combo.price }}</span>-->
+{% if combo.price %}
+  <span class="offer-card__price">₹{{ combo.price }}</span>
+{% endif %}
         </div>
         <h3 class="offer-card__name">{{ combo.name }}</h3>
         <p class="offer-card__for">{{ combo.target_audience }}</p>

@@ -800,7 +800,7 @@ function renderCards() {
         if (activePrice) {
 
             activePrice.textContent =
-                `₹${item.price}`;
+                `${item.price ? `₹${item.price}` : ''}`;
 
         }
 
