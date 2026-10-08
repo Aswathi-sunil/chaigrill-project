@@ -9164,3 +9164,71 @@ main:has(.offers),
         background: #8bd88b !important;
     }
 }
+/* =========================================================
+   FULL MENU IMAGE VIEWER
+   ========================================================= */
+
+body:has(.full-menu-viewer) {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #000 !important;
+    overflow-x: hidden !important;
+}
+
+body:has(.full-menu-viewer) main {
+    padding-top: var(--hdr) !important;
+    margin: 0 !important;
+}
+
+.full-menu-viewer {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+
+.full-menu-page {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #000;
+    line-height: 0;
+}
+
+.full-menu-page img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+}
+
+/* Hide normal footer on Full Menu page */
+body:has(.full-menu-viewer) .ft {
+    display: none !important;
+}
+
+/* Hide floating elements on Full Menu page */
+body:has(.full-menu-viewer) .wa-float,
+body:has(.full-menu-viewer) .promo-video-widget {
+    display: none !important;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+
+    .full-menu-page {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .full-menu-page img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+}

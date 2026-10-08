@@ -128,3 +128,6 @@ def submit_reservation(request):
         whatsapp_url = f"https://wa.me/{inquiry.outlet.whatsapp_number}?text={msg}"
         return redirect(whatsapp_url)
     return redirect('home')
+
+def full_menu(request):
+    return render(request, "full_menu.html")

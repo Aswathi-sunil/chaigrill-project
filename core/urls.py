@@ -10,5 +10,5 @@ urlpatterns = [
     path('api/menu/', views.api_menu_items, name='api_menu_items'),
     path('reserve/', views.submit_reservation, name='submit_reservation'),
     path('contact/', views.contact_view, name='contact'),
-
+    path("full-menu/", views.full_menu, name="full_menu"),
 ]

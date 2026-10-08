@@ -95,13 +95,11 @@
     <li>
       <a href="{% url 'menu' %}#menu">Specialities</a>
     </li>
-    <li>
-      <a href="{% static 'pdf/full-menu.pdf' %}"
-         target="_blank"
-         rel="noopener">
-        Full Menu
-      </a>
-    </li>
+<li>
+  <a href="{% url 'full_menu' %}">
+    Full Menu
+  </a>
+</li>
   </ul>
 </div>
                                  <a href="{% url 'combos' %}" class="hover:text-gold transition-colors flex items-center gap-1.5 {% if '/combos' in request.path %}text-gold border-b-2 border-gold pb-1{% else %}text-slate-200{% endif %}">
@@ -170,15 +168,12 @@
             <span>Specialities</span>
         </a>
 
-        <a
-            href="{% static 'pdf/full-menu.pdf' %}"
-            target="_blank"
-            rel="noopener">
+        <a href="{% url 'full_menu' %}">
 
-            <i class="fa-solid fa-book-open"></i>
-            <span>Full Menu</span>
+    <i class="fa-solid fa-book-open"></i>
+    <span>Full Menu</span>
 
-        </a>
+</a>
 
     </div>
 
