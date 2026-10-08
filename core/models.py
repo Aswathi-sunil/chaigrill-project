@@ -102,7 +102,9 @@ class MenuItem(models.Model):
         return self.image_url or ""
 
     def __str__(self):
-        return f"{self.name} - ₹{self.price}"
+        if self.price is not None:
+            return f"{self.name} - ₹{self.price}"
+        return self.name
 
 class ComboMeal(models.Model):
     name = models.CharField(max_length=150, help_text="e.g. Best Bucket, Jolley Meal, Family Combo")
