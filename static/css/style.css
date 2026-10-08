@@ -9241,3 +9241,109 @@ body:has(.full-menu-viewer) .promo-video-widget {
         display: none;
     }
 }
+/* =========================================================
+   FULL MENU PAGE
+   Navbar visible
+   Footer hidden
+   ========================================================= */
+
+body:has(.full-menu-viewer) {
+    overflow-x: hidden !important;
+    background: #000 !important;
+}
+
+/* Remove the default pt-20 gap */
+body:has(.full-menu-viewer) main.pt-20 {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Full menu starts immediately below the fixed navbar */
+body:has(.full-menu-viewer) .full-menu-viewer {
+    width: 100%;
+    margin: var(--hdr) 0 0 0 !important;
+    padding: 0 !important;
+    background: #000;
+}
+
+.full-menu-page {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #000;
+    line-height: 0;
+}
+
+.full-menu-page img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0;
+}
+
+/* Hide footer */
+body:has(.full-menu-viewer) .ft {
+    display: none !important;
+}
+
+/* Hide floating elements */
+body:has(.full-menu-viewer) .wa-float,
+body:has(.full-menu-viewer) .promo-video-widget {
+    display: none !important;
+}
+/* =========================================================
+   MENUS DROPDOWN — ORANGE FILLED, OLD CURVED BOX
+   ========================================================= */
+
+.nav-dd__menu {
+    background: var(--cg-orange) !important;
+    padding: 6px !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+.nav-dd__menu li {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-dd__menu a {
+    display: block !important;
+    width: 100% !important;
+    background: transparent !important;
+    color: #0a0a0a !important;
+    padding: 10px 16px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+.nav-dd__menu a:hover {
+    background: rgba(0, 0, 0, 0.08) !important;
+    color: #0a0a0a !important;
+}
+.offers__grid { padding-top: 30px; }          /* room for the overlap */
+
+.offer-card { position: relative; overflow: visible; }
+
+.offer-card__icon {
+  position: absolute;
+  top: -28px;
+  left: -18px;
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  object-position: center 35%;
+  border-radius: 50%;
+  background: #000;
+  border: 3px solid #ffa51f;
+  box-shadow: 0 8px 20px rgba(0,0,0,.35);
+  transform: rotate(-8deg);
+  z-index: 3;
+}
+
+.offer-card__top { padding-left: 52px; }      /* pushes the badge clear of the icon */

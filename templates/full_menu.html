@@ -1,55 +1,44 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}Full Menu | Chai Grill{% endblock %}
 
-    <title>Full Menu | Chai Grill</title>
+{% block content %}
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
+<main class="full-menu-viewer">
 
-<body>
+    <div class="full-menu-page">
+        <img
+            src="{% static 'images/full-menu/menu-1.png' %}"
+            alt="Chai Grill Full Menu - Page 1"
+            loading="eager"
+        >
+    </div>
 
-    <!-- Full Menu Viewer -->
-    <main class="full-menu-viewer">
+    <div class="full-menu-page">
+        <img
+            src="{% static 'images/full-menu/menu-2.png' %}"
+            alt="Chai Grill Full Menu - Page 2"
+            loading="lazy"
+        >
+    </div>
 
-        <div class="full-menu-page">
-            <img
-                src="{% static 'images/full-menu/menu-1.jpeg' %}"
-                alt="Chai Grill Full Menu - Page 1"
-                loading="eager"
-            >
-        </div>
+    <div class="full-menu-page">
+        <img
+            src="{% static 'images/full-menu/menu-3.png' %}"
+            alt="Chai Grill Full Menu - Page 3"
+            loading="lazy"
+        >
+    </div>
 
-        <div class="full-menu-page">
-            <img
-                src="{% static 'images/full-menu/menu-2.jpeg' %}"
-                alt="Chai Grill Full Menu - Page 2"
-                loading="lazy"
-            >
-        </div>
+    <div class="full-menu-page">
+        <img
+            src="{% static 'images/full-menu/menu-4.png' %}"
+            alt="Chai Grill Full Menu - Page 4"
+            loading="lazy"
+        >
+    </div>
 
-        <div class="full-menu-page">
-            <img
-                src="{% static 'images/full-menu/menu-3.jpeg' %}"
-                alt="Chai Grill Full Menu - Page 3"
-                loading="lazy"
-            >
-        </div>
+</main>
 
-        <div class="full-menu-page">
-            <img
-                src="{% static 'images/full-menu/menu-4.jpeg' %}"
-                alt="Chai Grill Full Menu - Page 4"
-                loading="lazy"
-            >
-        </div>
-
-
-    </main>
-
-</body>
-</html>
+{% endblock %}
