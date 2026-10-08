@@ -9232,3 +9232,12 @@ body:has(.full-menu-viewer) .promo-video-widget {
         height: auto;
     }
 }
+.desktop-break {
+    display: inline;
+}
+
+@media (max-width: 767px) {
+    .desktop-break {
+        display: none;
+    }
+}
