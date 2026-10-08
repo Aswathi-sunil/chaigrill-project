@@ -67,7 +67,7 @@ class MenuItem(models.Model):
     category = models.ForeignKey(MenuCategory, on_delete=models.CASCADE, related_name="items")
     name = models.CharField(max_length=160)
     slug = models.SlugField(max_length=180, unique=True, blank=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(max_digits=7, decimal_places=2,blank=True, null=True)
     portion_info = models.CharField(max_length=120, blank=True,
                                     help_text="e.g. 4PS / 8PS, Full / Half / Qtr, + Fries & Mayo")
     description = models.TextField(blank=True)
